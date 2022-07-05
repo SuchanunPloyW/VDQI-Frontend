@@ -78,6 +78,8 @@ export default {
           console.log(response.data)
           //เก็บข้อมูลลง localStorahe
           localStorage.setItem('user',JSON.stringify(response.data))
+    
+      
           // เมื่อ login ผ่านส่งไปหน้า admin
           const Toast = this.$swal.mixin({
                   toast: true,

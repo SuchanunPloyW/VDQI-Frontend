@@ -13,7 +13,7 @@
       </svg>
       <span>จัดการ และค้นหารถยนต์ในลานจอด</span>
     </div>
-    <span >View &RightArrow;</span>
+    <span>View &RightArrow;</span>
   </router-link>
   <div class="space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
     <div class="w-auto flex items-center p-1 bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -81,20 +81,20 @@
     </div>
     <!-- Card -->
   </div>
-  <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+ 
+  <div
+    class=" items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
         Stock A (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
       </p>
-      <div
-        class="flex items-center justify-between p-5 mb-8 text-sm font-semibold text-black-100 bg-gray-200 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
-        Lotus's
+   <!-- Card Lotus's -->   
+      <div class="py-4">
+        <a class="  flex items-center justify-between p-4  text-sm font-semibold  bg-gray-200 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+        >Lotus's
+        </a>
       </div>
-      <div>
-        <p class="w-24 h-96 flex items-center p-4 bg-gray-200 rounded-lg shadow-lg dark:bg-gray-800">
-          Front
-        </p>
-      </div>
+  <!-- Card Lotus's -->
     </div>
   </div>
   <div class="py-4">

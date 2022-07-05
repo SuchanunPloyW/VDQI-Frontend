@@ -72,6 +72,18 @@
         <span>ล้าง</span>
       </button>
     </div>
+
+    <div>
+      <button @click="openModalAddCar"
+        class="flex items-center justify-between px-4 py-1.5 mx-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-500 border border-transparent rounded-lg active:bg-purple-600 hover:bg-yellow-700 focus:outline-none focus:shadow-outline-purple">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+            clip-rule="evenodd" />
+        </svg>
+        <span>เพิ่ม</span>
+      </button>
+    </div>
   </div>
   <!-- ตารางสแดง Stock รถในลานจอด -->
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -116,7 +128,6 @@
                 class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-md active:bg-gray-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
                 <p>เพิ่มเติม</p>
               </button>
-
             </td>
           </tr>
         </tbody>
@@ -127,36 +138,133 @@
     </div>
   </div>
 
-  <!-- Extra Large Modal -->
-  
+  <!-- Popup สำหรับเพิ่มรายการสินค้าใหม่ -->
+  <div v-if="showAddModal" id="addProductModal"
+    class="fixed top-0 left-0 flex items-center justify-center w-full h-full modal">
+    <div class="absolute w-full h-full bg-gray-900 opacity-70 modal-overlay"></div>
+    <div class="z-50 w-11/12 p-5 mx-auto overflow-y-auto bg-white rounded shadow-lg h-4/5 modal-container md:max-w-md">
+      <!-- Header -->
+      <div class="flex items-center justify-center w-full h-auto">
+        <div class="flex items-start justify-start w-full h-auto py-2 text-xl font-bold">
+          เพิ่มรถยนต์
+        </div>
+        <div @click="closeAddModal" class="flex justify-center w-1/12 h-auto cursor-pointer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-x">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </div>
+        <!--Header End-->
+      </div>
+      <!-- Modal Content-->
+      <div class="w-full h-auto mb-4">
+        <form ref="addCarForm" @submit.prevent="onSubmit" enctype="multipart/form-data">
+          <label class="block my-3 text-gray-700 text-md" for="car_chassis">เลขตัวถัง (17 หลัก)</label>
+          <input v-model="car_chassis" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text" placeholder="Chassis no.">
+
+
+
+          <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
+          <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
+            <option disabled value="">กรุณาเลือกโซนในการจอด</option>
+            <option>Stock A</option>
+            <option>Stock B</option>
+            <option>Stock C</option>
+            <option>Stock D</option>
+            <option>Stock F</option>
+
+          </select>
+
+       <!--    <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
+          <select  v-model="status"  class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
+          <option >{{status.name}} </option>
+          </select> -->
+
+          <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอด</label>
+          <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text" placeholder="Position">
+
+          <!-- <label class="block my-3 text-gray-700 text-md" for="car_status">สถานะ</label>
+          <input v-model="car_status" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text" placeholder="Status"> -->
+
+
+         <!--  <label class="block my-3 text-gray-700 text-md" for="date">วันที่</label>
+
+          <input v-model="date" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text"
+            placeholder="Date"> -->
+
+         <!--  <label class="block my-3 text-gray-700 text-md" for="time">เวลา</label>
+          <input v-model="time" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text"
+            placeholder="Time"> -->
+
+          <label class="block my-3 text-gray-700 text-md" for="fullname">ชื่อ</label>
+          <input v-model="fullname" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text" placeholder="Name">
+
+          <label class="block my-3 text-gray-700 text-md" for="lastname">นามสกุล</label>
+          <input v-model="lastname" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text" placeholder="Lastname">
+
+
+
+
+          <div class="grid grid-cols-3 gap-4">
+
+            <div class="col-span-2">
+              <button @click="submitForm"
+                class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+                บันทึกรายการ
+              </button>
+            </div>
+            <div>
+              <button @click="onResetForm"
+                class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
+                ล้าง
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
 
 </template>
 <script>
 import http from '@/services/BackendServices'
 import '@ocrv/vue-tailwind-pagination/styles'
 import VueTailwindPagination from '@ocrv/vue-tailwind-pagination'
-
+import useValidate from '@vuelidate/core'
+import { required, helpers } from '@vuelidate/validators'
 
 export default {
   data() {
     return {
+      /* ตัวแปร เรียกใช้งาน validation */
+      v$: useValidate(),
       car: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
 
-      showEditModal: false, // popup แก้ไขสินค้า
-      chassis: '',
-      status: '',
-      where: '',
-      position: '',
+      showAddModal: false, // popup เพิ่มรถยนต์
+      car_chassis: '',
+      car_status: '',
+      car_where: '',
+      car_position: '',
       fullname: '',
       lastname: '',
       date: '',
       time: '',
+      
 
       //ตัวแปรค้นหา
-      keyword:''
+      keyword: ''
 
     }
   },
@@ -165,7 +273,8 @@ export default {
   },
 
   methods: {
-    show(car_id){
+
+    show(car_id) {
       this.$router.push({ name: "CarDetail" });
       this.$store.state.carShow = car_id;
     },
@@ -186,48 +295,157 @@ export default {
       this.perPage = responseCar.per_page
       this.total = responseCar.total
     },
-    
+
     // function click next page
     onPageClick(event) {
       this.currentPage = event
       // เช็คว่ามีการค้นหาสินค้าอยู่หรือไม่
-            if(this.keyword == ""){ // ไม่ได้ค้นหา
-                this.getProducts(this.currentPage)
-            }else{
-                this.getCar(this.currentPage)
-            }
+      if (this.keyword == "") { // ไม่ได้ค้นหา
+        this.getProducts(this.currentPage)
+      } else {
+        this.getCar(this.currentPage)
+      }
+    },
+    onSelectClick() {
+      http.get(`car/${this.car_id}`).then((response) => {
+        this.car_chassis = response.data.car_chassis;
+
+      });
+
     },
 
     //find car
-    submitSearchForm(){
-      if(this.keyword != ""){
+    submitSearchForm() {
+      if (this.keyword != "") {
         //เรียก api search
-        http.get(`car/search/${this.keyword}`).then(response=>{
-              let responseCar = response.data
-              this.car = responseCar
-              this.currentPage = responseCar.currentPage
-              this.perPage = responseCar.per_page
-              this.total = responseCar.total
+        http.get(`car/search/${this.keyword}`).then(response => {
+          let responseCar = response.data
+          this.car = responseCar
+          this.currentPage = responseCar.currentPage
+          this.perPage = responseCar.per_page
+          this.total = responseCar.total
 
         })
-      }else{
+      } else {
         this.$swal.fire('กรุณาป้อนเลขตัวถัง')
       }
 
     },
     // clear search
-    resetSearchForm(){
+    resetSearchForm() {
       this.currentPage = 1;
       this.getCar(this.currentPage)
-      this.keyword=''
+      this.keyword = ''
 
+    },
+    //function open close popup
+    openModalAddCar() {
+      this.showAddModal = true
+
+    },
+    closeAddModal() {
+      this.showAddModal = false
+      this.onResetForm()
+    },
+
+    // onResetfrom
+    onResetForm() {
+      this.$refs.addCarForm.reset()
+      this.car_chassis = ''
+      this.car_status = ''
+      this.car_where = ''
+      this.car_position = ''
+      this.fullname = ''
+      this.lastname = ''
+      this.date = ''
+      this.time = ''
+
+    },
+    // function submit form
+    submitForm() {
+      this.v$.$validate()
+      if (!this.v$.$error) {
+
+        /* let local_user = JSON.parse(window.localStorage.getItem("user"));
+        let name = local_user.fullname;
+     */
+        var d = new Date(); 
+        let data = new FormData()
+       // data.append("fullname", name);
+        data.append('car_chassis', this.car_chassis)
+        data.append('car_status', "นำเข้า")
+        data.append('car_where', this.car_where)
+        data.append('car_position', this.car_position)
+        data.append('fullname', this.fullname)
+        data.append('lastname', this.lastname)
+        data.append('date', +d.getFullYear()+"-"+(d.getMont้()+1)+"-"+d.getDate())
+        /* data.append('date', +d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear() ) */
+        data.append('time', d.getHours()+":"+d.getMinutes()+":"+d.getSeconds())
+
+        //console.log(data)
+        // alert('succcess')
+        http.post('car',
+          data
+        ).then((response) => {
+          console.log(response)
+          // เมื่อเพิ่มเสร็จทำการเคลียร์ค่าใน form
+          this.onResetForm()
+          // เมื่อเพิ่มเสร็จให้ดึงรายการล่าสุดมาแสดง
+          this.getCar(this.currentPage)
+          // เรียกใช้งาน popup ของ sweetalert 2
+          const Toast = this.$swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', this.$swal.stopTimer)
+              toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'success',
+            title: 'เพิ่มข้อมูลรถยนต์เรียบร้อย'
+          })
+
+        })
+
+      }
+
+    },
+
+    validations() {
+      return {
+        car_chassis: {
+          required: helpers.withMessage('ป้อนเลขตัวถังก่อน ', required),
+        },
+
+        where: {
+          required: helpers.withMessage('เลือกโซนที่จอดก่อน ', required),
+        },
+
+        position: {
+          required: helpers.withMessage('เลือกตำแหน่งที่จอดก่อน ', required),
+        },
+
+
+
+      }
     }
+
+
 
   },
   mounted() {
     this.currentPage = 1;
     // อ่านสินค้าจาก API
     this.getCar(this.currentPage)
+
+    http.get('/status').then(response=>{
+      let responseStatus = response.data
+          this.status = responseStatus
+    })
 
   }
 

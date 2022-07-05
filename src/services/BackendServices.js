@@ -16,7 +16,7 @@ const backendService = axios.create({
   baseURL: "http://206.189.92.79/api/",
   withCredentials: true,
   headers: {
-    "Content-type": "application/json",
+    "Content-type": "multipart/form-data",
     "Accept": "application/json",
    // "Authorization": `Bearer ${token}`
   },
