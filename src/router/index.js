@@ -15,6 +15,7 @@ import StockList from "@/views/backend/StockList.vue"
 import ReportGen from "@/views/backend/ReportGen.vue"
 import CarDetail from "@/views/backend/CarDetail.vue"
 import TestCar from "@/views/backend/TestCar.vue"
+import CarAdd from "@/views/backend/Create/CarAdd.vue"
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
 function authGuard(to, from, next){
@@ -148,6 +149,37 @@ const routes = [
     },
   },
   
+  /* route carInsert */
+  {
+    path: "/backend/car/add",
+    component: BackendLayout,
+    children: [
+      {
+        path: "",
+        name: "CarAdd",
+        component: CarAdd,
+        beforeEnter : authGuard
+      },
+    ],
+    meta: {
+      title: "ReportGenerator",
+      description: "ReportGen",
+    },
+  },
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
   /* router test */
   {
     path: "/backend/carstock",

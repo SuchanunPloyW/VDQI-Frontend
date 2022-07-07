@@ -163,53 +163,19 @@
           <label class="block my-3 text-gray-700 text-md" for="car_chassis">เลขตัวถัง (17 หลัก)</label>
           <input v-model="car_chassis" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text" placeholder="Chassis no.">
-
-
+           
 
           <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
-          <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="text">
-            <option disabled value="">กรุณาเลือกโซนในการจอด</option>
+          <select v-model="car_where"  class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
+            <option  v-for="car in car.data" :key="car.car_id"> {{car.car_where}}</option>
+            <!-- <option disabled value="">กรุณาเลือกโซนในการจอด</option>
             <option>Stock A</option>
-            <option>Stock B</option>
             <option>Stock C</option>
-            <option>Stock D</option>
-            <option>Stock F</option>
-
+            <option>Stock D</option> -->
           </select>
-
-       <!--    <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
-          <select  v-model="status"  class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
-          <option >{{status.name}} </option>
-          </select> -->
-
           <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอด</label>
           <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text" placeholder="Position">
-
-          <!-- <label class="block my-3 text-gray-700 text-md" for="car_status">สถานะ</label>
-          <input v-model="car_status" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="text" placeholder="Status"> -->
-
-
-         <!--  <label class="block my-3 text-gray-700 text-md" for="date">วันที่</label>
-
-          <input v-model="date" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text"
-            placeholder="Date"> -->
-
-         <!--  <label class="block my-3 text-gray-700 text-md" for="time">เวลา</label>
-          <input v-model="time" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text"
-            placeholder="Time"> -->
-
-          <label class="block my-3 text-gray-700 text-md" for="fullname">ชื่อ</label>
-          <input v-model="fullname" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="text" placeholder="Name">
-
-          <label class="block my-3 text-gray-700 text-md" for="lastname">นามสกุล</label>
-          <input v-model="lastname" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="text" placeholder="Lastname">
-
-
 
 
           <div class="grid grid-cols-3 gap-4">
@@ -232,7 +198,6 @@
       </div>
     </div>
   </div>
-
 
 </template>
 <script>
@@ -261,8 +226,6 @@ export default {
       lastname: '',
       date: '',
       time: '',
-      
-
       //ตัวแปรค้นหา
       keyword: ''
 
@@ -363,91 +326,99 @@ export default {
     },
     // function submit form
     submitForm() {
-      this.v$.$validate()
-      if (!this.v$.$error) {
+      
+      const swalWithBootstrapButtons = this.$swal.mixin({
+        customClass: {
+          title: "font-weight-bold",
+         confirmButton: ' bg-green-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	',
+        cancelButton: 'bg-red-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	'
+        },
+        buttonsStyling: false,
+      });
+      
+      swalWithBootstrapButtons
+        .fire({
+          title: "ตรวจสอบข้อมูล",
+          html:
+            `<p class="custom text-left font-normal text-xl"> <b>เลขตัวถัง :</b> ${this.car_chassis}</p>` +
+            ` <p class="custom text-left font-normal text-xl"> <b>โซนที่จอด :</b> ${this.car_where}</p>` +
+            ` <p class="custom text-left font-normal text-xl">  <b>ตำแหน่งที่จอด :</b> ${this.car_position} </p>`,
 
-        /* let local_user = JSON.parse(window.localStorage.getItem("user"));
-        let name = local_user.fullname;
-     */
-        var d = new Date(); 
-        let data = new FormData()
-       // data.append("fullname", name);
-        data.append('car_chassis', this.car_chassis)
-        data.append('car_status', "นำเข้า")
-        data.append('car_where', this.car_where)
-        data.append('car_position', this.car_position)
-        data.append('fullname', this.fullname)
-        data.append('lastname', this.lastname)
-        data.append('date', +d.getFullYear()+"-"+(d.getMont้()+1)+"-"+d.getDate())
-        /* data.append('date', +d.getDate()+"-"+(d.getMonth()+1)+"-"+d.getFullYear() ) */
-        data.append('time', d.getHours()+":"+d.getMinutes()+":"+d.getSeconds())
+          showCancelButton: true,
+          confirmButtonText: "ยืนยัน",
+          cancelButtonText: "ยกเลิก",
+          reverseButtons: true,
 
-        //console.log(data)
-        // alert('succcess')
-        http.post('car',
-          data
-        ).then((response) => {
-          console.log(response)
-          // เมื่อเพิ่มเสร็จทำการเคลียร์ค่าใน form
-          this.onResetForm()
-          // เมื่อเพิ่มเสร็จให้ดึงรายการล่าสุดมาแสดง
-          this.getCar(this.currentPage)
-          // เรียกใช้งาน popup ของ sweetalert 2
-          const Toast = this.$swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', this.$swal.stopTimer)
-              toast.addEventListener('mouseleave', this.$swal.resumeTimer)
-            }
-          })
-          Toast.fire({
-            icon: 'success',
-            title: 'เพิ่มข้อมูลรถยนต์เรียบร้อย'
-          })
-
-        })
-
-      }
+        }).then((result) => {
+     
+          if (result.isConfirmed) {
+            let local_user = JSON.parse(window.localStorage.getItem("user"));
+            let name = local_user.user.fullname;
+            let lastname = local_user.user.lastname;
+            var d = new Date();
+            let data = new FormData()
+            data.append("fullname", name);
+            data.append("lastname", lastname);
+            data.append('car_chassis', this.car_chassis)
+            data.append('car_status', "นำเข้า")
+            data.append('car_where', this.car_where)
+            data.append('car_position', this.car_position)
+            data.append('date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
+            data.append('time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
+            http.post("car", data).then(() => {
+              swalWithBootstrapButtons
+                .fire("บันทึกข้อมูลเรียบร้อย!", "", "success")
+                .then(() => {
+                  this.$router.push({ name: "StockList" });
+                  window.location.reload();
+                });
+            });
+          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            swalWithBootstrapButtons.fire(
+              "ยกเลิกเรียบร้อย!",
+              "คุณได้ยกเลิกการเพิ่มข้อมูล",
+              "error"
+            );
+          }
+        });
 
     },
-
-    validations() {
-      return {
-        car_chassis: {
-          required: helpers.withMessage('ป้อนเลขตัวถังก่อน ', required),
-        },
-
-        where: {
-          required: helpers.withMessage('เลือกโซนที่จอดก่อน ', required),
-        },
-
-        position: {
-          required: helpers.withMessage('เลือกตำแหน่งที่จอดก่อน ', required),
-        },
-
-
-
-      }
-    }
-
+    back() {
+      this.$router.push({ name: "StockList" });
+    },
 
 
   },
-  mounted() {
-    this.currentPage = 1;
-    // อ่านสินค้าจาก API
-    this.getCar(this.currentPage)
 
-    http.get('/status').then(response=>{
-      let responseStatus = response.data
-          this.status = responseStatus
-    })
 
-  }
+  validations() {
+    return {
+      car_chassis: {
+        required: helpers.withMessage('กรุณากรอกเลขตัวถัง ', required),
+      },
+
+      where: {
+        required: helpers.withMessage('เลือกโซนที่จอดก่อน ', required),
+      },
+
+      position: {
+        required: helpers.withMessage('เลือกตำแหน่งที่จอดก่อน ', required),
+      },
+
+    }
+  },
+
+mounted() {
+  this.currentPage = 1;
+  // อ่านสินค้าจาก API
+  this.getCar(this.currentPage)
+
+  http.get(`car?page=${this.currentPage}`).then(response => {
+    let responseStatus = response.data
+    this.status = responseStatus
+  })
+
+}
 
 
 

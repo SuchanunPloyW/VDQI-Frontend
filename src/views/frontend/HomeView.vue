@@ -123,18 +123,9 @@ export default {
                   title: 'The email address or password is incorrect'
                 })
 
-              //เรียก POP UP 
-            /*   this.$swal({
-               // position: 'top-end',
-                icon: 'error',
-                title: 'The email address or password is incorrect.',
-                showConfirmButton: false,
-                timer: 2000
-              }) */
+             
             }
-            /* console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers); */
+           
           }
         } )
       } else {
