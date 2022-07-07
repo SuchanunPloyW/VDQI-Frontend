@@ -163,11 +163,13 @@
           <label class="block my-3 text-gray-700 text-md" for="car_chassis">เลขตัวถัง (17 หลัก)</label>
           <input v-model="car_chassis" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text" placeholder="Chassis no.">
-           
+
 
           <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
-          <select v-model="car_where"  class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
-            <option  v-for="car in car.data" :key="car.car_id"> {{car.car_where}}</option>
+          <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
+            <option disabled value="">กรุณาเลือกโซนในการจอด</option>
+            <option v-for="status in status.data" :key="status.status_id"> {{ status.status }}</option>
             <!-- <option disabled value="">กรุณาเลือกโซนในการจอด</option>
             <option>Stock A</option>
             <option>Stock C</option>
@@ -175,28 +177,25 @@
           </select>
           <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอด</label>
           <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="text" placeholder="Position">
-
-
-          <div class="grid grid-cols-3 gap-4">
-
-            <div class="col-span-2">
-              <button @click="submitForm"
-                class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-                บันทึกรายการ
-              </button>
-            </div>
-            <div>
-              <button @click="onResetForm"
-                class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
-                ล้าง
-              </button>
-            </div>
-
+            type="number" placeholder="Position">
+          <div class="col-span-2">
+            <button @click="submitForm"
+              class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+              บันทึกรายการ
+            </button>
+          </div>
+          <div>
+            <button @click="onResetForm"
+              class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
+              ล้าง
+            </button>
           </div>
         </form>
       </div>
+       <a  class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a>
+        
     </div>
+    
   </div>
 
 </template>
@@ -213,6 +212,7 @@ export default {
       /* ตัวแปร เรียกใช้งาน validation */
       v$: useValidate(),
       car: [],
+      status: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
@@ -226,6 +226,7 @@ export default {
       lastname: '',
       date: '',
       time: '',
+
       //ตัวแปรค้นหา
       keyword: ''
 
@@ -233,6 +234,7 @@ export default {
   },
   components: {
     VueTailwindPagination
+
   },
 
   methods: {
@@ -250,6 +252,7 @@ export default {
       this.perPage = responseCar.per_page
       this.total = responseCar.total
     },
+
     async getCarSearch(pagenumber) {
       let response = await http.get(`car/search/${this.keyword}?page=${pagenumber}`)
       let responseCar = response.data
@@ -326,16 +329,16 @@ export default {
     },
     // function submit form
     submitForm() {
-      
+
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
-         confirmButton: ' bg-green-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	',
-        cancelButton: 'bg-red-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	'
+          confirmButton: ' bg-green-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	',
+          cancelButton: 'bg-red-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	'
         },
         buttonsStyling: false,
       });
-      
+
       swalWithBootstrapButtons
         .fire({
           title: "ตรวจสอบข้อมูล",
@@ -350,7 +353,7 @@ export default {
           reverseButtons: true,
 
         }).then((result) => {
-     
+
           if (result.isConfirmed) {
             let local_user = JSON.parse(window.localStorage.getItem("user"));
             let name = local_user.user.fullname;
@@ -408,21 +411,25 @@ export default {
     }
   },
 
-mounted() {
-  this.currentPage = 1;
-  // อ่านสินค้าจาก API
-  this.getCar(this.currentPage)
+  mounted() {
+    this.currentPage = 1;
+    // อ่านสินค้าจาก API
+    this.getCar(this.currentPage)
 
-  http.get(`car?page=${this.currentPage}`).then(response => {
-    let responseStatus = response.data
-    this.status = responseStatus
-  })
+    http.get(`car?page=${this.currentPage}`).then(response => {
+      let responseCar = response.data
+      this.car = responseCar
+    }),
 
-}
+      http.get(`status?page=${this.currentPage}`).then(response => {
+        let responseStatus = response.data
+        this.status = responseStatus
+      })
+
+  }
 
 
 
 }
 
 </script>
-

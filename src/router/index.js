@@ -5,34 +5,31 @@ import BackendLayout from "@/layouts/Backend.vue";
 
 //import Views
 //Frontend
-import HomeView from "@/views/frontend/HomeView.vue";
-import NotFound404 from "@/views/frontend/NotFound404.vue";
+import HomeView from "@/views/frontend/Login/HomeView.vue";
+import NotFound404 from "@/views/frontend/Error/NotFound404.vue";
 //Backend
-import DashBaord from "@/views/backend/DashBoard.vue";
-import CarStock from "@/views/backend/CarStock.vue";
-import Stock from "@/views/backend/StockManagement.vue"
-import StockList from "@/views/backend/StockList.vue"
-import ReportGen from "@/views/backend/ReportGen.vue"
-import CarDetail from "@/views/backend/CarDetail.vue"
-import TestCar from "@/views/backend/TestCar.vue"
-import CarAdd from "@/views/backend/Create/CarAdd.vue"
+import DashBaord from "@/views/backend/DashBoard/DashBoard.vue";
+import CarStock from "@/views/backend/Test/CarStock.vue";
+import Stock from "@/views/backend/Stock/StockManagement.vue";
+import StockList from "@/views/backend/Stock/StockList.vue";
+import ReportGen from "@/views/backend/Report/ReportGen.vue";
+import CarDetail from "@/views/backend/Stock/CarDetail.vue";
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
-function authGuard(to, from, next){
-  let isAuthenticated = false
+function authGuard(to, from, next) {
+  let isAuthenticated = false;
 
-  if(localStorage.getItem('user')){
-    isAuthenticated = true  //ถ้ามีข้อมูล localStorage อยู่
-  }else{
-    isAuthenticated = false  //ถ้าไม่มีมีข้อมูล localStorage 
+  if (localStorage.getItem("user")) {
+    isAuthenticated = true; //ถ้ามีข้อมูล localStorage อยู่
+  } else {
+    isAuthenticated = false; //ถ้าไม่มีมีข้อมูล localStorage
   }
 
-  if(isAuthenticated){
-    next() //อนุญาติให้เข้าสู่ route และโหลด component ที่เราต้องการได้
-  }else{
-    next({name: 'home'})
+  if (isAuthenticated) {
+    next(); //อนุญาติให้เข้าสู่ route และโหลด component ที่เราต้องการได้
+  } else {
+    next({ name: "home" });
   }
-
 }
 
 const routes = [
@@ -43,7 +40,7 @@ const routes = [
     children: [
       {
         path: "",
-        name: 'home',
+        name: "home",
         component: HomeView,
       },
     ],
@@ -53,7 +50,7 @@ const routes = [
     },
   },
 
- /*  Error 404 */
+  /*  Error 404 */
   {
     path: "/:catchAll(.*)",
     component: NotFound404,
@@ -68,7 +65,7 @@ const routes = [
         path: "",
         name: "DashBaord",
         component: DashBaord,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -77,7 +74,7 @@ const routes = [
     },
   },
 
-/* route StockManagement */
+  /* route StockManagement */
   {
     path: "/backend/stock",
     component: BackendLayout,
@@ -86,7 +83,7 @@ const routes = [
         path: "",
         name: "Stock",
         component: Stock,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -104,7 +101,7 @@ const routes = [
         path: "",
         name: "StockList",
         component: StockList,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -113,7 +110,7 @@ const routes = [
     },
   },
 
-   /* route car detail */
+  /* route car detail */
   {
     path: "/backend/stock/car/detail",
     component: BackendLayout,
@@ -122,7 +119,7 @@ const routes = [
         path: "",
         name: "CarDetail",
         component: CarDetail,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -131,8 +128,8 @@ const routes = [
     },
   },
 
-   /* route report */
-   {
+  /* route report */
+  {
     path: "/backend/report",
     component: BackendLayout,
     children: [
@@ -140,7 +137,7 @@ const routes = [
         path: "",
         name: "ReportGen",
         component: ReportGen,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -148,37 +145,6 @@ const routes = [
       description: "ReportGen",
     },
   },
-  
-  /* route carInsert */
-  {
-    path: "/backend/car/add",
-    component: BackendLayout,
-    children: [
-      {
-        path: "",
-        name: "CarAdd",
-        component: CarAdd,
-        beforeEnter : authGuard
-      },
-    ],
-    meta: {
-      title: "ReportGenerator",
-      description: "ReportGen",
-    },
-  },
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
   /* router test */
   {
@@ -189,7 +155,7 @@ const routes = [
         path: "",
         name: "CarStock",
         component: CarStock,
-        beforeEnter : authGuard
+        beforeEnter: authGuard,
       },
     ],
     meta: {
@@ -197,23 +163,6 @@ const routes = [
       description: "CarStock",
     },
   },
-  {
-    path: "/backend/test",
-    component: BackendLayout,
-    children: [
-      {
-        path: "",
-        name: "Test",
-        component: TestCar,
-        beforeEnter : authGuard
-      },
-    ],
-    meta: {
-      title: "Test",
-      description: "Test",
-    },
-  },
-
 ];
 
 const router = createRouter({

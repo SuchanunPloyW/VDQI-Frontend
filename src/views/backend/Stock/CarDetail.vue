@@ -76,6 +76,20 @@
             " type="text" readonly />
           </div>
         </div>
+        <div class="flex flex-wrap mb-4">
+          <div class="w-full px-4 md:w-96">
+            <label class="text-gray-700 text-sm">Person</label>
+            <input v-model="fullname"  class="
+              border-solid border-2 border-gray-100
+              text-sm
+              w-full
+              px-2
+              py-2
+              leading-tight
+              text-gray-700
+            " type="text" readonly />
+          </div>
+        </div>
       </form>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -161,6 +175,7 @@ export default {
       car_position: "",
       date: "",
       time: "",
+      fullname:""
     };
   },
   methods: {
@@ -172,6 +187,7 @@ export default {
         this.car_position = response.data.car_position;
         this.date = response.data.date;
         this.time = response.data.time;
+        this.fullname = response.data.fullname
       });
     },
   },
