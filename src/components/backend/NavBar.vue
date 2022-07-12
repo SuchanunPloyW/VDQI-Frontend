@@ -94,6 +94,10 @@ export default {
     onclickShowProfile() {
       this.showProfileMenu = !this.showProfileMenu;
     },
+    showPro(){
+      
+
+    },
    
 
     onClikLogout() {

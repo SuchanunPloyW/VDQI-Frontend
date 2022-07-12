@@ -90,6 +90,20 @@
             " type="text" readonly />
           </div>
         </div>
+        <div class="flex flex-wrap mb-4">
+          <div class="w-full px-4 md:w-96">
+            <label class="text-gray-700 text-sm">Person</label>
+            <input v-model="car_id" class="
+              border-solid border-2 border-gray-100
+              text-sm
+              w-full
+              px-2
+              py-2
+              leading-tight
+              text-gray-700
+            " type="text" readonly />
+          </div>
+        </div>
       </form>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -109,7 +123,7 @@
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
               <tr v-for="crqs in crqs.data" :key="crqs.crqs_id" class="text-gray-700 dark:text-gray-400 hover:bg-blue-100 border-b">
-                <td class="px-4 py-3 text-sm">Stock A</td>
+                <td class="px-4 py-3 text-sm"> {{crqs.c_date}} </td>
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <div>
@@ -242,6 +256,7 @@ export default {
       /* ตัวแปร show detail */
       status: [],
       station: [],
+      crqs: [],
       car_id: "",
       car_chassis: "",
       car_where: "",
@@ -261,24 +276,30 @@ export default {
      c_station:"",
      c_date:"",
      c_time:"",
-     crqs: [],
+     crqs_id:""
+ 
   
 
     };
   },
   methods: {
+   
+
     ShowCar() {
       this.car_id = this.$store.state.carShow;
       http.get(`car/${this.car_id}`).then((response) => {
+        localStorage.setItem('car_chassis', response.data.car_chassis);
         this.car_chassis = response.data.car_chassis;
         this.car_where = response.data.car_where;
         this.car_position = response.data.car_position;
         this.date = response.data.date;
         this.time = response.data.time;
         this.fullname = response.data.fullname
+        this.crqs_id = response.data.crqs_id
       });
-    },
-    /* function popup */
+    },   
+   
+     /* function popup */
     openModal() {
       this.showModal = true
 
@@ -318,20 +339,20 @@ export default {
         }).then((result) => {
 
           if (result.isConfirmed) {
-            
+           
+       
             let local_user = JSON.parse(window.localStorage.getItem("user"));
            // localStorage.setItem("car_chassis", this.car_chassis);
             let name = local_user.user.fullname;
             let lastname = local_user.user.lastname;
             var d = new Date();
             let data = new FormData()
-            
+            localStorage.setItem('car_chassis', this.car_chassis);
             data.append('car_chassis', this.car_chassis)
             data.append('car_status', "นำออก")
             data.append("fullname", name);
             data.append("lastname", lastname);
             data.append("station", this.c_station);
-
             data.append('car_where', this.c_where)
             data.append('car_position', this.car_position)
             data.append('c_date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
@@ -355,7 +376,7 @@ export default {
         });
 
     },
-
+  
   },
   validations() {
     return {
@@ -373,27 +394,33 @@ export default {
 
     }
   },
+  
+  
 
 
   mounted() {
+    
     this.currentPage = 1;
     this.ShowCar();
+ 
+
     http.get(`station?page=${this.currentPage}`).then(response => {
       let responseStation = response.data
       this.station = responseStation
     }),
-      http.get(`status?page=${this.currentPage}`).then(response => {
-        let responseStatus = response.data
-        this.status = responseStatus
-      }),
-      
-      http.get(`crqs/${this.car_chassis}`).then(response => {
-      let responseCrqs = response.data
-      this.crqs = responseCrqs
-      console.log(responseCrqs)
-
+    http.get(`status?page=${this.currentPage}`).then(response => {
+      let responseStatus = response.data
+      this.status = responseStatus
     })
 
+    http.get(`crqs/search/${this.crqs.car_chassis}?page=${this.currentPage}}`).then((response) => {
+      let responseCrqs = response.data
+      this.crqs = responseCrqs
+      this.car_chassis = response.data.car_chassis; 
+    })
+    
   },
+   
+
 };
 </script>
