@@ -6,6 +6,7 @@ export default createStore({
   state: {
     showSideMenu: false,
     carShow: 0
+    
   },
   getters: {
   },

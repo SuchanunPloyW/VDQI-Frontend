@@ -84,6 +84,8 @@
         <span>เพิ่ม</span>
       </button>
     </div>
+
+    
   </div>
   <!-- ตารางสแดง Stock รถในลานจอด -->
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -129,6 +131,8 @@
                 <p>เพิ่มเติม</p>
               </button>
             </td>
+            
+
           </tr>
         </tbody>
       </table>
@@ -192,10 +196,8 @@
           </div>
         </form>
       </div>
-       <a  class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a>
-        
+       <a  class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a> 
     </div>
-    
   </div>
 
 </template>
@@ -355,7 +357,9 @@ export default {
         }).then((result) => {
 
           if (result.isConfirmed) {
+            
             let local_user = JSON.parse(window.localStorage.getItem("user"));
+           // localStorage.setItem("car_chassis", this.car_chassis);
             let name = local_user.user.fullname;
             let lastname = local_user.user.lastname;
             var d = new Date();
@@ -424,7 +428,13 @@ export default {
       http.get(`status?page=${this.currentPage}`).then(response => {
         let responseStatus = response.data
         this.status = responseStatus
-      })
+      }),
+      http.get(`car?page=${this.currentPage}`).then(response => {
+      let responseCar = response.data
+      this.car = responseCar
+      console.log(responseCar)
+
+    })
 
   }
 
