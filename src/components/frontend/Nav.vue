@@ -68,5 +68,24 @@
 export default {
   name: 'NavBar',
   // ...
+ /*  data(){
+     return {
+      
+
+     }
+  },
+   methods: {
+    getProfile(){
+       let local_user = JSON.parse(window.localStorage.getItem("user"));
+       let name = local_user.user.fullname;
+    }
+
+
+    
+
+  },
+  mounted(){
+
+  } */
 }
 </script>

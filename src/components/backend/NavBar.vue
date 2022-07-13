@@ -23,7 +23,9 @@
       <!-- Search input -->
       <div class="flex justify-center flex-1 lg:mr-32"></div>
       <ul class="flex items-center flex-shrink-0 space-x-6">
-        <h5 class="text-black"> สวัสดี! {{}} </h5>
+        <div></div>
+        
+        <h5 class ="text-black"> สวัสดี! {{user}}   </h5>
         <!-- Profile menu -->
         <li class="relative">
           <button
@@ -84,6 +86,7 @@ export default {
       showProfileMenu: false,
       user: [],
       currentPage: 0,
+     
     };
   },
 
@@ -95,8 +98,11 @@ export default {
       this.showProfileMenu = !this.showProfileMenu;
     },
     showPro(){
-      
-
+      let local_user = JSON.parse(window.localStorage.getItem("user"));
+      let name = local_user.user.fullname;
+      let data = new FormData()
+      data.append("fullname", name);
+      console.log(local_user.user.fullname)
     },
    
 
@@ -117,5 +123,8 @@ export default {
         });
     },
   },
+  mounted(){
+    this.showPro();
+  }
 };
 </script>
