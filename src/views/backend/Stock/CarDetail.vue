@@ -22,7 +22,7 @@
         </div>
         <div class="flex flex-wrap mb-4">
           <div class="w-full px-4 md:w-96">
-            <label class="text-gray-700 text-sm">Where (ต้องอัพเดตเป็น where ล่าสุดใช่ไหม)</label>
+            <label class="text-gray-700 text-sm">Where</label>
             <input v-model="car_where" class="
               border-solid border-2 border-gray-100
               text-sm
@@ -76,7 +76,7 @@
             " type="text" readonly />
           </div>
         </div>
-        
+
       </form>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -95,13 +95,14 @@
               </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-              <tr v-for="crqs in crqs.data" :key="crqs.crqs_id" class="text-gray-700 dark:text-gray-400 hover:bg-blue-100 border-b">
-                <td class="px-4 py-3 text-sm">{{crqs.c_where}}</td>
+              <tr v-for="crqs in crqs.data" :key="crqs.crqs_id"
+                class="text-gray-700 dark:text-gray-400 hover:bg-blue-100 border-b">
+                <td class="px-4 py-3 text-sm">{{ crqs.car_where }}</td>
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{crqs.c_position}}
+                        {{ crqs.car_position }}
                       </p>
                     </div>
                   </div>
@@ -110,7 +111,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{crqs.c_date}}
+                        {{ crqs.c_date }}
                       </p>
                     </div>
                   </div>
@@ -119,7 +120,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{crqs.c_time}}
+                        {{ crqs.c_time }}
                       </p>
                     </div>
                   </div>
@@ -128,7 +129,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                       {{crqs.car_status}}
+                        {{ crqs.car_status }}
                       </p>
                     </div>
                   </div>
@@ -137,7 +138,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{crqs.fullname}}
+                        {{ crqs.fullname }}
                       </p>
                     </div>
                   </div>
@@ -183,26 +184,28 @@
       </div>
       <!-- Modal Content-->
       <div class="w-full h-auto mb-4">
-        <form @submit.prevent = "onSubmit">
+        <form @submit.prevent="onSubmit">
           <label class="block my-3 text-gray-700 text-md" for="name">เลขตัวถัง</label>
-          <input v-model="car_chassis" class="bg-gray-200 w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text" readonly>
+          <input v-model="car_chassis"
+            class="bg-gray-200 w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text" readonly>
 
           <label class="block my-3 text-gray-700 text-md" for="c_station">ดำเนินการที่สถานี</label>
-          <select v-model="c_station" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
+          <select v-model="c_station" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
             <option disabled value="">กรุณาเลือกสถานีในการดำเนินการ</option>
             <option v-for="station in station.data" :key="station.station_id">{{ station.station }} </option>
           </select>
 
-          <label class="block my-3 text-gray-700 text-md" for="c_where">เลือกโซนที่จอดล่าสุด </label>
-          <select v-model="c_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text">
+          <label class="block my-3 text-gray-700 text-md" for="car_where">เลือกโซนที่จอดล่าสุด </label>
+          <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
             <option disabled value="">กรุณาเลือกโซนในการจอด</option>
             <option v-for="status in status.data" :key="status.status_id"> {{ status.status }}</option>
           </select>
 
-
-
           <label class="block my-3 text-gray-700 text-md" for="c_position">ตำแหน่งที่จอดล่าสุด</label>
-          <input v-model="c_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="number" placeholder="Position">
+          <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="number" placeholder="Position">
           <div class="col-span-2">
             <button @click="submitForm"
               class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -243,13 +246,13 @@ export default {
       showModal: false,
 
       /* ตัวแปร เบิกรถยนต์ */
-     c_where: "",
-     c_position:"",
-     c_station:"",
-     c_date:"",
-     c_time:"",
-     crqs: [],
-  
+      c_where: "",
+      // car_position:"",
+      c_station: "",
+      c_date: "",
+      c_time: "",
+      crqs: [],
+
 
     };
   },
@@ -277,7 +280,7 @@ export default {
     returnCarlist() {
       this.$router.push({ name: 'StockList' })
     },
-     submitForm() {
+    submitForm() {
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
@@ -294,8 +297,8 @@ export default {
           html:
             `<p class="custom text-left font-normal text-xl"> <b>เลขตัวถัง :</b> ${this.car_chassis}</p>` +
             `<p class="custom text-left font-normal text-xl"> <b>ดำเนินการที่ :</b> ${this.c_station}</p>` +
-            ` <p class="custom text-left font-normal text-xl"> <b>โซนที่จอด :</b> ${this.c_where}</p>` +
-            ` <p class="custom text-left font-normal text-xl">  <b>ตำแหน่งที่จอด :</b> ${this.c_position} </p>`,
+            ` <p class="custom text-left font-normal text-xl"> <b>โซนที่จอดล่าสุด :</b> ${this.car_where}</p>` +
+            ` <p class="custom text-left font-normal text-xl">  <b>ตำแหน่งที่จอดล่าสุด :</b> ${this.car_position} </p>`,
 
           showCancelButton: true,
           confirmButtonText: "ยืนยัน",
@@ -305,14 +308,14 @@ export default {
         }).then((result) => {
 
           if (result.isConfirmed) {
-            
+
             let local_user = JSON.parse(window.localStorage.getItem("user"));
-           // localStorage.setItem("car_chassis", this.car_chassis);
+            // localStorage.setItem("car_chassis", this.car_chassis);
             let name = local_user.user.fullname;
             let lastname = local_user.user.lastname;
             var d = new Date();
             let data = new FormData()
-            
+
             data.append('car_chassis', this.car_chassis)
             data.append('car_id', this.car_id)
             data.append('car_status', "นำออก")
@@ -320,11 +323,11 @@ export default {
             data.append("lastname", lastname);
             data.append("station", this.c_station);
 
-            data.append('c_where', this.c_where)
-            data.append('c_position', this.c_position)
+            data.append('car_where', this.car_where)
+            data.append('car_position', this.car_position)
             data.append('c_date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
             data.append('c_time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
-            
+
             http.post("crqs", data).then(() => {
               swalWithBootstrapButtons
                 .fire("บันทึกข้อมูลเรียบร้อย!", "", "success")
@@ -332,8 +335,9 @@ export default {
                   this.$router.push({ name: "StockList" });
                   //window.location.reload();
                 });
-            });
-          } else if (result.dismiss === this.$swal.DismissReason.cancel) {
+            })
+          }
+          else if (result.dismiss === this.$swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire(
               "ยกเลิกเรียบร้อย!",
               "คุณได้ยกเลิกการเบิกรถ",
@@ -341,6 +345,18 @@ export default {
             );
           }
         });
+        //  edit
+      this.car_id = this.$store.state.carShow;
+      let data = new FormData();
+      data.append('car_where', this.car_where)
+      data.append('car_position', this.car_position)
+      data.append("_method", "PUT");
+      http.post(`car/${this.car_id}`,
+        data
+      ).then(response => {
+        console.log(response.data)
+      })
+
 
     },
 
@@ -374,11 +390,11 @@ export default {
         let responseStatus = response.data
         this.status = responseStatus
       })
-      
-      http.get(`crqs/id/${this.car_id}?page=${this.currentPage}`).then(response => {
+
+    http.get(`crqs/id/${this.car_id}?page=${this.currentPage}`).then(response => {
       let responseCrqs = response.data
       this.crqs = responseCrqs
-    
+
 
     })
 
