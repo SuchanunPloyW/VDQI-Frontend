@@ -23,9 +23,14 @@
       <!-- Search input -->
       <div class="flex justify-center flex-1 lg:mr-32"></div>
       <ul class="flex items-center flex-shrink-0 space-x-6">
-        <div></div>
         
-        <h5 class ="text-black"> สวัสดี! {{user}}   </h5>
+      <!-- สวัสดี  &nbsp;  -->  
+      สวัสดี  &nbsp;
+      
+      <!-- <input  v-model="lastname" class=" w-20 appearance-none bg-transparent border-none  text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" readonly  /> -->
+       <h5>{{user.fullname}} {{user.lastname}} </h5> 
+        
+       <!--  <h5 class ="text-black"> สวัสดี! {{user}}   </h5> -->
         <!-- Profile menu -->
         <li class="relative">
           <button
@@ -86,6 +91,8 @@ export default {
       showProfileMenu: false,
       user: [],
       currentPage: 0,
+      fullname: '',
+      lastname:'',
      
     };
   },
@@ -97,11 +104,20 @@ export default {
     onclickShowProfile() {
       this.showProfileMenu = !this.showProfileMenu;
     },
-    showPro(){
+
+    ShowProfile(){
       let local_user = JSON.parse(window.localStorage.getItem("user"));
-      let name = local_user.user.fullname;
-      let data = new FormData()
-      data.append("fullname", name);
+
+      http.get(`user/id/${local_user.user.id}`).then((response) => {
+        let responseUser= response.data
+        let responseFullname= response.data
+        this.user = responseUser
+        this.fullname = responseFullname
+         console.log(responseUser)
+       /*  this.profile = response.data[0];
+        this.fullname = this.profile.fullname
+        this.lastname = this.profile.lastname */
+      })
       console.log(local_user.user.fullname)
     },
    
@@ -124,7 +140,7 @@ export default {
     },
   },
   mounted(){
-    this.showPro();
+    this.ShowProfile();
   }
 };
 </script>
