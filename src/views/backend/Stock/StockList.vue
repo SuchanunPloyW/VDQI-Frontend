@@ -85,7 +85,7 @@
       </button>
     </div>
 
-    
+
   </div>
   <!-- ตารางสแดง Stock รถในลานจอด -->
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -131,7 +131,7 @@
                 <p>เพิ่มเติม</p>
               </button>
             </td>
-            
+
 
           </tr>
         </tbody>
@@ -142,7 +142,7 @@
     </div>
   </div>
 
-  <!-- Popup สำหรับเพิ่มรายการสินค้าใหม่ -->
+  <!-- Popup สำหรับเพิ่มรถใหม่ -->
   <div v-if="showAddModal" id="addProductModal"
     class="fixed top-0 left-0 flex items-center justify-center w-full h-full modal">
     <div class="absolute w-full h-full bg-gray-900 opacity-70 modal-overlay"></div>
@@ -173,15 +173,15 @@
           <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
             <option disabled value="">กรุณาเลือกโซนในการจอด</option>
-            <option v-for="status in status.data" :key="status.status_id"> {{ status.status }}</option>
-            <!-- <option disabled value="">กรุณาเลือกโซนในการจอด</option>
-            <option>Stock A</option>
-            <option>Stock C</option>
-            <option>Stock D</option> -->
+            <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
           </select>
           <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอด</label>
-          <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="number" placeholder="Position">
+          <select v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
+            <option disabled value="">กรุณาเลือกตำแหน่งในการจอด</option>
+            <option v-for="position in position.data" :key="position.position"> {{ position.car_position }}</option>
+
+          </select>
           <div class="col-span-2">
             <button @click="submitForm"
               class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -196,7 +196,7 @@
           </div>
         </form>
       </div>
-       <a  class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a> 
+      <a class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a>
     </div>
   </div>
 
@@ -315,7 +315,7 @@ export default {
       this.showAddModal = false
       this.onResetForm()
     },
-   
+
     // onResetfrom
     onResetForm() {
       this.$refs.addCarForm.reset()
@@ -357,9 +357,9 @@ export default {
         }).then((result) => {
 
           if (result.isConfirmed) {
-            
+
             let local_user = JSON.parse(window.localStorage.getItem("user"));
-           // localStorage.setItem("car_chassis", this.car_chassis);
+            // localStorage.setItem("car_chassis", this.car_chassis);
             let name = local_user.user.fullname;
             let lastname = local_user.user.lastname;
             var d = new Date();
@@ -425,16 +425,20 @@ export default {
       this.car = responseCar
     }),
 
-      http.get(`status?page=${this.currentPage}`).then(response => {
-        let responseStatus = response.data
-        this.status = responseStatus
+      http.get(`where?page=${this.currentPage}`).then(response => {
+        let responseWhere = response.data
+        this.where = responseWhere
+      }),
+      http.get(`position?page=${this.currentPage}`).then(response => {
+        let responsePosition = response.data
+        this.position = responsePosition
       }),
       http.get(`car?page=${this.currentPage}`).then(response => {
-      let responseCar = response.data
-      this.car = responseCar
-      console.log(responseCar)
+        let responseCar = response.data
+        this.car = responseCar
+        console.log(responseCar)
 
-    })
+      })
 
   }
 

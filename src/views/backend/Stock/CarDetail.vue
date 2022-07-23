@@ -3,7 +3,8 @@
     Stock Management
   </h2>
   <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
+    <div class=" gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
+      <!-- //gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2 -->
       <form enctype="multipart/form-data">
         <h4 class="font-semibold">Car Information</h4>
         <div class="flex flex-wrap mb-4">
@@ -88,21 +89,32 @@
                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th class="px-4 py-3">WHERE</th>
                 <th class="px-4 py-3">POSITION</th>
-                <th class="px-4 py-3">DATE</th>
-                <th class="px-4 py-3">TIME</th>
                 <th class="px-4 py-3">ACTION</th>
                 <th class="px-4 py-3">PERSON</th>
+                <th class="px-4 py-3">DATE</th>
+                <th class="px-4 py-3">TIME</th>
+                <th class="px-4 py-3">STATION</th>
               </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-              <tr v-for="crqs in crqs.data" :key="crqs.crqs_id"
+              <tr v-for="req in req.data" :key="req.req_id"
                 class="text-gray-700 dark:text-gray-400 hover:bg-blue-100 border-b">
-                <td class="px-4 py-3 text-sm">{{ crqs.car_where }}</td>
+                <td class="px-4 py-3 text-sm">{{ req.car_where }}</td>
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ crqs.car_position }}
+                        {{ req.car_position }}
+                      </p>
+                    </div>
+                  </div>
+                </td>
+
+                <td class="px-4 py-3">
+                  <div class="flex items-center text-sm">
+                    <div>
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
+                        {{ req.req_status }}
                       </p>
                     </div>
                   </div>
@@ -111,7 +123,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ crqs.c_date }}
+                        {{ req.fullname }}
                       </p>
                     </div>
                   </div>
@@ -120,7 +132,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ crqs.c_time }}
+                        {{ req.req_date }}
                       </p>
                     </div>
                   </div>
@@ -129,7 +141,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ crqs.car_status }}
+                        {{ req.req_time }}
                       </p>
                     </div>
                   </div>
@@ -138,7 +150,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ crqs.fullname }}
+                        {{ req.car_station }}
                       </p>
                     </div>
                   </div>
@@ -189,23 +201,27 @@
           <input v-model="car_chassis"
             class="bg-gray-200 w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="text" readonly>
 
-          <label class="block my-3 text-gray-700 text-md" for="c_station">ดำเนินการที่สถานี</label>
-          <select v-model="c_station" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+          <label class="block my-3 text-gray-700 text-md" for="car_station">ดำเนินการที่สถานี</label>
+          <select v-model="car_station" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
             <option disabled value="">กรุณาเลือกสถานีในการดำเนินการ</option>
-            <option v-for="station in station.data" :key="station.station_id">{{ station.station }} </option>
+            <option v-for="station in station.data" :key="station.station_id">{{ station.car_station }} </option>
           </select>
 
-          <label class="block my-3 text-gray-700 text-md" for="car_where">เลือกโซนที่จอดล่าสุด </label>
+          <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอดล่าสุด </label>
           <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
             <option disabled value="">กรุณาเลือกโซนในการจอด</option>
-            <option v-for="status in status.data" :key="status.status_id"> {{ status.status }}</option>
+            <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
           </select>
 
-          <label class="block my-3 text-gray-700 text-md" for="c_position">ตำแหน่งที่จอดล่าสุด</label>
-          <input v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-            type="number" placeholder="Position">
+          <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอดล่าสุด</label>
+          <select v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+            type="text">
+            <option disabled value="">กรุณาเลือกตำแหน่งในการจอด</option>
+            <option v-for="position in position.data" :key="position.position"> {{ position.car_position }}</option>
+
+          </select>
           <div class="col-span-2">
             <button @click="submitForm"
               class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -248,10 +264,10 @@ export default {
       /* ตัวแปร เบิกรถยนต์ */
       c_where: "",
       // car_position:"",
-      c_station: "",
+      car_station: "",
       c_date: "",
       c_time: "",
-      crqs: [],
+      req: [],
 
 
     };
@@ -296,7 +312,7 @@ export default {
           title: "ตรวจสอบข้อมูล",
           html:
             `<p class="custom text-left font-normal text-xl"> <b>เลขตัวถัง :</b> ${this.car_chassis}</p>` +
-            `<p class="custom text-left font-normal text-xl"> <b>ดำเนินการที่ :</b> ${this.c_station}</p>` +
+            `<p class="custom text-left font-normal text-xl"> <b>ดำเนินการที่ :</b> ${this.car_station}</p>` +
             ` <p class="custom text-left font-normal text-xl"> <b>โซนที่จอดล่าสุด :</b> ${this.car_where}</p>` +
             ` <p class="custom text-left font-normal text-xl">  <b>ตำแหน่งที่จอดล่าสุด :</b> ${this.car_position} </p>`,
 
@@ -318,17 +334,16 @@ export default {
 
             data.append('car_chassis', this.car_chassis)
             data.append('car_id', this.car_id)
-            data.append('car_status', "นำออก")
+            data.append('req_status', "นำออก")
             data.append("fullname", name);
             data.append("lastname", lastname);
-            data.append("station", this.c_station);
-
+            data.append("car_station", this.car_station);
             data.append('car_where', this.car_where)
             data.append('car_position', this.car_position)
-            data.append('c_date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
-            data.append('c_time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
+            data.append('req_date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
+            data.append('req_time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
 
-            http.post("crqs", data).then(() => {
+            http.post("req", data).then(() => {
               swalWithBootstrapButtons
                 .fire("บันทึกข้อมูลเรียบร้อย!", "", "success")
                 .then(() => {
@@ -345,15 +360,13 @@ export default {
             );
           }
         });
-        //  edit
+      //  edit
       this.car_id = this.$store.state.carShow;
       let data = new FormData();
       data.append('car_where', this.car_where)
       data.append('car_position', this.car_position)
       data.append("_method", "PUT");
-      http.post(`car/${this.car_id}`,
-        data
-      ).then(response => {
+      http.post(`car/${this.car_id}`, data).then(response => {
         console.log(response.data)
       })
 
@@ -386,17 +399,22 @@ export default {
       let responseStation = response.data
       this.station = responseStation
     }),
-      http.get(`status?page=${this.currentPage}`).then(response => {
-        let responseStatus = response.data
-        this.status = responseStatus
+      http.get(`where?page=${this.currentPage}`).then(response => {
+        let responseWhere = response.data
+        this.where = responseWhere
+      }),
+      http.get(`position?page=${this.currentPage}`).then(response => {
+        let responsePosition = response.data
+        this.position = responsePosition
+      }),
+
+      http.get(`req/id/${this.car_id}?page=${this.currentPage}`).then(response => {
+        let responsereq = response.data
+        this.req = responsereq
+        this.req.data.reverse();
+
+
       })
-
-    http.get(`crqs/id/${this.car_id}?page=${this.currentPage}`).then(response => {
-      let responseCrqs = response.data
-      this.crqs = responseCrqs
-
-
-    })
 
   },
 };
