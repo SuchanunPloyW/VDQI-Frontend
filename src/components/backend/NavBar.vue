@@ -28,7 +28,7 @@
       สวัสดี  &nbsp;
       
       <!-- <input  v-model="lastname" class=" w-20 appearance-none bg-transparent border-none  text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" readonly  /> -->
-       <h5>{{user.fullname}} {{user.lastname}} </h5> 
+       <h5 class="text-gray-900	">{{user.fullname}} {{user.lastname}} </h5> 
         
        <!--  <h5 class ="text-black"> สวัสดี! {{user}}   </h5> -->
         <!-- Profile menu -->
