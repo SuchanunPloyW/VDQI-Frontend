@@ -81,24 +81,40 @@
     </div>
     <!-- Card -->
   </div>
- 
+
   <div
-    class=" items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
+    class=" overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
         Stock A (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
       </p>
-   <!-- Card Lotus's -->   
+      <!-- Card Lotus's -->
       <div class="py-4">
-        <a class="  flex items-center justify-between p-4  text-sm font-semibold  bg-gray-200 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-        >Lotus's
+        <a
+          class=" flex items-center justify-between p-4 text-sm font-semibold  bg-gray-200 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
         </a>
       </div>
-  <!-- Card Lotus's -->
+      <!-- Card Lotus's -->
+      <div class="flex">
+        <div @click="test" class="flex items-center pl-4 rounded border border-gray-200 dark:border-gray-700">
+          <input id="bordered-radio-1" type="radio" value="" name="bordered-radio"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="bordered-radio-1"
+            class="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">1 ว่าง</label>
+        </div>
+        <div class="flex items-center pl-4 rounded border border-red-200 dark:border-gray-700">
+          <input disabled id="bordered-radio-2" type="radio" value="" name="bordered-radio"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="bordered-radio-2"
+            class="py-4 ml-2 w-full text-sm font-medium text-gray-500 dark:text-gray-300">2 ไม่ว่าง</label>
+        </div>
+
+      </div>
+
     </div>
   </div>
-  <div  class="py-4">
-    <a  @click="ViewPicture"
+  <div class="py-4">
+    <a @click="ViewPicture"
       class=" flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
       href="">
       <div class="flex items-center">
@@ -126,6 +142,9 @@ export default {
         imageAlt: "A tall image",
       });
     },
+    test(){
+      alert('ployyyyyyyyyy')
+    }
   },
 };
 </script>
