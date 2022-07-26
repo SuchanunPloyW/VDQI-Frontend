@@ -161,7 +161,7 @@
         </div>
         <div class="col-span-2">
           <button @click="openModal"
-            class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+            class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
             เบิกรถยนต์
           </button>
         </div>
@@ -224,7 +224,7 @@
           </select>
           <div class="col-span-2">
             <button @click="submitForm"
-              class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+              class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
               บันทึกรายการ
             </button>
           </div>

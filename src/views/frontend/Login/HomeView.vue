@@ -33,11 +33,14 @@
                 {{ v$.password.$errors[0].$message }}
               </div>
 
+              
+
 
 
 
               <p class="my-4"></p>
-              <button @click="submitForm" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg cursor-pointer active:bg-purple-600 hover:bg-red-700">LOGIN</button>
+              <button @click="submitForm"
+                class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg cursor-pointer active:bg-purple-600 hover:bg-purple-700">LOGIN</button>
             </form>
 
           </div>
@@ -48,7 +51,7 @@
 </template>
 <script>
 import useValidate from "@vuelidate/core";
-import { required, email,minLength, helpers } from "@vuelidate/validators";
+import { required, email, minLength, helpers } from "@vuelidate/validators";
 import http from "@/services/AuthService";
 
 
@@ -65,69 +68,69 @@ export default {
     submitForm() {
       this.v$.$validate(); // check app input
       if (!this.v$.$error) {
-       // alert("From validate Success");
+        // alert("From validate Success");
         // ถ้า validate ผ่าน
         //เรียนกใช้งาน API จาก LARAVEL
         http.post('login',
-        {
-          "email" : this.email,
-          "password" : this.password
-        }
-        
+          {
+            "email": this.email,
+            "password": this.password
+          }
+
         ).then(response => {
           console.log(response.data)
           //เก็บข้อมูลลง localStorahe
-          localStorage.setItem('user',JSON.stringify(response.data))
-    
-      
+          localStorage.setItem('user', JSON.stringify(response.data))
+
+
           // เมื่อ login ผ่านส่งไปหน้า admin
           const Toast = this.$swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 1500,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', this.$swal.stopTimer)
-                    toast.addEventListener('mouseleave', this.$swal.resumeTimer)
-                   // this.$router.push('backend')
-                  }
-                })
-
-                Toast.fire({
-                  icon: 'success',
-                  title: 'Login Success'
-                }).then(()=>{
-                  this.$router.push({name : 'DashBaord'})
-                 // window.location.href = '/backend'
-                })
-                
-         
-        }).catch(error =>{
-          if (error.response){
-            if(error.response.status == 401){
-              const Toast = this.$swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', this.$swal.stopTimer)
-                    toast.addEventListener('mouseleave', this.$swal.resumeTimer)
-                  }
-                })
-
-                Toast.fire({
-                  icon: 'error',
-                  title: 'The email address or password is incorrect'
-                })
-
-             
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', this.$swal.stopTimer)
+              toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+              // this.$router.push('backend')
             }
-           
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Login Success'
+          }).then(() => {
+            this.$router.push({ name: 'DashBaord' })
+            // window.location.href = '/backend'
+          })
+
+
+        }).catch(error => {
+          if (error.response) {
+            if (error.response.status == 401) {
+              const Toast = this.$swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', this.$swal.stopTimer)
+                  toast.addEventListener('mouseleave', this.$swal.resumeTimer)
+                }
+              })
+
+              Toast.fire({
+                icon: 'error',
+                title: 'The email address or password is incorrect'
+              })
+
+
+            }
+
           }
-        } )
+        })
       } else {
         //alert("Form validate fail");
       }
@@ -141,10 +144,10 @@ export default {
       },
       password: {
         required: helpers.withMessage('Please insert Password. ', required),
-        minLength : helpers.withMessage(
+        minLength: helpers.withMessage(
           ({
             $params
-          }) => `Password must be at least  ${$params.min} characters`, 
+          }) => `Password must be at least  ${$params.min} characters`,
           minLength(10)
         )
       },

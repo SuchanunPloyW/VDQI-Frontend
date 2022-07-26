@@ -182,6 +182,8 @@
             <option v-for="position in position.data" :key="position.position"> {{ position.car_position }}</option>
 
           </select>
+          
+          
           <div class="col-span-2">
             <button @click="submitForm"
               class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -194,10 +196,13 @@
               ล้าง
             </button>
           </div>
+          
         </form>
       </div>
-      <a class=" text-blue-600 underline decoration-sky-500">ภาพอธิบายลานจอด</a>
+      <h5 @click="ViewPicture" class=" text-blue-600  decoration-sky-500">&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; ภาพอธิบายลานจอด</h5>
     </div>
+
   </div>
 
 </template>
@@ -240,6 +245,15 @@ export default {
   },
 
   methods: {
+     ViewPicture() {
+       this.$swal.fire({
+        imageUrl: "https://trello.com/1/cards/62846a8ad8fd477751f8fd0f/attachments/628c6441c9f7818c5876300b/previews/628c6442c9f7818c58763022/download/flow-plan-now.jpg",
+        imageHeight: 1500,
+        imageAlt: "A tall image",
+      });
+      
+      
+    },
 
     show(car_id) {
       this.$router.push({ name: "CarDetail" });
