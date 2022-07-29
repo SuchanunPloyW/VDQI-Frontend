@@ -91,7 +91,7 @@ export default {
          this.fullname = this.profile.fullname
          this.lastname = this.profile.lastname */
       })
-      console.log(local_user.user.fullname)
+     // console.log(local_user.user.fullname)
     },
 
 
