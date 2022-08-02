@@ -219,7 +219,7 @@
           <select v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
             <option disabled value="">กรุณาเลือกตำแหน่งในการจอด</option>
-            <option v-for="position in position.data" :key="position.position"> {{ position.car_position }}</option>
+            <option v-for="position in position.data" :key="position.position"> ช่องจอด : {{ position.car_position }}</option>
 
           </select>
           <div class="col-span-2">
@@ -403,7 +403,7 @@ export default {
         let responseWhere = response.data
         this.where = responseWhere
       }),
-      http.get(`position?page=${this.currentPage}`).then(response => {
+      http.get(`position/search/0/?page=${this.currentPage}`).then(response => {
         let responsePosition = response.data
         this.position = responsePosition
       }),

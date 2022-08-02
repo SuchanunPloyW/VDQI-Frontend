@@ -89,37 +89,42 @@
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
+          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
         </a>
       </div>
-       <div class="flex items-center mr-4">
-    <div v-for="position in position.data" :key="position.position_id"
-      class="bg-green-500 flex items-center pl-4 rounded border border-gray-500 dark:border-gray-700">
-      <input type="radio" @click="Select" :id="position.position_id" name="position-radio"
-        :value="position.car_position" v-model="car_position"
-        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-      <label :for="position.position_id"
-        class="py-4 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">{{ position.car_position }} ({{position.position_status }})</label>
+    
+        <!--  <div v-for="position in position.data" :key="position.position_id" >
+          <input  class="hidden w-1" type="radio" @click="Select" :id="position.position_id" name="position-radio"
+            :value="position.car_position" v-model="car_position">
+          <label :for="position.position_id" class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer">
+            <span class="text-sm font-bold mt-1"> ช่องจอด : {{ position.car_position }} </span>
+            <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
+          </label>
+        </div> -->
+   
+      <div class="grid grid-rows-3 grid-flow-col gap-4">
+        <div class="space-x-1 flex ">
+          <div v-for="position in position.data" :key="position.position_id">
+            <div @click="Select"
+              class="flex  p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
+              <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
+                :value="position.car_position" v-model="car_position">
+              <label :for="position.position_id" class="">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="" />
+                </svg>
+                <span> </span>
+              </label>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
     </div>
   </div>
-    </div>
-  </div>
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   <div class="py-4">
     <button @click="ViewPicture"
@@ -171,33 +176,34 @@ export default {
         },
         buttonsStyling: false,
       });
-      swalWithBootstrapButtons.fire({
-        title: "โปรดยืนยันการทำรายการ",
-        text: "ปิดการใช้งานช่องจอดรถยนต์",
-        icon: 'warning',
+      swalWithBootstrapButtons
+        .fire({
+          title: "โปรดยืนยันการทำรายการ",
+          text: "ปิดการใช้งานช่องจอดรถยนต์",
+          icon: "warning",
 
-        showCancelButton: true,
-        confirmButtonText: "ยืนยัน",
-        cancelButtonText: "ยกเลิก",
-        reverseButtons: true,
-      }).then((result) => {
-        
-        if (result.isConfirmed) {
-          
-          localStorage.setItem("id", this.car_position);
-          let positionid = JSON.parse(window.localStorage.getItem("id"));
+          showCancelButton: true,
+          confirmButtonText: "ยืนยัน",
+          cancelButtonText: "ยกเลิก",
+          reverseButtons: true,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            localStorage.setItem("id", this.car_position);
+            let positionid = JSON.parse(window.localStorage.getItem("id"));
 
-          console.log(this.car_position)
-          let data = new FormData();
-          data.append('position_status', 'not available')
-          data.append("_method", "PUT");
-          http.post(`position/${positionid}`, data).then(response => {
-            console.log(response.data)
+            console.log(this.car_position);
+            let data = new FormData();
+            data.append("position_status", "1");
+            data.append("_method", "PUT");
+            http.post(`position/${positionid}`, data).then((response) => {
+              console.log(response.data);
+              window.location.reload();
+            });
+          }else{
             window.location.reload();
-          })
-         
-        }
-      });
+          }
+        });
     },
   },
   mounted() {
@@ -210,32 +216,11 @@ export default {
 };
 </script>
 
-<!-- localStorage.setItem("position_id", this.position_id);
-      this.$swal.fire({
-        title: 'โปรดยืนยันการทำรายการ',
-        text: "ปิดการใช้งานช่องจอดรถยนต์",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: 'green',
-        cancelButtonColor: 'grey',
-        confirmButtonText: 'ยืนยัน',
-        cancelButtonText: 'ยกเลิก'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          
-           let local_user = JSON.parse(window.localStorage.getItem("position_id"));
-           let position_id = local_user.position_id.position_id;
-           let data = new FormData();
-           data.append('position_status', " not available")
-           data.append("_method", "PUT");
-           http.post(`position/${position_id}`, data).then(response => {
-               console.log(response.data)
-           })
-
-         /*  this.$Swal.fire(
-            'Deleted!',
-            'Your file has been deleted.',
-            'success'
-          ) */
-        }
-      }); -->
+<style>
+input:checked+label {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: RED;
+  border: red;
+}
+</style>
