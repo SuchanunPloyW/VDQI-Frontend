@@ -74,7 +74,7 @@ export default {
           }
 
         ).then(response => {
-          console.log(response.data)
+        //  console.log(response.data)
           //เก็บข้อมูลลง localStorahe
           localStorage.setItem('user', JSON.stringify(response.data))
 

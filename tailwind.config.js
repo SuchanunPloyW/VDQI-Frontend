@@ -5,8 +5,16 @@ module.exports = {
     extend: {
       fontFamily:{
         sans: ['Inter','IBM Plex Sans Thai', 'sans-serif']
+        
+      },
+
+      gridTemplateColumns:{
+        '30': 'repeat(30, minmax(0, 1fr))',
+        'footer': '200px minmax(900px, 1fr) 100px',
+
 
       }
+
     },
   },
   variants: {

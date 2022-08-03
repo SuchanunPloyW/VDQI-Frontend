@@ -86,7 +86,7 @@ export default {
         let responseFullname = response.data
         this.user = responseUser
         this.fullname = responseFullname
-        console.log(responseUser)
+        //console.log(responseUser)
         /*  this.profile = response.data[0];
          this.fullname = this.profile.fullname
          this.lastname = this.profile.lastname */

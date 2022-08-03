@@ -386,7 +386,7 @@ export default {
             data.append('car_position', this.car_position)
             data.append('date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
             data.append('time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
-            http.post("car", data).then(() => {
+            http.post("car", data).then(() => {   
               swalWithBootstrapButtons
                 .fire("บันทึกข้อมูลเรียบร้อย!", "", "success")
                 .then(() => {
