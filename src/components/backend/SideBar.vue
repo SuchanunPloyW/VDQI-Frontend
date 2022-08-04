@@ -22,7 +22,7 @@
 
       <ul>
         <li class="relative px-6 py-3">
-          <router-link to="/backend/stock"
+          <router-link to="/backend/stock/a"
             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
             href="forms.html">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -57,7 +57,7 @@
 
       <ul>
         <li class="relative px-6 py-3">
-          <router-link to="/backend/zone"
+          <router-link to="/backend/position"
             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
             href="forms.html">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -65,7 +65,7 @@
                 d="M2 5a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm14 1a1 1 0 11-2 0 1 1 0 012 0zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2zm14 1a1 1 0 11-2 0 1 1 0 012 0z"
                 clip-rule="evenodd" />
             </svg>
-            <span class="ml-4">โซนที่จอด</span>
+            <span class="ml-4">เพิ่มช่องจอด</span>
           </router-link>
         </li>
       </ul>

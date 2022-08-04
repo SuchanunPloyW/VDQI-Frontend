@@ -14,7 +14,7 @@ import Stock from "@/views/backend/Stock/StockManagement.vue";
 import StockList from "@/views/backend/Stock/StockList.vue";
 import ReportGen from "@/views/backend/Report/ReportGen.vue";
 import CarDetail from "@/views/backend/Stock/CarDetail.vue";
-import ZoneManage from "@/views/backend/Manage/Zone/ZoneManage.vue";
+import PositionManage from "@/views/backend/Manage/Zone/ZoneManage.vue";
 import StockB from "@/views/backend/Stock/StockB.vue";
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
@@ -78,7 +78,7 @@ const routes = [
 
   /* route StockManagement */
   {
-    path: "/backend/stock",
+    path: "/backend/stock/a",
     component: BackendLayout,
     children: [
       {
@@ -165,19 +165,19 @@ const routes = [
   },
 /* route system */
 {
-  path: "/backend/zone",
+  path: "/backend/position",
   component: BackendLayout,
   children: [
     {
       path: "",
-      name: "ZoneManage",
-      component: ZoneManage,
+      name: "PositionManage",
+      component: PositionManage,
       beforeEnter: authGuard,
     },
   ],
   meta: {
-    title: "ZoneManage",
-    description: "ZoneManage",
+    title: "PositionManage",
+    description: "PositionManage",
   },
 },
 

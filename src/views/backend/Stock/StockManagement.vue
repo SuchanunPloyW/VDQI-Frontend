@@ -22,12 +22,14 @@
         <div>
           <label class="block mt-4 text-sm- font-bold">
             <span class="text-gray-700 dark:text-gray-400"> Select area </span>
-            <select 
+
+            <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-              <option >Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option >Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option>Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option>Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              
+             <option value="a" > Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option  value="b" > Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option  value="c"> Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
           </label>
         </div>
@@ -103,19 +105,22 @@
           </label>
         </div> -->
 
-        <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6>
+        <!-- <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6> -->
+        
         <div class="  grid md:grid-cols-30 gap-1 ">
           <div v-for="position in position.data" :key="position.position_id">
-            <div @click="Select"
+            <div @click="Select" title="เลขตัวถัง"
               class="flex  p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
               <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
                 :value="position.car_position" v-model="car_position">
               <label :for="position.position_id" class="">
-                <span>{{position.car_position}} </span>
+                <span>A{{position.car_position}} </span>
               </label>
             </div>
           </div>
         </div>
+        
+        
   
       
     </div>
@@ -140,6 +145,7 @@
       <span>View &RightArrow;</span>
     </button>
   </div>
+  
 </template>
 
 <script>
@@ -156,6 +162,12 @@ export default {
     };
   },
   methods: {
+    changeRoute(e) {
+      this.$router.push("/backend/stock/" + e.target.value);
+     // this.$router.push({ name: 'StockList' })
+      // this.$router.push("/b" + e.target.value); not working....
+    },
+    
     ViewPicture() {
       this.$swal.fire({
         imageUrl:
@@ -194,6 +206,7 @@ export default {
             console.log(this.car_position);
             let data = new FormData();
             data.append("position_status", "1");
+            data.append("car_chassis", null);
             data.append("_method", "PUT");
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
@@ -204,10 +217,7 @@ export default {
           }
         });
     },
-    a(){
-      alert('aaaa')
-
-    },
+    
   },
   mounted() {
     this.currentPage = 1;

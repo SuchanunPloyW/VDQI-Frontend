@@ -22,17 +22,19 @@
         <div>
           <label class="block mt-4 text-sm- font-bold">
             <span class="text-gray-700 dark:text-gray-400"> Select area </span>
-            <select
+
+            <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-              <option>Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option>Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option>Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option>Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+               <option  value="b" > Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+             <option value="a" > Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option  value="c"> Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
           </label>
         </div>
       </div>
     </div>
+    
     <!-- Card -->
     <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
       <div class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500">
@@ -84,7 +86,7 @@
     class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
-        Stock A (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
+        Stock B (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
       </p>
       <!-- Card Lotus's -->
       <div class="py-4">
@@ -92,7 +94,7 @@
           class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
         </a>
       </div>
-    
+
         <!--  <div v-for="position in position.data" :key="position.position_id" >
           <input  class="hidden w-1" type="radio" @click="Select" :id="position.position_id" name="position-radio"
             :value="position.car_position" v-model="car_position">
@@ -101,31 +103,32 @@
             <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
           </label>
         </div> -->
-   
-      <div class="grid grid-rows-3 grid-flow-col gap-4">
-        <div class="space-x-1 flex ">
+
+        <!-- <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6> -->
+        
+        <div class="  grid md:grid-cols-30 gap-1 ">
           <div v-for="position in position.data" :key="position.position_id">
-            <div @click="Select"
+            <div @click="Select" title="เลขตัวถัง"
               class="flex  p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
               <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
                 :value="position.car_position" v-model="car_position">
               <label :for="position.position_id" class="">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    d="" />
-                </svg>
-                <span> </span>
+                <span>B{{position.car_position}} </span>
               </label>
             </div>
           </div>
-
-
         </div>
-      </div>
+        
+        
+  
+      
     </div>
   </div>
-
+<!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <router-link class="dropdown-item" to="/CreatEvent">Create an event</router-link>
+              <router-link class="dropdown-item" to="/ViewEvent">View events</router-link>
+              <router-link class="dropdown-item" to="/EditEvent">Update an event</router-link>
+            </div> -->
   <div class="py-4">
     <button @click="ViewPicture"
       class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
@@ -141,6 +144,7 @@
       <span>View &RightArrow;</span>
     </button>
   </div>
+  
 </template>
 
 <script>
@@ -157,6 +161,12 @@ export default {
     };
   },
   methods: {
+    changeRoute(e) {
+      this.$router.push("/backend/stock/" + e.target.value);
+     // this.$router.push({ name: 'StockList' })
+      // this.$router.push("/b" + e.target.value); not working....
+    },
+    
     ViewPicture() {
       this.$swal.fire({
         imageUrl:
@@ -195,6 +205,7 @@ export default {
             console.log(this.car_position);
             let data = new FormData();
             data.append("position_status", "1");
+            data.append("car_chassis", null);
             data.append("_method", "PUT");
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
@@ -205,6 +216,7 @@ export default {
           }
         });
     },
+    
   },
   mounted() {
     this.currentPage = 1;

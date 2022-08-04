@@ -140,7 +140,9 @@
       <VueTailwindPagination :current="currentPage" :total="total" :per-page="perPage"
         @page-changed="onPageClick($event)" />
     </div>
+    
   </div>
+
 
   <!-- Popup สำหรับเพิ่มรถใหม่ -->
   <div v-if="showAddModal" id="addProductModal"
@@ -169,18 +171,18 @@
             type="text" placeholder="Chassis no.">
 
 
-          <label class="block my-3 text-gray-700 text-md" for="car_where">โซนที่จอด</label>
+          <label class="block my-3 text-gray-700 text-md" for="car_where">ลานจอด</label>
           <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
-            <option disabled value="">กรุณาเลือกโซนในการจอด</option>
+            <option disabled value="">กรุณาเลือกลานในการจอด</option>
             <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
           </select>
 
-          <label class="block my-3 text-gray-700 text-md" for="car_position">ตำแหน่งที่จอด</label>
+          <label class="block my-3 text-gray-700 text-md" for="car_position">ช่องที่จอด</label>
           <select v-model="car_position" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
             type="text">
-            <option disabled value="">กรุณาเลือกตำแหน่งในการจอด</option>
-            <option v-for="position in position.data" :key="position.position"> ช่องจอด : {{ position.car_position }}</option>
+            <option disabled value="">กรุณาเลือกช่องในการจอด</option>
+            <option v-for="position in position.data" :key="position.position"> {{ position.car_position }}</option>
           </select>
           
           
@@ -394,6 +396,17 @@ export default {
                   window.location.reload();
                 });
             });
+
+            //เพิ่มเลขตัวถังเข้ากับตำแหน่งจอด
+            let putdata = new FormData();
+            putdata.append('position_status', '1')
+            putdata.append('car_chassis', this.car_chassis)
+            putdata.append("_method", "PUT");
+            http.post(`position/${this.car_position}`, putdata).then(response => {
+              console.log(response.putdata)
+              console.log(this.car_position)
+            })
+            
           } else if (result.dismiss === this.$swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire(
               "ยกเลิกเรียบร้อย!",
@@ -450,7 +463,7 @@ export default {
       http.get(`car?page=${this.currentPage}`).then(response => {
         let responseCar = response.data
         this.car = responseCar
-        console.log(responseCar)
+       // console.log(responseCar)
 
       })
 
