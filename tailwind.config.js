@@ -10,7 +10,7 @@ module.exports = {
 
       gridTemplateColumns:{
         '30': 'repeat(30, minmax(0, 1fr))',
-        'footer': '200px minmax(900px, 1fr) 100px',
+     /*    'footer': '200px minmax(900px, 1fr) 100px', */
 
 
       }

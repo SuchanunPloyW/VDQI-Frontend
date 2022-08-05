@@ -1,49 +1,62 @@
 <template>
   <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
     Stock Management : A
-    
   </h2>
-
-  
-   
-  
-  <router-link to="/backend/stock/list"
+  <router-link
+    to="/backend/stock/list"
     class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-    href="">
+    href=""
+  >
     <div class="flex items-center">
       <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
         <path
-          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-        </path>
+          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+        ></path>
       </svg>
       <span>จัดการ และค้นหารถยนต์ในลานจอด</span>
     </div>
     <span>View &RightArrow;</span>
   </router-link>
   <div class="space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-    <div class="w-auto flex items-center p-1 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-      <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+    <div
+      class="w-auto flex items-center p-1 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    >
+      <div
+        class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500"
+      >
         <!--  <h4>Select area</h4> -->
         <div>
           <label class="block mt-4 text-sm- font-bold">
             <span class="text-gray-700 dark:text-gray-400"> Select area </span>
 
-            <select v-on:change="changeRoute($event)"
-              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-              
-             <option value="a" > Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option  value="b" > Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option  value="c"> Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+            <select
+              v-on:change="changeRoute($event)"
+              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+            >
+              <option value="a">
+                Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง
+              </option>
+              <option value="b">
+                Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง
+              </option>
+              <option value="c">
+                Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง
+              </option>
+              <option value="d">
+                Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง
+              </option>
             </select>
           </label>
         </div>
       </div>
     </div>
-    
     <!-- Card -->
-    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-      <div class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500">
+    <div
+      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    >
+      <div
+        class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500"
+      >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -51,14 +64,18 @@
           เปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          300
+          {{ available.total }}
         </p>
       </div>
     </div>
     <!-- Card -->
     <!-- Card -->
-    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-      <div class="p-3 mr-4 text-green-500 bg-red-400 rounded-full dark:text-green-100 dark:bg-green-500">
+    <div
+      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    >
+      <div
+        class="p-3 mr-4 text-green-500 bg-red-400 rounded-full dark:text-green-100 dark:bg-green-500"
+      >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -66,14 +83,18 @@
           อยู่ในช่องจอด
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          300
+          {{ noavailable.total }}
         </p>
       </div>
     </div>
     <!-- Card -->
     <!-- Card -->
-    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-      <div class="p-3 mr-4 text--500 bg-yellow-400 rounded-full dark:text-green-100 dark:bg-green-500">
+    <div
+      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
+    >
+      <div
+        class="p-3 mr-4 text--500 bg-yellow-400 rounded-full dark:text-green-100 dark:bg-green-500"
+      >
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -81,7 +102,7 @@
           ว่าง
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{position.total}}
+          {{ available.total }}
         </p>
       </div>
     </div>
@@ -89,7 +110,8 @@
   </div>
 
   <div
-    class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
+    class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1"
+  >
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
         Stock A (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
@@ -97,11 +119,11 @@
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
+          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+          >Lotus's
         </a>
       </div>
-
-        <!--  <div v-for="position in position.data" :key="position.position_id" >
+      <!--  <div v-for="position in position.data" :key="position.position_id" >
           <input  class="hidden w-1" type="radio" @click="Select" :id="position.position_id" name="position-radio"
             :value="position.car_position" v-model="car_position">
           <label :for="position.position_id" class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer">
@@ -109,41 +131,49 @@
             <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
           </label>
         </div> -->
-        <div class="  grid md:grid-cols-30 gap-1 ">
-          <div v-for="position in position.data" :key="position.position_id">
-            <div @click="Select" :title="position.position_status"
-            class="position-car" 
+      <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-30">
+        <div v-for="position in position.data" :key="position.position_id">
+          <div
+            @click="Select"
+            class="position"
             :class="{
-                    'position-car--sold': position.position_status === '1',
-                    'position-car--booked': position.position_status === '0',
-                  }">
-
-
-              <input   class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
-                :value="position.car_position" v-model="car_position">
-              <label :for="position.position_id" class="">
-                <span>A{{position.car_position}} </span>
-              </label>
-            </div>
+              'position-0': position.position_status === '0',
+              'position-1': position.position_status === '1',
+              'position-2': position.position_status === '2',
+            }"
+          >
+            <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ position.car_chassis }}
+            </span>
+            <input
+              class="hidden w-1"
+              type="radio"
+              :id="position.position_id"
+              name="position-radio"
+              :value="position.car_position"
+              v-model="car_position"
+            />
+            <label :for="position.position_id" class="">
+              <span>A{{ position.car_position }} </span>
+            </label>
           </div>
         </div>
-
-    
-       
-        
-  
-      
+      </div>
     </div>
   </div>
 
   <div class="py-4">
-    <button @click="ViewPicture"
-      class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
+    <button
+      @click="ViewPicture"
+      class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+    >
       <div class="flex items-center">
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
           <path
-            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-          </path>
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+          ></path>
         </svg>
         <span>ภาพอธิบายลานจอด</span>
       </div>
@@ -151,7 +181,6 @@
       <span>View &RightArrow;</span>
     </button>
   </div>
-  
 </template>
 
 <script>
@@ -160,6 +189,8 @@ export default {
   data() {
     return {
       position: [],
+      available: [],
+      noavailable: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
@@ -170,10 +201,10 @@ export default {
   methods: {
     changeRoute(e) {
       this.$router.push("/backend/stock/" + e.target.value);
-     // this.$router.push({ name: 'StockList' })
+      // this.$router.push({ name: 'StockList' })
       // this.$router.push("/b" + e.target.value); not working....
     },
-    
+
     ViewPicture() {
       this.$swal.fire({
         imageUrl:
@@ -211,19 +242,18 @@ export default {
 
             console.log(this.car_position);
             let data = new FormData();
-            data.append("position_status", "1");
+            data.append("position_status", "2");
             data.append("car_chassis", null);
             data.append("_method", "PUT");
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
               window.location.reload();
             });
-          }else{
+          } else {
             window.location.reload();
           }
         });
     },
-    
   },
   mounted() {
     this.currentPage = 1;
@@ -231,40 +261,71 @@ export default {
       let responsePosition = response.data;
       this.position = responsePosition;
     });
-    
+    // เช็คตำแหน่งที่จอดว่าง
+    http.get(`position/search/0/?page=${this.currentPage}`).then((response) => {
+      let responseAvailable = response.data;
+      this.available = responseAvailable;
+    });
+
+    // เช็คตำแหน่งที่จอดไม่ว่าง
+    http.get(`position/search/1/?page=${this.currentPage}`).then((response) => {
+      let responseNoAvailable = response.data;
+      this.noavailable = responseNoAvailable;
+    });
   },
 };
 </script>
 
-
- <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
+<!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
-input:checked+label {
-  
+input:checked + label {
   background-color: RED;
   border: red;
 }
-.position-car{
+.position {
   background-color: rgb(47, 255, 186);
   padding-top: 10px;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
 
+  position: relative;
 }
-.position-car:hover {
-    background-color: rgb(255, 0, 0);
- 
+.position .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: rgb(179, 86, 255);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
-.position-car--sold {
+
+.position:hover .tooltiptext {
+  visibility: visible;
+}
+.position:hover {
+  background-color: rgb(255, 0, 0);
+}
+.position-1 {
   background-color: red;
   color: #fff;
 }
-
+.position-2 {
+  background-color: rgb(190, 190, 190);
+  color: #fff;
+}
 </style>
 <!-- class="flex p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white"> -->
- 
- <!-- tooltip -->
+
+<!-- tooltip -->
 <!-- <div class="bg-red-200 group ...">
     <div><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
