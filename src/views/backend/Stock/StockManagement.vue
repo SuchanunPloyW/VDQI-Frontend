@@ -1,7 +1,12 @@
 <template>
   <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
     Stock Management : A
+    
   </h2>
+
+  
+   
+  
   <router-link to="/backend/stock/list"
     class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
     href="">
@@ -104,14 +109,17 @@
             <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
           </label>
         </div> -->
-
-        <!-- <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6> -->
-        
         <div class="  grid md:grid-cols-30 gap-1 ">
           <div v-for="position in position.data" :key="position.position_id">
-            <div @click="Select" title="เลขตัวถัง"
-              class="flex  p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
-              <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
+            <div @click="Select" :title="position.position_status"
+            class="position-car" 
+            :class="{
+                    'position-car--sold': position.position_status === '1',
+                    'position-car--booked': position.position_status === '0',
+                  }">
+
+
+              <input   class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
                 :value="position.car_position" v-model="car_position">
               <label :for="position.position_id" class="">
                 <span>A{{position.car_position}} </span>
@@ -119,17 +127,15 @@
             </div>
           </div>
         </div>
-        
+
+    
+       
         
   
       
     </div>
   </div>
-<!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <router-link class="dropdown-item" to="/CreatEvent">Create an event</router-link>
-              <router-link class="dropdown-item" to="/ViewEvent">View events</router-link>
-              <router-link class="dropdown-item" to="/EditEvent">Update an event</router-link>
-            </div> -->
+
   <div class="py-4">
     <button @click="ViewPicture"
       class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
@@ -230,11 +236,37 @@ export default {
 };
 </script>
 
+
+ <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
 input:checked+label {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
   background-color: RED;
   border: red;
 }
+.position-car{
+  background-color: rgb(47, 255, 186);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
+
+}
+.position-car:hover {
+    background-color: rgb(255, 0, 0);
+ 
+}
+.position-car--sold {
+  background-color: red;
+  color: #fff;
+}
+
 </style>
+<!-- class="flex p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white"> -->
+ 
+ <!-- tooltip -->
+<!-- <div class="bg-red-200 group ...">
+    <div><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
+</svg></div>
+    <div class="hidden group-hover:block ...">ดาวน์โหลด</div>   -->
