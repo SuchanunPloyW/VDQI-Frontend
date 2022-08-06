@@ -13,7 +13,7 @@
           อยู่ในช่องจอด
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ car.total }}
+          {{ noavailable.total }}
         </p>
       </div>
     </div>
@@ -84,7 +84,17 @@
         <span>เพิ่ม</span>
       </button>
     </div>
-
+     <div>
+      <button @click="nextAdd"
+        class="flex items-center justify-between px-4 py-1.5 mx-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-500 border border-transparent rounded-lg active:bg-purple-600 hover:bg-yellow-700 focus:outline-none focus:shadow-outline-purple">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd"
+            d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+            clip-rule="evenodd" />
+        </svg>
+        <span>เพิ่ม</span>
+      </button>
+    </div>
 
   </div>
   <!-- ตารางสแดง Stock รถในลานจอด -->
@@ -108,7 +118,7 @@
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
-                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                  <p class="text-sm text-gray-600 dark:text-gray-400 ">
                     {{ car.car_where }}
                   </p>
                 </div>
@@ -222,6 +232,7 @@ export default {
       v$: useValidate(),
       car: [],
       status: [],
+      noavailable: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
@@ -420,6 +431,9 @@ export default {
     back() {
       this.$router.push({ name: "StockList" });
     },
+    nextAdd(){
+       this.$router.push({ name: "AddStock" });
+    }
 
 
   },
@@ -444,7 +458,7 @@ export default {
 
   mounted() {
     this.currentPage = 1;
-    // อ่านสินค้าจาก API
+
     this.getCar(this.currentPage)
 
     http.get(`car?page=${this.currentPage}`).then(response => {
@@ -466,6 +480,11 @@ export default {
        // console.log(responseCar)
 
       })
+      // เช็คตำแหน่งที่จอดไม่ว่าง
+    http.get(`position/search/1/?page=${this.currentPage}`).then((response) => {
+      let responseNoAvailable = response.data;
+      this.noavailable = responseNoAvailable;
+    });
 
   }
 

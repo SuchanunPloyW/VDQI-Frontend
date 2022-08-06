@@ -61,10 +61,10 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          เปิดใช้งาน
+          ปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ available.total }}
+          {{ close.total }}
         </p>
       </div>
     </div>
@@ -131,7 +131,7 @@
             <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
           </label>
         </div> -->
-      <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-30">
+      <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-35">
         <div v-for="position in position.data" :key="position.position_id">
           <div
             @click="Select"
@@ -143,7 +143,7 @@
             }"
           >
             <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <h1 class="font-bold">ข้อมูลรถที่จอด</h1>
               <span class="font-bold"> เลขตัวถัง :</span>
               {{ position.car_chassis }}
             </span>
@@ -156,14 +156,14 @@
               v-model="car_position"
             />
             <label :for="position.position_id" class="">
-              <span>A{{ position.car_position }} </span>
+            <span>A{{ position.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
     </div>
   </div>
-
+<!--   value='{ "key1": "value1", "key2": "value2", "key3": "value3" } -->
   <div class="py-4">
     <button
       @click="ViewPicture"
@@ -191,6 +191,7 @@ export default {
       position: [],
       available: [],
       noavailable: [],
+      close: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
@@ -214,6 +215,7 @@ export default {
       });
     },
     Select() {
+     
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
@@ -237,10 +239,11 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            localStorage.setItem("id", this.car_position);
+          localStorage.setItem("id", this.car_position);
+          console.log()
+        //  localStorage.setItem("status", this.position.position_status);
             let positionid = JSON.parse(window.localStorage.getItem("id"));
-
-            console.log(this.car_position);
+            
             let data = new FormData();
             data.append("position_status", "2");
             data.append("car_chassis", null);
@@ -248,7 +251,8 @@ export default {
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
               window.location.reload();
-            });
+            })
+            
           } else {
             window.location.reload();
           }
@@ -272,9 +276,20 @@ export default {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
+
+    // เช็คตำแหน่งปิดช่องจอด
+    http.get(`position/search/2/?page=${this.currentPage}`).then((response) => {
+      let responseClose = response.data;
+      this.close = responseClose;
+    });
   },
+
 };
 </script>
+
+
+
+
 
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
@@ -288,13 +303,14 @@ input:checked + label {
   border-radius: 5px;
   font-size: 12px;
   text-align: center;
+  
 
   position: relative;
 }
 .position .tooltiptext {
   visibility: hidden;
   width: 200px;
-  background-color: rgb(179, 86, 255);
+  background-color: rgb(197, 135, 248);
   color: rgb(255, 255, 255);
   text-align: center;
   border-radius: 6px;
@@ -323,11 +339,6 @@ input:checked + label {
   color: #fff;
 }
 </style>
-<!-- class="flex p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white"> -->
 
-<!-- tooltip -->
-<!-- <div class="bg-red-200 group ...">
-    <div><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M15 13l-3 3m0 0l-3-3m3 3V8m0 13a9 9 0 110-18 9 9 0 010 18z" />
-</svg></div>
-    <div class="hidden group-hover:block ...">ดาวน์โหลด</div>   -->
+
+
