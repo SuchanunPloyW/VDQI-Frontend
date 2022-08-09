@@ -2,39 +2,31 @@
   <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
     Stock Management : A
   </h2>
-  <router-link
-    to="/backend/stock/list"
+  <router-link to="/backend/stock/list"
     class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-    href=""
-  >
+    href="">
     <div class="flex items-center">
       <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
         <path
-          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-        ></path>
+          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+        </path>
       </svg>
       <span>จัดการ และค้นหารถยนต์ในลานจอด</span>
     </div>
     <span>View &RightArrow;</span>
   </router-link>
   <div class="space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-    <div
-      class="w-auto flex items-center p-1 bg-white rounded-lg shadow-lg dark:bg-gray-800"
-    >
-      <div
-        class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500"
-      >
+    <div class="w-auto flex items-center p-1 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
         <!--  <h4>Select area</h4> -->
         <div>
           <label class="block mt-4 text-sm- font-bold">
             <span class="text-gray-700 dark:text-gray-400"> Select area </span>
 
-            <select
-              v-on:change="changeRoute($event)"
-              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-            >
+            <select v-on:change="changeRoute($event)"
+              class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
               <option value="a">
-                Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง
+                Stock A (15) : ลานจอดรถ VDQi ลานดิน
               </option>
               <option value="b">
                 Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง
@@ -51,12 +43,8 @@
       </div>
     </div>
     <!-- Card -->
-    <div
-      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
-    >
-      <div
-        class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500"
-      >
+    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <div class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -70,12 +58,8 @@
     </div>
     <!-- Card -->
     <!-- Card -->
-    <div
-      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
-    >
-      <div
-        class="p-3 mr-4 text-green-500 bg-red-400 rounded-full dark:text-green-100 dark:bg-green-500"
-      >
+    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <div class="p-3 mr-4 text-green-500 bg-red-400 rounded-full dark:text-green-100 dark:bg-green-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -89,12 +73,8 @@
     </div>
     <!-- Card -->
     <!-- Card -->
-    <div
-      class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
-    >
-      <div
-        class="p-3 mr-4 text--500 bg-yellow-400 rounded-full dark:text-green-100 dark:bg-green-500"
-      >
+    <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
+      <div class="p-3 mr-4 text--500 bg-yellow-400 rounded-full dark:text-green-100 dark:bg-green-500">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
       </div>
       <div>
@@ -110,70 +90,116 @@
   </div>
 
   <div
-    class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1"
-  >
+    class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
-        Stock A (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
+        Stock A (15) : ลานจอดรถ VDQi ลานดิน
       </p>
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-          >Lotus's
+          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
         </a>
       </div>
-      <!--  <div v-for="position in position.data" :key="position.position_id" >
-          <input  class="hidden w-1" type="radio" @click="Select" :id="position.position_id" name="position-radio"
-            :value="position.car_position" v-model="car_position">
-          <label :for="position.position_id" class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer">
-            <span class="text-sm font-bold mt-1"> ช่องจอด : {{ position.car_position }} </span>
-            <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
-          </label>
-        </div> -->
-      <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-35">
-        <div v-for="position in position.data" :key="position.position_id">
-          <div
-            @click="Select"
-            class="position"
-            :class="{
-              'position-0': position.position_status === '0',
-              'position-1': position.position_status === '1',
-              'position-2': position.position_status === '2',
-            }"
-          >
-            <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถที่จอด</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ position.car_chassis }}
-            </span>
-            <input
-              class="hidden w-1"
-              type="radio"
-              :id="position.position_id"
-              name="position-radio"
-              :value="position.car_position"
-              v-model="car_position"
-            />
-            <label :for="position.position_id" class="">
-            <span>A{{ position.car_position }} </span>
+      <!-- position A -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2">
+        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionA.position_status === '0',
+            'position-1': positionA.position_status === '1',
+            'position-2': positionA.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
+              :value="positionA.position_id" v-model="position_id" />
+
+            <label :for="positionA.position_id" class="">
+              <span>{{ positionA.car_line }}{{ positionA.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
+      <br>
+      <!-- position A -->
+
+      <!-- position B -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+        
+        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionB.position_status === '0',
+            'position-1': positionB.position_status === '1',
+            'position-2': positionB.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
+              :value="positionB.position_id" v-model="position_id" />
+
+            <label :for="positionB.position_id" class="">
+              <span>{{ positionB.car_line }}{{ positionB.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position B -->
+
+     <!-- position C -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+        
+        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionC.position_status === '0',
+            'position-1': positionC.position_status === '1',
+            'position-2': positionC.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
+              :value="positionC.position_id" v-model="position_id" />
+
+            <label :for="positionC.position_id" class="">
+              <span>{{ positionC.car_line }}{{ positionC.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position C -->
+
+    <!-- position D -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+        
+        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionD.position_status === '0',
+            'position-1': positionD.position_status === '1',
+            'position-2': positionD.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
+              :value="positionD.position_id" v-model="position_id" />
+
+            <label :for="positionD.position_id" class="">
+              <span>{{ positionD.car_line }}{{ positionD.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position D -->
+      
+
+
+
+
+
+
     </div>
   </div>
-<!--   value='{ "key1": "value1", "key2": "value2", "key3": "value3" } -->
   <div class="py-4">
-    <button
-      @click="ViewPicture"
-      class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-    >
+    <button @click="ViewPicture"
+      class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
       <div class="flex items-center">
         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
           <path
-            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-          ></path>
+            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+          </path>
         </svg>
         <span>ภาพอธิบายลานจอด</span>
       </div>
@@ -188,7 +214,10 @@ import http from "@/services/BackendServices";
 export default {
   data() {
     return {
-      position: [],
+      positionA: [],
+      positionB: [],
+      positionC: [],
+      positionD: [],
       available: [],
       noavailable: [],
       close: [],
@@ -197,6 +226,8 @@ export default {
       total: 0,
       car_position: "",
       positionModel: "",
+      position_id: "",
+      position_status: "",
     };
   },
   methods: {
@@ -215,7 +246,7 @@ export default {
       });
     },
     Select() {
-     
+
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
@@ -239,20 +270,17 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-          localStorage.setItem("id", this.car_position);
-          console.log()
-        //  localStorage.setItem("status", this.position.position_status);
+            localStorage.setItem("id", this.position_id);
             let positionid = JSON.parse(window.localStorage.getItem("id"));
-            
+            //  localStorage.setItem("status", this.position.position_status);
             let data = new FormData();
             data.append("position_status", "2");
-            data.append("car_chassis", null);
             data.append("_method", "PUT");
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
               window.location.reload();
             })
-            
+
           } else {
             window.location.reload();
           }
@@ -261,11 +289,40 @@ export default {
   },
   mounted() {
     this.currentPage = 1;
-    http.get(`position?page=${this.currentPage}`).then((response) => {
-      let responsePosition = response.data;
-      this.position = responsePosition;
+    // get stock A  / ตำแหน่ง A
+    http.get(`position/search/1/a?page=${this.currentPage}`).then((response) => {
+      let responsePositionA = response.data;
+      this.positionA = responsePositionA;
     });
-    // เช็คตำแหน่งที่จอดว่าง
+    // get stock A  / ตำแหน่ง B
+    http.get(`position/search/1/b?page=${this.currentPage}`).then((response) => {
+      let responsePositionB = response.data;
+      this.positionB = responsePositionB;
+    });
+
+    // get stock A  / ตำแหน่ง C
+    http.get(`position/search/1/c?page=${this.currentPage}`).then((response) => {
+      let responsePositionC = response.data;
+      this.positionC = responsePositionC;
+    });
+  
+   // get stock A  / ตำแหน่ง D
+    http.get(`position/search/1/d?page=${this.currentPage}`).then((response) => {
+      let responsePositionD = response.data;
+      this.positionD = responsePositionD;
+    });
+
+
+
+
+
+
+
+
+
+
+
+    /* // เช็คตำแหน่งที่จอดว่าง
     http.get(`position/search/0/?page=${this.currentPage}`).then((response) => {
       let responseAvailable = response.data;
       this.available = responseAvailable;
@@ -281,7 +338,7 @@ export default {
     http.get(`position/search/2/?page=${this.currentPage}`).then((response) => {
       let responseClose = response.data;
       this.close = responseClose;
-    });
+    }); */
   },
 
 };
@@ -293,20 +350,22 @@ export default {
 
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
-input:checked + label {
+input:checked+label {
   background-color: RED;
   border: red;
 }
+
 .position {
   background-color: rgb(47, 255, 186);
   padding-top: 10px;
   border-radius: 5px;
   font-size: 12px;
   text-align: center;
-  
+
 
   position: relative;
 }
+
 .position .tooltiptext {
   visibility: hidden;
   width: 200px;
@@ -327,13 +386,16 @@ input:checked + label {
 .position:hover .tooltiptext {
   visibility: visible;
 }
+
 .position:hover {
   background-color: rgb(255, 0, 0);
 }
+
 .position-1 {
   background-color: red;
   color: #fff;
 }
+
 .position-2 {
   background-color: rgb(190, 190, 190);
   color: #fff;

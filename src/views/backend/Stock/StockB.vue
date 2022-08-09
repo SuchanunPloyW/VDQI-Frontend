@@ -105,7 +105,7 @@
         </div> -->
 
         <!-- <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6> -->
-        
+        <!-- 
         <div class="  grid md:grid-cols-30 gap-1 ">
           <div v-for="position in position.data" :key="position.position_id">
             <div @click="Select" title="เลขตัวถัง"
@@ -119,7 +119,7 @@
           </div>
         </div>
         
-        
+         -->
   
       
     </div>

@@ -1,6 +1,6 @@
 <template>
   <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-    Stock Management ({{ car.total }})
+  
   </h2>
 
   <button>
@@ -25,28 +25,28 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-          <tr v-for="car in car.data" :key="car.car_id" class="text-gray-700 dark:text-gray-400 hover:bg-blue-100">
-            <td class="px-4 py-3 text-lg">{{ car.car_id }}</td>
+          <tr v-for="position in position.data" :key="position.position_id" class="text-gray-700 dark:text-gray-400 hover:bg-blue-100">
+            <td class="px-4 py-3 text-lg">{{ position.position_id }}</td>
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
                 <div>
                   <p class="text-lg text-gray-600 dark:text-gray-400">
-                    {{ car.car_chassisnum }}
+                    {{ position.car_line }}
                   </p>
                 </div>
               </div>
             </td>
-            <td class="px-4 py-3 text-lg">{{ car.area_stock }}</td>
+            <td class="px-4 py-3 text-lg">{{ position.car_position }}</td>
             <td class="px-4 py-3 text-sm">
               <div class="flex items-center text-sm">
                 <div>
                   <p class="text-lg text-black-600 dark:text-gray-400">
-                    {{ car.fullname }} {{ car.lastname }}
+                    {{ position.joinwhere.car_where }} 
                   </p>
                 </div>
               </div>
             </td>
-            <td class="px-4 py-3 text-lg">{{ car.car_status }}</td>
+            <td class="px-4 py-3 text-lg">{{ position.position_status }}</td>
             <td class="px-4 py-3 text-sm">
               <button
                 class="px-4 py-2 mx-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-yellow-400 border border-transparent rounded-lg active:bg-purple-600 hover:bg-yellow-500 focus:outline-none focus:shadow-outline-purple">
@@ -76,17 +76,17 @@ import http from '@/services/BackendServices'
 export default {
   data() {
     return {
-      car: [],
+      position: [],
       currentPage: 0
     }
   },
   mounted() {
     this.currentPage = 1;
     // อ่านสินค้าจาก API
-    http.get(`car?page=${this.currentPage}`).then(response => {
-      let responseCar = response.data
-      this.car = responseCar
-      console.log(responseCar)
+    http.get(`position?page=${this.currentPage}`).then(response => {
+      let responsePosition = response.data
+      this.position = responsePosition
+      console.log(responsePosition)
 
     })
 

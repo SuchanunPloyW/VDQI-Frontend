@@ -1,94 +1,88 @@
 <template>
-    <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
-        เพิ่มรถยนต์
-    </h2>
-    
-    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-       
-       <label class="block text-gray-700 text-sm mt-3 mb-2">เลขตัวถัง (17 หลัก)</label>
-        <div class="flex">
-            <span
-                class="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-                </svg>
-            </span>
-            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight" for="Chassis"
-                type="text" placeholder="Chassis no."  v-model="car_chassis" />
-                
+  <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
+    เพิ่มรถยนต์
+  </h2>
 
-        </div>
-        <label v-if="v$.Chassis.$error" class="mt-2 text-sm text-red-500 ">
-                {{ v$.Chassis.$errors[0].$message }}
-              </label>
+  <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-        <div>
-            <label class="block my-3 text-gray-700 text-md" for="car_where">ลานจอด</label>
-            <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
-                type="text">
-                <option disabled value="">กรุณาเลือกลานในการจอด</option>
-                <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
-            </select>
-        </div>
-        <label class="block my-3 text-gray-700 text-md" for="car_where">ช่องที่จอด</label>
-        <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-30">
-            <div v-for="position in position.data" :key="position.position_id">
-                <div @click="Select" class="position" :class="{
-                    'position-0': position.position_status === '0',
-                    'position-1': position.position_status === '1',
-                    'position-2': position.position_status === '2',
-                }">
-
-                    <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
-                        :value="position.car_position" v-model="car_position" />
-                    <label :for="position.position_id" class="">
-                        <span>A{{ position.car_position }} </span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <button @click="submitForm"
-            class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
-            บันทึกรายการ
-        </button>
-        <button @click="onResetForm"
-            class="w-full px-4 py-2 mt-2 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
-            ยกเลิก
-        </button>
-
-
-
-
-
+    <label class="block text-gray-700 text-sm mt-3 mb-2">เลขตัวถัง (17 หลัก)</label>
+    <div class="flex">
+      <span
+        class="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+          stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+        </svg>
+      </span>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-black-700 leading-tight" for="Chassis"
+        type="text" placeholder="Chassis no." v-model="car_chassis" />
 
 
     </div>
+    <label v-if="v$.Chassis.$error" class="mt-2 text-sm text-red-500 ">
+      {{ v$.Chassis.$errors[0].$message }}
+    </label>
+
+    <div>
+      <label class="block my-3 text-gray-700 text-md" for="car_where">ลานจอด</label>
+      <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+        type="text">
+        <option disabled value="">กรุณาเลือกลานในการจอด</option>
+        <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
+      </select>
+    </div>
+    <label class="block my-3 text-gray-700 text-md" for="car_where">ช่องที่จอด</label>
+    <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-35">
+      <div v-for="position in position.data" :key="position.position_id">
+        <div @click="Select" class="position" :class="{
+          'position-0': position.position_status === '0',
+          'position-1': position.position_status === '1',
+          'position-2': position.position_status === '2',
+        }">
+
+          <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
+            :value="position.car_position" v-model="car_position" />
+          <label :for="position.position_id" class="">
+            <span>{{ position.car_position }} </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <button @click="submitForm"
+      class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
+      บันทึกรายการ
+    </button>
+    <button @click="onResetForm"
+      class="w-full px-4 py-2 mt-2 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
+      ยกเลิก
+    </button>
+
+  </div>
 </template>
 
 <script>
 import http from "@/services/BackendServices";
 import useValidate from "@vuelidate/core";
-import { required,  minLength, helpers } from "@vuelidate/validators";
+import { required, minLength, helpers } from "@vuelidate/validators";
 
 export default {
-    data() {
-        return {
-           v$: useValidate(),
-            where: [],
-            position: [],
-            status: [],
-            currentPage: 0,
-            perPage: 0,
-            total: 0,
-            car_where: '',
+  data() {
+    return {
+      v$: useValidate(),
+      where: [],
+      position: [],
+      status: [],
+      currentPage: 0,
+      perPage: 0,
+      total: 0,
+      car_where: '',
 
-        }
-    },
-    methods: {
-        submitForm() {
-          this.v$.$validate();
+    }
+  },
+  methods: {
+    submitForm() {
+      this.v$.$validate();
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
@@ -130,7 +124,7 @@ export default {
             data.append('car_position', this.car_position)
             data.append('date', +d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate())
             data.append('time', d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds())
-            http.post("car", data).then(() => {   
+            http.post("car", data).then(() => {
               swalWithBootstrapButtons
                 .fire("บันทึกข้อมูลเรียบร้อย!", "", "success")
                 .then(() => {
@@ -138,7 +132,6 @@ export default {
                   window.location.reload();
                 });
             });
-
             //เพิ่มเลขตัวถังเข้ากับตำแหน่งจอด
             let putdata = new FormData();
             putdata.append('position_status', '1')
@@ -148,7 +141,7 @@ export default {
               console.log(response.putdata)
               console.log(this.car_position)
             })
-            
+
           } else if (result.dismiss === this.$swal.DismissReason.cancel) {
             swalWithBootstrapButtons.fire(
               "ยกเลิกเรียบร้อย!",
@@ -162,12 +155,12 @@ export default {
     back() {
       this.$router.push({ name: "StockList" });
     },
-    onResetForm(){
-      this.$router.push({ name: "StockList" });  
+    onResetForm() {
+      this.$router.push({ name: "StockList" });
     }
 
-    },
-    validations() {
+  },
+  validations() {
     return {
       Chassis: {
         required: helpers.withMessage('กรุณากรอกเลขตัวถัง (17 หลัก) ', required),
@@ -180,20 +173,52 @@ export default {
       },
     };
   },
-    mounted() {
-        this.currentPage = 1;
+  mounted() {
+    this.currentPage = 1;
 
-        http.get(`where?page=${this.currentPage}`).then(response => {
-            let responseWhere = response.data
-            this.where = responseWhere
-        })
-        http.get(`position?page=${this.currentPage}`).then((response) => {
-            let responsePosition = response.data;
-            this.position = responsePosition;
-        });
+    http.get(`where?page=${this.currentPage}`).then(response => {
+      let responseWhere = response.data
+      this.where = responseWhere
+    })
+    http.get(`position?page=${this.currentPage}`).then((response) => {
+      let responsePosition = response.data;
+      this.position = responsePosition;
+    });
 
 
-    }
+  }
 }
 
 </script>
+<style>
+input:checked+label {
+  background-color: RED;
+
+}
+
+.position {
+  background-color: rgb(47, 255, 186);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
+
+
+.position:hover {
+  background-color: rgb(255, 0, 0);
+
+}
+
+.position-1 {
+  background-color: red;
+  color: #fff;
+}
+
+.position-2 {
+  background-color: rgb(190, 190, 190);
+  color: #fff;
+}
+</style>
+
