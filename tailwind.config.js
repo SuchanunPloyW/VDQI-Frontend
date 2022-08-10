@@ -9,11 +9,9 @@ module.exports = {
       },
 
       gridTemplateColumns:{
-        '35': 'repeat(35, minmax(0, 1fr))',
         '15': 'repeat(15, minmax(0, 1fr))',
+        '32': 'repeat(32, minmax(0, 1fr))',
      /*    'footer': '200px minmax(900px, 1fr) 100px', */
-
-
       }
 
     },

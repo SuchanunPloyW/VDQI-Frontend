@@ -25,8 +25,8 @@
 
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-               <option  value="b" > Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-             <option value="a" > Stock A (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+               <option  value="b" > Stock B (32) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+             <option value="a" > Stock A (15) : ลานจอดรถ VDQi ลานดิน</option>
               <option  value="c"> Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
               <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
@@ -42,10 +42,10 @@
       </div>
       <div>
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-          เปิดใช้งาน
+          ปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          300
+          {{ close.total }} 
         </p>
       </div>
     </div>
@@ -60,7 +60,7 @@
           อยู่ในช่องจอด
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          300
+         {{ noavailable.total }}
         </p>
       </div>
     </div>
@@ -75,7 +75,7 @@
           ว่าง
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{position.total}}
+         {{ available.total }}
         </p>
       </div>
     </div>
@@ -86,49 +86,120 @@
     class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
-        Stock B (500) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
+        Stock B (160) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
       </p>
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
+          class="bg-gray-200 flex p-4 max- w-screen ">
+          <h1 >Lotus's</h1>
         </a>
       </div>
 
-        <!--  <div v-for="position in position.data" :key="position.position_id" >
-          <input  class="hidden w-1" type="radio" @click="Select" :id="position.position_id" name="position-radio"
-            :value="position.car_position" v-model="car_position">
-          <label :for="position.position_id" class="flex flex-col p-4 border-2 border-gray-400 cursor-pointer">
-            <span class="text-sm font-bold mt-1"> ช่องจอด : {{ position.car_position }} </span>
-            <span class="text-sm  mt-1 text-red-600"> สถานะ : {{ position.position_status }} </span>
-          </label>
-        </div> -->
-
-        <!-- <h6>// มันจะเปลี่ยนสียังไง แล้วจะเช็คยังไงว่า ถ้าเป็นสถานะ0 ให้สีเขียว สถานะ1 ให้แดง </h6> -->
-        <!-- 
-        <div class="  grid md:grid-cols-30 gap-1 ">
-          <div v-for="position in position.data" :key="position.position_id">
-            <div @click="Select" title="เลขตัวถัง"
-              class="flex  p-1.5 bg-green-300 rounded-lg hover:rounded-3xl hover:bg-red-600 transition-all duration-300 text-white">
-              <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
-                :value="position.car_position" v-model="car_position">
-              <label :for="position.position_id" class="">
-                <span>B{{position.car_position}} </span>
-              </label>
-            </div>
+      <!-- position A -->
+      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionA.position_status === '0',
+            'position-1': positionA.position_status === '1',
+            'position-2': positionA.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
+              :value="positionA.position_id" v-model="position_id" />
+            <label :for="positionA.position_id" class="">
+              <span>{{ positionA.car_line }}{{ positionA.car_position }} </span>
+            </label>
           </div>
         </div>
+      </div>
+      <br>
+      <!-- position A -->
+      <!-- position B -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
         
-         -->
+        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionB.position_status === '0',
+            'position-1': positionB.position_status === '1',
+            'position-2': positionB.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
+              :value="positionB.position_id" v-model="position_id" />
+
+            <label :for="positionB.position_id" class="">
+              <span>{{ positionB.car_line }}{{ positionB.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position B -->
+      <!-- position C -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+        
+        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionC.position_status === '0',
+            'position-1': positionC.position_status === '1',
+            'position-2': positionC.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
+              :value="positionC.position_id" v-model="position_id" />
+
+            <label :for="positionC.position_id" class="">
+              <span>{{ positionC.car_line }}{{ positionC.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position C -->
+       <!-- position D -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+        
+        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionD.position_status === '0',
+            'position-1': positionD.position_status === '1',
+            'position-2': positionD.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
+              :value="positionD.position_id" v-model="position_id" />
+
+            <label :for="positionD.position_id" class="">
+              <span>{{ positionD.car_line }}{{ positionD.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position D -->
+      <!-- position E -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+        
+        <div v-for="positionE in positionE.data" :key="positionE.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionE.position_status === '0',
+            'position-1': positionE.position_status === '1',
+            'position-2': positionE.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionE.position_id" name="position-radio"
+              :value="positionE.position_id" v-model="position_id" />
+
+            <label :for="positionE.position_id" class="">
+              <span>{{ positionE.car_line }}{{ positionE.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position E -->
+       
   
       
     </div>
   </div>
-<!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <router-link class="dropdown-item" to="/CreatEvent">Create an event</router-link>
-              <router-link class="dropdown-item" to="/ViewEvent">View events</router-link>
-              <router-link class="dropdown-item" to="/EditEvent">Update an event</router-link>
-            </div> -->
+
   <div class="py-4">
     <button @click="ViewPicture"
       class="w-96 flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
@@ -152,12 +223,21 @@ import http from "@/services/BackendServices";
 export default {
   data() {
     return {
-      position: [],
+      positionA: [],
+      positionB: [],
+      positionC: [],
+      positionD: [],
+      positionE: [],
+      available: [],
+      noavailable: [],
+      close: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
       car_position: "",
       positionModel: "",
+      position_id: "",
+      position_status: "",
     };
   },
   methods: {
@@ -199,19 +279,18 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            localStorage.setItem("id", this.car_position);
+            localStorage.setItem("id", this.position_id);
             let positionid = JSON.parse(window.localStorage.getItem("id"));
-
-            console.log(this.car_position);
+            //  localStorage.setItem("status", this.position.position_status);
             let data = new FormData();
-            data.append("position_status", "1");
-            data.append("car_chassis", null);
+            data.append("position_status", "2");
             data.append("_method", "PUT");
             http.post(`position/${positionid}`, data).then((response) => {
               console.log(response.data);
               window.location.reload();
-            });
-          }else{
+            })
+
+          } else {
             window.location.reload();
           }
         });
@@ -220,10 +299,50 @@ export default {
   },
   mounted() {
     this.currentPage = 1;
-    http.get(`position?page=${this.currentPage}`).then((response) => {
-      let responsePosition = response.data;
-      this.position = responsePosition;
+    // get stock B  / ตำแหน่ง A
+    http.get(`position/search/2/a?page=${this.currentPage}`).then((response) => {
+      let responsePositionA = response.data;
+      this.positionA = responsePositionA;
     });
+     // get stock B  / ตำแหน่ง B
+    http.get(`position/search/2/b?page=${this.currentPage}`).then((response) => {
+      let responsePositionB = response.data;
+      this.positionB = responsePositionB;
+    });
+    // get stock A  / ตำแหน่ง C
+    http.get(`position/search/2/c?page=${this.currentPage}`).then((response) => {
+      let responsePositionC = response.data;
+      this.positionC = responsePositionC;
+    });
+    // get stock A  / ตำแหน่ง D
+    http.get(`position/search/2/d?page=${this.currentPage}`).then((response) => {
+      let responsePositionD = response.data;
+      this.positionD = responsePositionD;
+    });
+     // get stock A  / ตำแหน่ง E
+    http.get(`position/search/2/e?page=${this.currentPage}`).then((response) => {
+      let responsePositionE = response.data;
+      this.positionE = responsePositionE;
+    });
+
+    /* เช็คตำแหน่งที่จอดว่าง */
+    http.get(`position/status/2/0?page=${this.currentPage}`).then((response) => {
+      let responseAvailable = response.data;
+      this.available = responseAvailable;
+    });
+
+    // เช็คตำแหน่งรถที่จอดอยู่
+    http.get(`position/status/2/1?page=${this.currentPage}`).then((response) => {
+      let responseNoAvailable = response.data;
+      this.noavailable = responseNoAvailable;
+    });
+
+    // เช็คตำแหน่งปิดช่องจอด
+    http.get(`position/status/2/2?page=${this.currentPage}`).then((response) => {
+      let responseClose = response.data;
+      this.close = responseClose;
+    });
+
     
   },
 };
@@ -231,10 +350,54 @@ export default {
 
 <style>
 input:checked+label {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   background-color: RED;
   border: red;
 }
 
+.position {
+  width: 30px;
+  background-color: rgb(47, 255, 186);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+
+
+  position: relative;
+}
+
+.position .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: rgb(197, 135, 248);
+  color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.position:hover .tooltiptext {
+  visibility: visible;
+}
+
+.position:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.position-1 {
+  background-color: red;
+  color: #fff;
+}
+
+.position-2 {
+  background-color: rgb(190, 190, 190);
+  color: #fff;
+}
 </style>

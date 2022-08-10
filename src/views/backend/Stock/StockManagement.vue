@@ -29,7 +29,7 @@
                 Stock A (15) : ลานจอดรถ VDQi ลานดิน
               </option>
               <option value="b">
-                Stock B (500) : ลานลานจอดรถ VDQi หลังกำแพง
+                Stock B (32) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
               <option value="c">
                 Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง
@@ -52,7 +52,7 @@
           ปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ close.total }}
+         {{ close.total }} 
         </p>
       </div>
     </div>
@@ -102,7 +102,7 @@
         </a>
       </div>
       <!-- position A -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0">
         <div v-for="positionA in positionA.data" :key="positionA.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionA.position_status === '0',
@@ -122,7 +122,7 @@
       <!-- position A -->
 
       <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0">
         
         <div v-for="positionB in positionB.data" :key="positionB.position_id">
           <div @click="Select" class="position" :class="{
@@ -143,7 +143,7 @@
       <!-- position B -->
 
      <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0 ">
         
         <div v-for="positionC in positionC.data" :key="positionC.position_id">
           <div @click="Select" class="position" :class="{
@@ -164,7 +164,7 @@
       <!-- position C -->
 
     <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-2 ">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0 ">
         
         <div v-for="positionD in positionD.data" :key="positionD.position_id">
           <div @click="Select" class="position" :class="{
@@ -184,12 +184,6 @@
        <br>
       <!-- position D -->
       
-
-
-
-
-
-
     </div>
   </div>
   <div class="py-4">
@@ -312,10 +306,23 @@ export default {
       this.positionD = responsePositionD;
     });
 
+    /* เช็คตำแหน่งที่จอดว่าง */
+    http.get(`position/status/1/0?page=${this.currentPage}`).then((response) => {
+      let responseAvailable = response.data;
+      this.available = responseAvailable;
+    });
 
+    // เช็คตำแหน่งรถที่จอดอยู่
+    http.get(`position/status/1/1?page=${this.currentPage}`).then((response) => {
+      let responseNoAvailable = response.data;
+      this.noavailable = responseNoAvailable;
+    });
 
-
-
+    // เช็คตำแหน่งปิดช่องจอด
+    http.get(`position/status/1/2?page=${this.currentPage}`).then((response) => {
+      let responseClose = response.data;
+      this.close = responseClose;
+    });
 
 
 
@@ -323,22 +330,14 @@ export default {
 
 
     /* // เช็คตำแหน่งที่จอดว่าง
-    http.get(`position/search/0/?page=${this.currentPage}`).then((response) => {
-      let responseAvailable = response.data;
-      this.available = responseAvailable;
-    });
-
+   
     // เช็คตำแหน่งที่จอดไม่ว่าง
     http.get(`position/search/1/?page=${this.currentPage}`).then((response) => {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
 
-    // เช็คตำแหน่งปิดช่องจอด
-    http.get(`position/search/2/?page=${this.currentPage}`).then((response) => {
-      let responseClose = response.data;
-      this.close = responseClose;
-    }); */
+     */
   },
 
 };
@@ -356,6 +355,7 @@ input:checked+label {
 }
 
 .position {
+  width: 50px;
   background-color: rgb(47, 255, 186);
   padding-top: 10px;
   border-radius: 5px;
