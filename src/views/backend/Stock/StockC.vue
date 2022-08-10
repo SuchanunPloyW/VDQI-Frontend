@@ -1,6 +1,6 @@
 <template>
   <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
-    Stock Management : B
+    Stock Management : C
   </h2>
   <router-link to="/backend/stock/list"
     class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
@@ -25,9 +25,9 @@
 
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+              <option  value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
                <option  value="b" > Stock B (60) : ลานลานจอดรถ VDQi หลังกำแพง</option>
              <option value="a" > Stock A (160) : ลานจอดรถ VDQi ลานดิน</option>
-              <option  value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
               <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
           </label>
@@ -91,13 +91,15 @@
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="bg-gray-200 flex p-4 max- w-screen ">
+          class="bg-gray-200 flex p-4 max- w-full ">
           <h1 >Lotus's</h1>
         </a>
       </div>
 
       <!-- position A -->
-      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
+        <div class="ABCDE">A</div>
+
         <div v-for="positionA in positionA.data" :key="positionA.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionA.position_status === '0',
@@ -115,8 +117,8 @@
       <br>
       <!-- position A -->
       <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
+         <div class="ABCDE">B</div>
         <div v-for="positionB in positionB.data" :key="positionB.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionB.position_status === '0',
@@ -135,8 +137,8 @@
        <br>
       <!-- position B -->
       <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
+        <div class="ABCDE">C</div>
         <div v-for="positionC in positionC.data" :key="positionC.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionC.position_status === '0',
@@ -155,8 +157,8 @@
        <br>
       <!-- position C -->
        <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
+        <div class="ABCDE">D</div>
         <div v-for="positionD in positionD.data" :key="positionD.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionD.position_status === '0',
@@ -175,7 +177,8 @@
        <br>
       <!-- position D -->
       <!-- position E -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
+        <div class="ABCDE">E</div>
         
         <div v-for="positionE in positionE.data" :key="positionE.position_id">
           <div @click="Select" class="position" :class="{
@@ -300,45 +303,45 @@ export default {
   mounted() {
     this.currentPage = 1;
     // get stock B  / ตำแหน่ง A
-    http.get(`position/search/2/a?page=${this.currentPage}`).then((response) => {
+    http.get(`position/search/3/a?page=${this.currentPage}`).then((response) => {
       let responsePositionA = response.data;
       this.positionA = responsePositionA;
     });
      // get stock B  / ตำแหน่ง B
-    http.get(`position/search/2/b?page=${this.currentPage}`).then((response) => {
+    http.get(`position/search/3/b?page=${this.currentPage}`).then((response) => {
       let responsePositionB = response.data;
       this.positionB = responsePositionB;
     });
     // get stock A  / ตำแหน่ง C
-    http.get(`position/search/2/c?page=${this.currentPage}`).then((response) => {
+    http.get(`position/search/3/c?page=${this.currentPage}`).then((response) => {
       let responsePositionC = response.data;
       this.positionC = responsePositionC;
     });
     // get stock A  / ตำแหน่ง D
-    http.get(`position/search/2/d?page=${this.currentPage}`).then((response) => {
+    http.get(`position/search/3/d?page=${this.currentPage}`).then((response) => {
       let responsePositionD = response.data;
       this.positionD = responsePositionD;
     });
      // get stock A  / ตำแหน่ง E
-    http.get(`position/search/2/e?page=${this.currentPage}`).then((response) => {
+    http.get(`position/search/3/e?page=${this.currentPage}`).then((response) => {
       let responsePositionE = response.data;
       this.positionE = responsePositionE;
     });
 
     /* เช็คตำแหน่งที่จอดว่าง */
-    http.get(`position/status/2/0?page=${this.currentPage}`).then((response) => {
+    http.get(`position/status/3/0?page=${this.currentPage}`).then((response) => {
       let responseAvailable = response.data;
       this.available = responseAvailable;
     });
 
     // เช็คตำแหน่งรถที่จอดอยู่
-    http.get(`position/status/2/1?page=${this.currentPage}`).then((response) => {
+    http.get(`position/status/3/1?page=${this.currentPage}`).then((response) => {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
 
     // เช็คตำแหน่งปิดช่องจอด
-    http.get(`position/status/2/2?page=${this.currentPage}`).then((response) => {
+    http.get(`position/status/3/2?page=${this.currentPage}`).then((response) => {
       let responseClose = response.data;
       this.close = responseClose;
     });
@@ -363,6 +366,15 @@ input:checked+label {
   text-align: center;
 
 
+  position: relative;
+}
+.ABCDE {
+  width: 30px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
   position: relative;
 }
 

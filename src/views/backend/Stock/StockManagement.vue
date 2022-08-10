@@ -26,13 +26,13 @@
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
               <option value="a">
-                Stock A (15) : ลานจอดรถ VDQi ลานดิน
+                Stock A (60) : ลานจอดรถ VDQi ลานดิน
               </option>
               <option value="b">
-                Stock B (32) : ลานลานจอดรถ VDQi หลังกำแพง
+                Stock B (160) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
               <option value="c">
-                Stock C (500) : ลานลานจอดรถ VDQi หลังกำแพง
+                Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
               <option value="d">
                 Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง
@@ -98,11 +98,12 @@
       <!-- Card Lotus's -->
       <div class="py-4">
         <a
-          class="bg-gray-200 flex items-center justify-between p-4 text-sm font-semibold bg-gray- rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">Lotus's
+          class="bg-gray-200 flex  p-4 ">Lotus's
         </a>
       </div>
       <!-- position A -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+         <div class="ABCDE">A</div>
         <div v-for="positionA in positionA.data" :key="positionA.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionA.position_status === '0',
@@ -122,8 +123,8 @@
       <!-- position A -->
 
       <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+         <div class="ABCDE">B</div>
         <div v-for="positionB in positionB.data" :key="positionB.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionB.position_status === '0',
@@ -143,8 +144,8 @@
       <!-- position B -->
 
      <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+         <div class="ABCDE">C</div>
         <div v-for="positionC in positionC.data" :key="positionC.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionC.position_status === '0',
@@ -164,8 +165,8 @@
       <!-- position C -->
 
     <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-15 md:gap-0 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+         <div class="ABCDE">D</div>
         <div v-for="positionD in positionD.data" :key="positionD.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionD.position_status === '0',
@@ -353,6 +354,15 @@ input:checked+label {
   background-color: RED;
   border: red;
 }
+.ABCDE {
+  width: 30px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+}
 
 .position {
   width: 50px;
@@ -361,8 +371,6 @@ input:checked+label {
   border-radius: 5px;
   font-size: 12px;
   text-align: center;
-
-
   position: relative;
 }
 
