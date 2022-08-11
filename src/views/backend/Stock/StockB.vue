@@ -97,7 +97,8 @@
       </div>
 
       <!-- position A -->
-      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
+      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+         <div class="ABCDE">A</div>
         <div v-for="positionA in positionA.data" :key="positionA.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionA.position_status === '0',
@@ -107,7 +108,7 @@
             <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
               :value="positionA.position_id" v-model="position_id" />
             <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_line }}{{ positionA.car_position }} </span>
+              <span>{{ positionA.car_position }} </span>
             </label>
           </div>
         </div>
@@ -115,8 +116,8 @@
       <br>
       <!-- position A -->
       <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+        <div class="ABCDE">B</div>
         <div v-for="positionB in positionB.data" :key="positionB.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionB.position_status === '0',
@@ -127,7 +128,7 @@
               :value="positionB.position_id" v-model="position_id" />
 
             <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_line }}{{ positionB.car_position }} </span>
+              <span>{{ positionB.car_position }} </span>
             </label>
           </div>
         </div>
@@ -135,8 +136,8 @@
        <br>
       <!-- position B -->
       <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+         <div class="ABCDE">C</div>
         <div v-for="positionC in positionC.data" :key="positionC.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionC.position_status === '0',
@@ -147,7 +148,7 @@
               :value="positionC.position_id" v-model="position_id" />
 
             <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_line }}{{ positionC.car_position }} </span>
+              <span>{{ positionC.car_position }} </span>
             </label>
           </div>
         </div>
@@ -155,8 +156,8 @@
        <br>
       <!-- position C -->
        <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+         <div class="ABCDE">D</div>
         <div v-for="positionD in positionD.data" :key="positionD.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionD.position_status === '0',
@@ -167,7 +168,7 @@
               :value="positionD.position_id" v-model="position_id" />
 
             <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_line }}{{ positionD.car_position }} </span>
+              <span>{{ positionD.car_position }} </span>
             </label>
           </div>
         </div>
@@ -175,8 +176,8 @@
        <br>
       <!-- position D -->
       <!-- position E -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-32 md:gap-12 ">
-        
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+         <div class="ABCDE">E</div>
         <div v-for="positionE in positionE.data" :key="positionE.position_id">
           <div @click="Select" class="position" :class="{
             'position-0': positionE.position_status === '0',
@@ -187,7 +188,7 @@
               :value="positionE.position_id" v-model="position_id" />
 
             <label :for="positionE.position_id" class="">
-              <span>{{ positionE.car_line }}{{ positionE.car_position }} </span>
+              <span>{{ positionE.car_position }} </span>
             </label>
           </div>
         </div>
@@ -243,8 +244,6 @@ export default {
   methods: {
     changeRoute(e) {
       this.$router.push("/backend/stock/" + e.target.value);
-     // this.$router.push({ name: 'StockList' })
-      // this.$router.push("/b" + e.target.value); not working....
     },
     
     ViewPicture() {
@@ -255,7 +254,9 @@ export default {
         imageAlt: "A tall image",
       });
     },
+
     Select() {
+      
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
@@ -363,6 +364,15 @@ input:checked+label {
   text-align: center;
 
 
+  position: relative;
+}
+.ABCDE {
+  width: 30px;
+  background-color: rgb(255, 255, 255);
+  padding-top: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
   position: relative;
 }
 

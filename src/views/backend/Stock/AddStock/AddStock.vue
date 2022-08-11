@@ -32,23 +32,94 @@
         <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
       </select>
     </div>
-    <label class="block my-3 text-gray-700 text-md" for="car_where">ช่องที่จอด</label>
-    <div class="grid gap-1 md:grid-cols-10 xl:grid-cols-35">
-      <div v-for="position in position.data" :key="position.position_id">
-        <div @click="Select" class="position" :class="{
-          'position-0': position.position_status === '0',
-          'position-1': position.position_status === '1',
-          'position-2': position.position_status === '2',
-        }">
+    <br>
 
-          <input class="hidden w-1" type="radio" :id="position.position_id" name="position-radio"
-            :value="position.car_position" v-model="car_position" />
-          <label :for="position.position_id" class="">
-            <span>{{ position.car_position }} </span>
-          </label>
+     <!-- position A -->
+      <div class="  grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+         <div class="ABCDE">A</div>
+        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+          <div  @click="Select" class="position" :class="{
+            'position-0': positionA.position_status === '0' ,
+            'position-1': positionA.position_status === '1',
+            'position-2': positionA.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
+              :value="positionA.car_position" v-model="car_position" />
+
+            <label :for="positionA.position_id" class="">
+              <span>{{ positionA.car_position }} </span>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
+      
+      <br>
+      <!-- position A -->
+
+      <!-- position B -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+         <div class="ABCDE">B</div>
+        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionB.position_status === '0',
+            'position-1': positionB.position_status === '1',
+            'position-2': positionB.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
+              :value="positionB.car_position" v-model="car_position" />
+
+            <label :for="positionB.position_id" class="">
+              <span>{{ positionB.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position B -->
+
+     <!-- position C -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+         <div class="ABCDE">C</div>
+        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionC.position_status === '0',
+            'position-1': positionC.position_status === '1',
+            'position-2': positionC.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
+              :value="positionC.car_position" v-model="car_position" />
+
+            <label :for="positionC.position_id" class="">
+              <span>{{ positionC.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position C -->
+
+    <!-- position D -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+         <div class="ABCDE">D</div>
+        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionD.position_status === '0',
+            'position-1': positionD.position_status === '1',
+            'position-2': positionD.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
+              :value="positionD.car_position" v-model="car_position" />
+
+            <label :for="positionD.position_id" class="">
+              <span>{{ positionD.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position D -->
+    
+
     <button @click="submitForm"
       class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
       บันทึกรายการ
@@ -71,7 +142,10 @@ export default {
     return {
       v$: useValidate(),
       where: [],
-      position: [],
+      positionA: [],
+      positionB: [],
+      positionC: [],
+      positionD: [],
       status: [],
       currentPage: 0,
       perPage: 0,
@@ -180,10 +254,29 @@ export default {
       let responseWhere = response.data
       this.where = responseWhere
     })
-    http.get(`position?page=${this.currentPage}`).then((response) => {
-      let responsePosition = response.data;
-      this.position = responsePosition;
+    // get stock A  / ตำแหน่ง A
+    http.get(`position/search/1/a?page=${this.currentPage}`).then((response) => {
+      let responsePositionA = response.data;
+      this.positionA = responsePositionA;
     });
+    // get stock A  / ตำแหน่ง B
+    http.get(`position/search/1/b?page=${this.currentPage}`).then((response) => {
+      let responsePositionB = response.data;
+      this.positionB = responsePositionB;
+    });
+
+    // get stock A  / ตำแหน่ง C
+    http.get(`position/search/1/c?page=${this.currentPage}`).then((response) => {
+      let responsePositionC = response.data;
+      this.positionC = responsePositionC;
+    });
+  
+   // get stock A  / ตำแหน่ง D
+    http.get(`position/search/1/d?page=${this.currentPage}`).then((response) => {
+      let responsePositionD = response.data;
+      this.positionD = responsePositionD;
+    });
+
 
 
   }

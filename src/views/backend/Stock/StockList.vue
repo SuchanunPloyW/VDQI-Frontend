@@ -124,6 +124,7 @@
                 </div>
               </div>
             </td>
+           
             <td class="px-4 py-3 text-sm">{{ car.car_position }} </td>
             <td class="px-4 py-3 text-sm">
               <div class="flex items-center text-sm">

@@ -109,7 +109,7 @@
             <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
               :value="positionA.position_id" v-model="position_id" />
             <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_line }}{{ positionA.car_position }} </span>
+              <span>{{ positionA.car_position }} </span>
             </label>
           </div>
         </div>
@@ -129,7 +129,7 @@
               :value="positionB.position_id" v-model="position_id" />
 
             <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_line }}{{ positionB.car_position }} </span>
+              <span>{{ positionB.car_position }} </span>
             </label>
           </div>
         </div>
@@ -149,7 +149,7 @@
               :value="positionC.position_id" v-model="position_id" />
 
             <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_line }}{{ positionC.car_position }} </span>
+              <span>{{ positionC.car_position }} </span>
             </label>
           </div>
         </div>
@@ -169,7 +169,7 @@
               :value="positionD.position_id" v-model="position_id" />
 
             <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_line }}{{ positionD.car_position }} </span>
+              <span>{{ positionD.car_position }} </span>
             </label>
           </div>
         </div>
@@ -190,7 +190,7 @@
               :value="positionE.position_id" v-model="position_id" />
 
             <label :for="positionE.position_id" class="">
-              <span>{{ positionE.car_line }}{{ positionE.car_position }} </span>
+              <span>{{ positionE.car_position }} </span>
             </label>
           </div>
         </div>
