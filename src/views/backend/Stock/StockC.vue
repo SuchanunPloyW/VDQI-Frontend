@@ -259,6 +259,12 @@ export default {
       });
     },
     Select() {
+       localStorage.setItem("id1", this.position_id);
+            let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
+            http.get(`position/${positionid1}`).then((response) => {
+              console.log(response.data);
+              localStorage.setItem('position', JSON.stringify(response.data))
+            })
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
@@ -282,19 +288,37 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            localStorage.setItem("id", this.position_id);
-            let positionid = JSON.parse(window.localStorage.getItem("id"));
-            //  localStorage.setItem("status", this.position.position_status);
-            let data = new FormData();
-            data.append("position_status", "2");
-            data.append("_method", "PUT");
-            http.post(`position/${positionid}`, data).then((response) => {
-              console.log(response.data);
-              window.location.reload();
-            })
+            let positionid = JSON.parse(window.localStorage.getItem("position"));
+            http.get(`position/id/${positionid.position_id}`).then((response) => {
+                let responsePosition = response.data
+                let responseStatus= response.data
+                this.position = responsePosition
+                this.position_status = responseStatus
+                console.log(positionid.position_status)
+                //console.log(responseUser)
+                if(positionid.position_status === '0'){
+                  let data = new FormData();
+                  data.append("position_status", "2");
+                  data.append("_method", "PUT");
+                  http.post(`position/${positionid.position_id}`, data).then((response) => {
+                    console.log(response.data);
+                    window.location.reload();
+                  })
+                  
 
+                }else{
+                  let data = new FormData();
+                  data.append("position_status", "0");
+                  data.append("_method", "PUT");
+                  http.post(`position/${positionid.position_id}`, data).then((response) => {
+                    console.log(response.data);
+                    window.location.reload();
+                  })
+                }
+              })
+              
           } else {
-            window.location.reload();
+           /*  window.location.reload(); */
           }
         });
     },

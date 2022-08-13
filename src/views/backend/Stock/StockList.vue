@@ -232,6 +232,7 @@ export default {
       /* ตัวแปร เรียกใช้งาน validation */
       v$: useValidate(),
       car: [],
+      position: [],
       status: [],
       noavailable: [],
       currentPage: 0,
@@ -471,10 +472,12 @@ export default {
         let responseWhere = response.data
         this.where = responseWhere
       }),
-      http.get(`position/search/0/?page=${this.currentPage}`).then(response => {
-        let responsePosition = response.data
-        this.position = responsePosition
-      }),
+
+       http.get(`position/status/1/1?page=${this.currentPage}`).then((response) => {
+      let responseNoAvailable = response.data;
+      this.noavailable = responseNoAvailable;
+    });
+
       http.get(`car?page=${this.currentPage}`).then(response => {
         let responseCar = response.data
         this.car = responseCar

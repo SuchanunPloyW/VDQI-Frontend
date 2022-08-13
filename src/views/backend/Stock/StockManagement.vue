@@ -236,8 +236,9 @@ export default {
     ViewPicture() {
       this.$swal.fire({
         imageUrl:
-          "https://trello.com/1/cards/62846a8ad8fd477751f8fd0f/attachments/628c6441c9f7818c5876300b/previews/628c6442c9f7818c58763022/download/flow-plan-now.jpg",
-        imageHeight: 1500,
+          "https://trello.com/1/cards/62846a8ad8fd477751f8fd0f/attachments/62f71d2bcb4c9600e49d56e5/previews/62f71d2ccb4c9600e49d5a8d/download/image.png",
+       
+        imageWidth: 1200,     
         imageAlt: "A tall image",
       });
     },
@@ -262,7 +263,7 @@ export default {
       swalWithBootstrapButtons
         .fire({
           title: "โปรดยืนยันการทำรายการ",
-          text: "ปิดการใช้งานช่องจอดรถยนต์",
+          text: "เปิด / ปิด การใช้งานช่องจอดรถยนต์",
           icon: "warning",
 
           showCancelButton: true,
@@ -286,11 +287,11 @@ export default {
                   data.append("_method", "PUT");
                   http.post(`position/${positionid.position_id}`, data).then((response) => {
                     console.log(response.data);
-                    
+                    window.location.reload();
                   })
                   
-
                 }else{
+                  
                   let data = new FormData();
                   data.append("position_status", "0");
                   data.append("_method", "PUT");
@@ -300,24 +301,9 @@ export default {
                   })
                 }
               })
-            
 
-            /* if(){
-
-            } */
-            /* localStorage.setItem("id", this.position_id);
-            let positionid = JSON.parse(window.localStorage.getItem("id"));
-            //  localStorage.setItem("status", this.position.position_status);
-            let data = new FormData();
-            data.append("position_status", "2");
-            data.append("_method", "PUT");
-            http.post(`position/${positionid}`, data).then((response) => {
-              console.log(response.data);
-              window.location.reload();
-            })
- */
           } else {
-            window.location.reload();
+            console.log('')
           }
         });
     },
@@ -365,20 +351,6 @@ export default {
       this.close = responseClose;
     });
 
-
-
-
-
-
-    /* // เช็คตำแหน่งที่จอดว่าง
-   
-    // เช็คตำแหน่งที่จอดไม่ว่าง
-    http.get(`position/search/1/?page=${this.currentPage}`).then((response) => {
-      let responseNoAvailable = response.data;
-      this.noavailable = responseNoAvailable;
-    });
-
-     */
   },
 
 };
@@ -391,8 +363,8 @@ export default {
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
 input:checked+label {
-  background-color: RED;
-  border: red;
+ background-color: rgb(47, 255, 186);
+  
 }
 .ABCDE {
   width: 30px;

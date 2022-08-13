@@ -26,10 +26,12 @@
 
     <div>
       <label class="block my-3 text-gray-700 text-md" for="car_where">ลานจอด</label>
-      <select v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+      <select id="Myid"  v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
         type="text">
         <option disabled value="">กรุณาเลือกลานในการจอด</option>
-        <option v-for="where in where.data" :key="where.where_id"> {{ where.car_where }}</option>
+        <option  value="AA">A</option>
+        <option  value="BB">B</option>
+        <!-- <option v-for="where in where.data" :key="where.where_id" :value="where.car_where"> {{ where.car_where }}</option> -->
       </select>
     </div>
     <br>
@@ -37,7 +39,7 @@
      <!-- position A -->
       <div class="  grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
          <div class="ABCDE">A</div>
-        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+        <div class="d-none" v-for="positionA in positionA.data" :key="positionA.position_id">
           <div  @click="Select" class="position" :class="{
             'position-0': positionA.position_status === '0' ,
             'position-1': positionA.position_status === '1',
@@ -133,6 +135,11 @@
 </template>
 
 <script>
+
+
+
+
+
 import http from "@/services/BackendServices";
 import useValidate from "@vuelidate/core";
 import { required, minLength, helpers } from "@vuelidate/validators";
@@ -284,9 +291,9 @@ export default {
 
 </script>
 <style>
+
 input:checked+label {
   background-color: RED;
-
 }
 
 .position {
