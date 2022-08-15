@@ -195,9 +195,6 @@
       </div>
        <br>
       <!-- position E -->
-       
-  
-      
     </div>
   </div>
 

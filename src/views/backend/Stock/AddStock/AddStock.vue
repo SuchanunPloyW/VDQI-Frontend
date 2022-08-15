@@ -26,101 +26,235 @@
 
     <div>
       <label class="block my-3 text-gray-700 text-md" for="car_where">ลานจอด</label>
-      <select id="Myid"  v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
+      <select id="Myid" v-model="car_where" class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow"
         type="text">
         <option disabled value="">กรุณาเลือกลานในการจอด</option>
-        <option  value="AA">A</option>
-        <option  value="BB">B</option>
-        <!-- <option v-for="where in where.data" :key="where.where_id" :value="where.car_where"> {{ where.car_where }}</option> -->
+        <option v-for="where in where.data" :key="where.where_id" :value="where.car_where"> {{ where.car_where }}
+        </option>
       </select>
     </div>
     <br>
+    <div class="">
+      <details class="bg-white border-2 shadow rounded group mb-4" open>
+        <summary
+          class="list-none flex flex-wrap items-center cursor-pointer focus-visible:outline-none focus-visible:ring focus-visible:ring-pink-500 rounded group-open:rounded-b-none group-open:z-[1] relative">
+          <h3 class="flex flex-1 p-4 font-semibold text-sm">
+            Stock A (15) : ลานจอดรถ VDQi ลานดิน
+          </h3>
+          <div class="flex w-10 items-center justify-center">
+            <div
+              class="border-8 border-transparent border-l-gray-600 ml-2 group-open:rotate-90 transition-transform origin-left">
+            </div>
+          </div>
+        </summary>
+        <div class="p-4">
+          <!-- position A -->
+          <div class="  grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+            <div class="ABCDE">A</div>
+            <div class="d-none" v-for="positionA in positionA.data" :key="positionA.position_id">
+              <div @click="Select" class="position" :class="{
+                'position-0': positionA.position_status === '0',
+                'position-1': positionA.position_status === '1',
+                'position-2': positionA.position_status === '2',
+              }">
+                <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
+                  :value="positionA.car_position" v-model="car_position" />
 
-     <!-- position A -->
-      <div class="  grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+                <label :for="positionA.position_id" class="">
+                  <span>{{ positionA.car_position }} </span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <!-- position A -->
+
+          <!-- position B -->
+          <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+            <div class="ABCDE">B</div>
+            <div v-for="positionB in positionB.data" :key="positionB.position_id">
+              <div @click="Select" class="position" :class="{
+                'position-0': positionB.position_status === '0',
+                'position-1': positionB.position_status === '1',
+                'position-2': positionB.position_status === '2',
+              }">
+                <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
+                  :value="positionB.car_position" v-model="car_position" />
+
+                <label :for="positionB.position_id" class="">
+                  <span>{{ positionB.car_position }} </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- position B -->
+
+          <!-- position C -->
+          <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+            <div class="ABCDE">C</div>
+            <div v-for="positionC in positionC.data" :key="positionC.position_id">
+              <div @click="Select" class="position" :class="{
+                'position-0': positionC.position_status === '0',
+                'position-1': positionC.position_status === '1',
+                'position-2': positionC.position_status === '2',
+              }">
+                <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
+                  :value="positionC.car_position" v-model="car_position" />
+
+                <label :for="positionC.position_id" class="">
+                  <span>{{ positionC.car_position }} </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- position C -->
+
+          <!-- position D -->
+          <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+            <div class="ABCDE">D</div>
+            <div v-for="positionD in positionD.data" :key="positionD.position_id">
+              <div @click="Select" class="position" :class="{
+                'position-0': positionD.position_status === '0',
+                'position-1': positionD.position_status === '1',
+                'position-2': positionD.position_status === '2',
+              }">
+                <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
+                  :value="positionD.car_position" v-model="car_position" />
+
+                <label :for="positionD.position_id" class="">
+                  <span>{{ positionD.car_position }} </span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <br>
+          <!-- position D -->
+        </div>
+      </details>
+    </div>
+
+    <div class="">
+      <details class="bg-white border-2 shadow rounded group mb-4 overflow-x-auto" open>
+        <summary
+          class="list-none flex flex-wrap items-center cursor-pointer focus-visible:outline-none focus-visible:ring focus-visible:ring-pink-500 rounded group-open:rounded-b-none group-open:z-[1] relative">
+          <h3 class="flex flex-1 p-4 font-semibold text-sm">
+            Stock B (160) : ลานลานจอดรถ VDQi หลังกำแพง
+          </h3>
+          <div class="flex w-10 items-center justify-center">
+            <div
+              class="border-8 border-transparent border-l-gray-600 ml-2 group-open:rotate-90 transition-transform origin-left">
+            </div>
+          </div>
+        </summary>
+        <div class="p-4">
+           <!-- position A -->
+      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">A</div>
-        <div class="d-none" v-for="positionA in positionA.data" :key="positionA.position_id">
-          <div  @click="Select" class="position" :class="{
-            'position-0': positionA.position_status === '0' ,
-            'position-1': positionA.position_status === '1',
-            'position-2': positionA.position_status === '2',
+        <div v-for="positionA2 in positionA2.data" :key="positionA2.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionA2.position_status === '0',
+            'position-1': positionA2.position_status === '1',
+            'position-2': positionA2.position_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
-              :value="positionA.car_position" v-model="car_position" />
-
-            <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_position }} </span>
+            <input class="hidden w-1" type="radio" :id="positionA2.position_id" name="position-radio"
+              :value="positionA2.position_id" v-model="car_position" />
+            <label :for="positionA2.position_id" class="">
+              <span>{{ positionA2.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
-      
       <br>
       <!-- position A -->
-
       <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
-         <div class="ABCDE">B</div>
-        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+        <div class="ABCDE">B</div>
+        <div v-for="positionB2 in positionB2.data" :key="positionB2.position_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionB.position_status === '0',
-            'position-1': positionB.position_status === '1',
-            'position-2': positionB.position_status === '2',
+            'position-0': positionB2.position_status === '0',
+            'position-1': positionB2.position_status === '1',
+            'position-2': positionB2.position_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
-              :value="positionB.car_position" v-model="car_position" />
+            <input class="hidden w-1" type="radio" :id="positionB2.position_id" name="position-radio"
+              :value="positionB2.position_id" v-model="car_position" />
 
-            <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_position }} </span>
+            <label :for="positionB2.position_id" class="">
+              <span>{{ positionB2.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
        <br>
       <!-- position B -->
-
-     <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+      <!-- position C -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">C</div>
-        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+        <div v-for="positionC2 in positionC2.data" :key="positionC2.position_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionC.position_status === '0',
-            'position-1': positionC.position_status === '1',
-            'position-2': positionC.position_status === '2',
+            'position-0': positionC2.position_status === '0',
+            'position-1': positionC2.position_status === '1',
+            'position-2': positionC2.position_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
-              :value="positionC.car_position" v-model="car_position" />
+            <input class="hidden w-1" type="radio" :id="positionC2.position_id" name="position-radio"
+              :value="positionC2.position_id" v-model="car_position" />
 
-            <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_position }} </span>
+            <label :for="positionC2.position_id" class="">
+              <span>{{ positionC2.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
        <br>
       <!-- position C -->
-
-    <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
+       <!-- position D -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">D</div>
-        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+        <div v-for="positionD2 in positionD2.data" :key="positionD2.position_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionD.position_status === '0',
-            'position-1': positionD.position_status === '1',
-            'position-2': positionD.position_status === '2',
+            'position-0': positionD2.position_status === '0',
+            'position-1': positionD2.position_status === '1',
+            'position-2': positionD2.position_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
-              :value="positionD.car_position" v-model="car_position" />
+            <input class="hidden w-1" type="radio" :id="positionD2.position_id" name="position-radio"
+              :value="positionD2.position_id" v-model="car_position" />
 
-            <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_position }} </span>
+            <label :for="positionD2.position_id" class="">
+              <span>{{ positionD2.car_position }} </span>
             </label>
           </div>
         </div>
       </div>
        <br>
       <!-- position D -->
-    
+      <!-- position E -->
+      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
+         <div class="ABCDE">E</div>
+        <div v-for="positionE2 in positionE2.data" :key="positionE2.position_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionE2.position_status === '0',
+            'position-1': positionE2.position_status === '1',
+            'position-2': positionE2.position_status === '2',
+          }">
+            <input class="hidden w-1" type="radio" :id="positionE2.position_id" name="position-radio"
+              :value="positionE2.position_id" v-model="car_position" />
+
+            <label :for="positionE2.position_id" class="">
+              <span>{{ positionE2.car_position }} </span>
+            </label>
+          </div>
+        </div>
+      </div>
+       <br>
+      <!-- position E -->
+        </div>
+      </details>
+    </div>
+
+
+
 
     <button @click="submitForm"
       class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-purple">
@@ -153,6 +287,16 @@ export default {
       positionB: [],
       positionC: [],
       positionD: [],
+
+      positionA2: [],
+      positionB2: [],
+      positionC2: [],
+      positionD2: [],
+      positionE2: [],
+
+      
+
+   
       status: [],
       currentPage: 0,
       perPage: 0,
@@ -277,12 +421,40 @@ export default {
       let responsePositionC = response.data;
       this.positionC = responsePositionC;
     });
-  
-   // get stock A  / ตำแหน่ง D
+
+    // get stock A  / ตำแหน่ง D
     http.get(`position/search/1/d?page=${this.currentPage}`).then((response) => {
       let responsePositionD = response.data;
       this.positionD = responsePositionD;
     });
+
+    /*  */
+    // get stock B  / ตำแหน่ง A
+    http.get(`position/search/2/a?page=${this.currentPage}`).then((response) => {
+      let responsePositionA2 = response.data;
+      this.positionA2 = responsePositionA2;
+    });
+     // get stock B  / ตำแหน่ง B
+    http.get(`position/search/2/b?page=${this.currentPage}`).then((response) => {
+      let responsePositionB2 = response.data;
+      this.positionB2 = responsePositionB2;
+    });
+    // get stock A  / ตำแหน่ง C
+    http.get(`position/search/2/c?page=${this.currentPage}`).then((response) => {
+      let responsePositionC2 = response.data;
+      this.positionC2 = responsePositionC2;
+    });
+    // get stock A  / ตำแหน่ง D
+    http.get(`position/search/2/d?page=${this.currentPage}`).then((response) => {
+      let responsePositionD2 = response.data;
+      this.positionD2 = responsePositionD2;
+    });
+     // get stock A  / ตำแหน่ง E
+    http.get(`position/search/2/e?page=${this.currentPage}`).then((response) => {
+      let responsePositionE2 = response.data;
+      this.positionE2 = responsePositionE2;
+    });
+    
 
 
 
@@ -291,7 +463,6 @@ export default {
 
 </script>
 <style>
-
 input:checked+label {
   background-color: RED;
 }

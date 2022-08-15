@@ -19,7 +19,7 @@ import StockB from "@/views/backend/Stock/StockB.vue";
 import StockC from "@/views/backend/Stock/StockC.vue";
 import StockD from "@/views/backend/Stock/StockD.vue";
 import AddStock from "@/views/backend/Stock/AddStock/AddStock.vue"
-
+import TestCode from "@/views/backend/Test/TestCode.vue";
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
 function authGuard(to, from, next) {
   let isAuthenticated = false;
@@ -278,6 +278,22 @@ const routes = [
     meta: {
       title: "CarStock",
       description: "CarStock",
+    },
+  },
+  {
+    path: "/backend/test",
+    component: BackendLayout,
+    children: [
+      {
+        path: "",
+        name: "TestCode",
+        component: TestCode,
+        beforeEnter: authGuard,
+      },
+    ],
+    meta: {
+      title: "TestCode",
+      description: "TestCode",
     },
   },
 ];
