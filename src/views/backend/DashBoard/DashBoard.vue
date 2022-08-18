@@ -46,7 +46,7 @@
           อยู่ระหว่างดำเนินการ
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{req.total}}
+          {{ req.total }}
         </p>
       </div>
     </div>
@@ -68,8 +68,8 @@
         <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
           ดำเนินการเสร็จสิ้น
         </p>
-        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          376
+        <p  class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+          {{ reqfinish.total }} 
         </p>
       </div>
     </div>
@@ -98,41 +98,48 @@
     </div>
   </div>
   <div class="p-50">
-    <h3 class="my-6 text-2xl font-boid text-gray">Summary</h3>
+    <h3 class="my-1 text-2xl font-boid text-gray">Summary</h3>
   </div>
+  <!-- chart 1 -->
+  <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
+    <div class=" border-solid border-2 border-grey-600 bg-white">
+      <canvas id="myChart" width="1200" height="800"></canvas>
 
+         <input  onchange="filterData"  type="date" id="startdate" value="2022-08-11">
+        <input onchange="filterData"  type="date" id="enddate" value="2022-08-16">
+
+    </div>
+ <!-- chart 2 -->
+    <div class=" border-solid border-2 border-grey-600 bg-white">
+      <canvas id="myChart2" width="1200" height="800"></canvas>
+    </div>
+  </div>
+  
   <!-- New Table -->
 </template>
-<script>
-import http from "@/services/BackendServices";
-export default {
-  data() {
-    return {
-      noavailable: [],
-      req: [],
-      currentPage: 0,
-      perPage: 0,
-      total: 0,
-    };
-  },
-  methods: {},
 
-  mounted() {
-    http
-      .get(`position/status/1/1?page=${this.currentPage}`)
-      .then((response) => {
-        let responseNoAvailable = response.data;
-        this.noavailable = responseNoAvailable;
-      })
-
-    http
-      .get(`req?page=${this.currentPage}`)
-      .then((response) => {
-        let responseReq = response.data;
-        this.req = responseReq;
-      })
-
-    
-  },
-};
+<script  type="text/javascript" src="./DashBoard">
 </script>
+
+
+
+<!--  function filterData() {
+       const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
+       const dates2 = [...dates];
+       console.log(dates2);
+       const startdate = document.getElementById('startdate');
+      /*  console.log(startdate); */
+       const enddate = document.getElementById('enddate');
+      /*  console.log(enddate); */
+       const indexstartdate = dates2.indexOf(startdate.value);
+       const indexenddate = dates2.indexOf(enddate.value);
+       console.log(indexstartdate)
+       console.log(indexenddate)
+
+       const filterDate =dates2.slice(indexstartdate ,indexenddate + 1 );
+       console.log(filterDate)
+       myChart.confif.data.labels = filterDate;
+       myChart.update();
+
+
+    } -->

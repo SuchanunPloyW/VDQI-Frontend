@@ -182,7 +182,7 @@
               <div class="flex items-center text-sm">
                 <div>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    {{ car.car_where }}
+                    {{ car.car_where.car_where }}
                   </p>
                 </div>
               </div>

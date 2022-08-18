@@ -408,23 +408,23 @@ export default {
       let responseStation = response.data
       this.station = responseStation
     }),
+
       http.get(`where?page=${this.currentPage}`).then(response => {
         let responseWhere = response.data
         this.where = responseWhere
-      }),
-      http.get(`position/search/0/?page=${this.currentPage}`).then(response => {
+      })
+    /*   http.get(`position/search/0/?page=${this.currentPage}`).then(response => {
         let responsePosition = response.data
         this.position = responsePosition
-      }),
+      }), */
 
-      http.get(`req/id/${this.car_id}?page=${this.currentPage}`).then(response => {
+     /*  http.get(`req/id/${this.car_id}?page=${this.currentPage}`).then(response => {
         let responsereq = response.data
         this.req = responsereq
         this.req.data.reverse();
 
+      }) */
 
-      })
-
-  },
+  }
 };
 </script>

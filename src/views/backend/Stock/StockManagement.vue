@@ -244,11 +244,11 @@ export default {
     },
     Select() {
       localStorage.setItem("id1", this.position_id);
-            let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
-            http.get(`position/${positionid1}`).then((response) => {
-              console.log(response.data);
-              localStorage.setItem('position', JSON.stringify(response.data))
-            })
+      let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
+      http.get(`position/${positionid1}`).then((response) => {
+        console.log(response.data);
+        localStorage.setItem('position', JSON.stringify(response.data))
+        })
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
