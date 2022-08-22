@@ -287,8 +287,8 @@ export default {
                   data.append("_method", "PUT");
                   http.post(`position/${positionid.position_id}`, data).then((response) => {
                     console.log(response.data);
-                    window.location.reload();
                   })
+                  
                   
                 }else{
                   

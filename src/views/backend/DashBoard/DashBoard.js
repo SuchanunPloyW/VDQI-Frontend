@@ -1,4 +1,3 @@
-
 import Chart from "chart.js/auto";
 import http from "@/services/BackendServices";
 export default {
@@ -12,52 +11,42 @@ export default {
       total: 0,
     };
   },
-
- 
+  methods: {
+    filterData(){
+      const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
+      const dates2 = [...dates];
+      console.log(dates2);
+      const startdate = document.getElementById('startdate');
+      console.log(startdate);
+      const enddate = document.getElementById('enddate');
+      console.log(enddate);
+      
+    }
+  },
+  
+  
   mounted() {
-    // eslint-disable-next-line no-unused-vars
-    function filterData() {
-        const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
-        const dates2 = [...dates];
-        console.log(dates2);
-        const startdate = document.getElementById('startdate');
-       /*  console.log(startdate); */
-        const enddate = document.getElementById('enddate');
-       /*  console.log(enddate); */
-        const indexstartdate = dates2.indexOf(startdate.value);
-        const indexenddate = dates2.indexOf(enddate.value);
-        console.log(indexstartdate)
-        console.log(indexenddate)
- 
-        const filterDate =dates2.slice(indexstartdate ,indexenddate + 1 );
-        console.log(filterDate)
-        myChart.confif.data.labels = filterDate;
-        myChart.update();
- 
- 
-     }
-
+    
     /* line chart 1 */
-    const dates = [ "12", "13", "14", "15","16", "Today"];
+    const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
     const ctx = document.getElementById("myChart");
     const myChart = new Chart(ctx, {
       
       data: {
         datasets: [{
           type: 'line',
-            label: 'inStock',
-            data: [15, 21, 30, 40,13,41,25],
-            borderColor: "purple",
-            tension:0.4
-           
+          label: 'inStock',
+          data: [15, 21, 30, 40,13,41,25],
+          borderColor: "purple",
+          tension:0.4
+          
         }, {
           type: 'line',
-            label: 'outStock',
-            data: [30, 28, 3, 5, 2, 3,12],
-            borderColor: "green",
-             tension:0.4
+          label: 'outStock',
+          data: [30, 28, 3, 5, 2, 3,12],
+          borderColor: "green",
+          tension:0.4
         },
-
         {
           type: 'line',
             label: 'onProcess',
@@ -68,6 +57,7 @@ export default {
         ],
         labels: dates ,
     },
+    
       options: {
         scales: {
           y: {
@@ -85,7 +75,7 @@ export default {
       } */
     /* line chart 1 */
 
-     /* line chart 1 */
+     /* line chart 2 */
     const ctx2 = document.getElementById("myChart2");
     const myChart2 = new Chart(ctx2, {
       type: "line",
@@ -99,6 +89,7 @@ export default {
             tension:0.4,
             borderColor: "pink",
             borderWidth: 1,
+            
           },
         ],
       },

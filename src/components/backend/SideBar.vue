@@ -53,9 +53,9 @@
       <div></div>
       <ul class="pt-3 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700"></ul>
 
-      <h6 class="ml-6 text-sm text-gray">การจัดการระบบ</h6>
+    <!--   <h6 class="ml-6 text-sm text-gray">การจัดการระบบ</h6> -->
 
-      <ul>
+      <!-- <ul>
         <li class="relative px-6 py-3">
           <router-link to="/backend/position"
             class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -84,7 +84,7 @@
             <span class="ml-4">Test</span>
           </router-link>
         </li>
-      </ul>
+      </ul> -->
     </div>
   </aside>
 

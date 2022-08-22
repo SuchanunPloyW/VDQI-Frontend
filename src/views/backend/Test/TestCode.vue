@@ -1,29 +1,142 @@
 <template>
-  <div class="p-10 bg-gray-200 text-gray-700">
-    <div class="relative w-[400px] overflow-hidden">
-        <input type="checkbox" class="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer">
-        <div class="bg-blue-500 h-12 w-full pl-5 flex items-center">
-            <h1 class="text-lg font-semibold text-white">Stock A</h1>
-        </div>
-         <!-- icon -->
-        <div class="absolute top-3 right-3 text-white transition-transform duration-500 rotate-0  ">
-      
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-        </div>
-        <!-- content -->
-        <div class="bg-white overflow-hidden transition-all duration-500  ">
-            <div class="p-4">
-                <p>
-                    ลานจอด A 
-                    ************************
-                </p>
+  <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
+    <div class=" border-solid border-2 border-grey-600 bg-white">
+      <canvas id="myChart" width="1200" height="800"></canvas>
 
-            </div>
-
-        </div>
+         <input  @change="filterData"  type="date" id="startdate" value="2022-08-11">
+        <input @change="filterData"  type="date" id="enddate" value="2022-08-16">
 
     </div>
-  </div>
+    </div>
+
+  
 </template>
+<script>
+import Chart from "chart.js/auto";
+import http from "@/services/BackendServices";
+export default {
+  data() {
+    return {
+      noavailable: [],
+      req: [],
+      reqfinish: [],
+      currentPage: 0,
+      perPage: 0,
+      total: 0,
+    };
+  },
+  methods: {
+    filterData(){
+      const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
+      const dates2 = [...dates];
+      console.log(dates2);
+      const startdate = document.getElementById('startdate');
+      console.log(startdate);
+      const enddate = document.getElementById('enddate');
+      console.log(enddate);
+      
+    }
+  },
+  
+  
+  mounted() {
+    
+    /* line chart 1 */
+    const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
+    const ctx = document.getElementById("myChart");
+    const myChart = new Chart(ctx, {
+      
+      data: {
+        datasets: [{
+          type: 'line',
+          label: 'inStock',
+          data: [15, 21, 30, 40,13,41,25],
+          borderColor: "purple",
+          tension:0.4
+          
+        }, {
+          type: 'line',
+          label: 'outStock',
+          data: [30, 28, 3, 5, 2, 3,12],
+          borderColor: "green",
+          tension:0.4
+        },
+        {
+          type: 'line',
+            label: 'onProcess',
+            data: [18, 20, 28, 27 ,7,1,5],
+            borderColor: "blue",
+            tension:0.4
+        }
+        ],
+        labels: dates ,
+    },
+    
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    }
+    );
+    myChart;
+     /*  function filterData(){
+        const dates2 = [...dates];
+        console.log(dates2);
+        
+      } */
+    /* line chart 1 */
+
+     /* line chart 1 */
+    const ctx2 = document.getElementById("myChart2");
+    const myChart2 = new Chart(ctx2, {
+      type: "line",
+      
+      data: {
+        labels: ["17", "18", "19", "20", "21", "Today"],
+        datasets: [
+          {
+            label: "Last 7 Day Transection",
+            data: [30, 19, 3, 5, 2, 3],
+            tension:0.4,
+            borderColor: "pink",
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+    myChart2;
+    
+    
+    /* line chart 1 */
+
+    http
+      .get(`position/status/1/1?page=${this.currentPage}`)
+      .then((response) => {
+        let responseNoAvailable = response.data;
+        this.noavailable = responseNoAvailable;
+      });
+
+    http.get(`req?page=${this.currentPage}`).then((response) => {
+      let responseReq = response.data;
+      this.req = responseReq;
+    });
+    http.get(`req/status/3?page=${this.currentPage}`).then((response) => {
+      let responseReqFinish = response.data;
+      this.reqfinish = responseReqFinish;
+    });
+  },
+  
+
+  
+};
+</script>

@@ -3,7 +3,6 @@
   <!-- Cards -->
   <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
     <!-- Card -->
-
     <div
       class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
     >
@@ -25,7 +24,6 @@
         </p>
       </div>
     </div>
-
     <!-- Card -->
     <div
       class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
@@ -50,7 +48,6 @@
         </p>
       </div>
     </div>
-
     <!-- Card -->
     <div
       class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
@@ -73,7 +70,6 @@
         </p>
       </div>
     </div>
-
     <!-- Card -->
     <div
       class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800"
@@ -105,8 +101,8 @@
     <div class=" border-solid border-2 border-grey-600 bg-white">
       <canvas id="myChart" width="1200" height="800"></canvas>
 
-         <input  onchange="filterData"  type="date" id="startdate" value="2022-08-11">
-        <input onchange="filterData"  type="date" id="enddate" value="2022-08-16">
+         <input  @change="filterData"  type="date" id="startdate" value="2022-08-11">
+        <input @change="filterData"  type="date" id="enddate" value="2022-08-16">
 
     </div>
  <!-- chart 2 -->
@@ -120,8 +116,6 @@
 
 <script  type="text/javascript" src="./DashBoard">
 </script>
-
-
 
 <!--  function filterData() {
        const dates = ["2022-08-11", "2022-08-12", "2022-08-13", "2022-08-14", "2022-08-15", "2022-08-16"];
@@ -141,5 +135,5 @@
        myChart.confif.data.labels = filterDate;
        myChart.update();
 
-
     } -->
+    
