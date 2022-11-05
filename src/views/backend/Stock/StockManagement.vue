@@ -25,9 +25,7 @@
 
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-              <option value="a">
-                Stock A (60) : ลานจอดรถ VDQi ลานดิน
-              </option>
+              <option value="a">Stock A (60) : ลานจอดรถ VDQi ลานดิน</option>
               <option value="b">
                 Stock B (160) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
@@ -96,156 +94,210 @@
         Stock A (15) : ลานจอดรถ VDQi ลานดิน
       </p>
       <!-- Card Lotus's -->
-      <div class="py-4">
-        <a class="bg-gray-200 flex  p-4 ">Lotus's
-        </a>
+      <div
+        class="h-14 overflow-x-auto items-center p-4 bg-gray-200 rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-0 mb-8 md:grid-cols-2 xl:grid-cols-1">
+        <div class="text-center">
+          <h1 class="font-bold">Lotus's</h1>
+        </div>
       </div>
-      <!-- position A -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
-        <div class="ABCDE">A</div>
+      <!-- A -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">A</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionA in positionA.data" :key="positionA.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionA.car_status === 0,
-            'position-1': positionA.car_status === 1,
-            'position-2': positionA.car_status === 2,
-          }">
-            <span class="tooltiptext">
-              <h1></h1>
-              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionA.car_where.car_where }}</span> </h1>
-              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionA.line }}{{ positionA.posit }}</span></h1>
-              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionA.car_id.car_chassis }}</span></h1>
-              
-              <button
-                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
+          <input type="radio" :id="positionA.posit_id" name="position-radio" :value="positionA.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionA.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionA.line }}{{
+                      positionA.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionA.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-                <span>เพิ่มเติม</span>
-              </button>
-
-
-
-              <!--  <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionA.car_id.car_chassis }} -->
-            </span>
-
-
-            <input class="hidden w-1" type="radio" :id="positionA.posit_id" name="position-radio"
-              :value="positionA.posit_id" v-model="posit_id" />
-
-            <label :for="positionA.posit_id" class="">
-              <span>{{ positionA.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionA.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionA.car_status === 2,
+                  'bg-red-in': positionA.car_status === 1,
+                  'bg-green-in': positionA.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionA.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <br>
-      <!-- position A -->
+      </ul>
 
-      <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
-        <div class="ABCDE">B</div>
+      <br />
+      <!-- B -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">B</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionB in positionB.data" :key="positionB.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionB.car_status === 0,
-            'position-1': positionB.car_status === 1,
-            'position-2': positionB.car_status === 2,
-          }">
-            <span class="tooltiptext">
-              <h1></h1>
-              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionB.car_where.car_where }}</span> </h1>
-              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionB.line }}{{ positionB.posit }}</span></h1>
-              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionB.car_id.car_chassis }}</span></h1>
-              
-              <button
-                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
+          <input type="radio" :id="positionB.posit_id" name="position-radio" :value="positionB.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionB.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionB.line }}{{
+                      positionB.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionB.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-                <span>เพิ่มเติม</span>
-              </button>
-
-            </span>
-
-            <input class="hidden w-1" type="radio" :id="positionB.posit_id" name="position-radio"
-              :value="positionB.posit_id" v-model="posit_id" />
-
-            <label :for="positionB.posit_id" class="">
-              <span>{{ positionB.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionB.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionB.car_status === 2,
+                  'bg-red-in': positionB.car_status === 1,
+                  'bg-green-in': positionB.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionB.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <br>
-      <!-- position B -->
-
-      <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
-        <div class="ABCDE">C</div>
+      </ul>
+      <br />
+      <!-- C -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">C</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionC in positionC.data" :key="positionC.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionC.car_status === 0,
-            'position-1': positionC.car_status === 1,
-            'position-2': positionC.car_status === 2,
-          }">
-            <span class="tooltiptext">
-              <h1></h1>
-              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionC.car_where.car_where }}</span> </h1>
-              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionC.line }}{{ positionC.posit }}</span></h1>
-              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionC.car_id.car_chassis }}</span></h1>
-              
-              <button
-                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
+          <input type="radio" :id="positionC.posit_id" name="position-radio" :value="positionC.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionC.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionC.line }}{{
+                      positionC.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionC.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-                <span>เพิ่มเติม</span>
-              </button>
-
-            </span>
-
-            <input class="hidden w-1" type="radio" :id="positionC.posit_id" name="position-radio"
-              :value="positionC.posit_id" v-model="posit_id" />
-
-            <label :for="positionC.posit_id" class="">
-              <span>{{ positionC.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionC.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionC.car_status === 2,
+                  'bg-red-in': positionC.car_status === 1,
+                  'bg-green-in': positionC.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionC.posit }}</h1> 
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <br>
-      <!-- position C -->
-
-      <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
-        <div class="ABCDE">D</div>
+      </ul>
+     
+      <br />
+      <!-- D -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">D</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionD in positionD.data" :key="positionD.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionD.car_status === 0,
-            'position-1': positionD.car_status === 1,
-            'position-2': positionD.car_status === 2,
-          }">
-            <span class="tooltiptext">
-              <h1></h1>
-              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionD.car_where.car_where }}</span> </h1>
-              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionD.line }}{{ positionD.posit }}</span></h1>
-              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionD.car_id.car_chassis }}</span></h1>
-              
-              <button
-                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
+          <input type="radio" :id="positionD.posit_id" name="position-radio" :value="positionD.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionD.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionD.line }}{{
+                      positionD.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionD.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-                <span>เพิ่มเติม</span>
-              </button>
-
-            </span>
-
-            <input class="hidden w-1" type="radio" :id="positionD.posit_id" name="position-radio"
-              :value="positionD.posit_id" v-model="posit_id" />
-
-            <label :for="positionD.posit_id" class="">
-              <span class="">{{ positionD.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionD.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionD.car_status === 2,
+                  'bg-red-in': positionD.car_status === 1,
+                  'bg-green-in': positionD.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionD.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-      <br>
-      <!-- position D -->
+      </ul>
       
-
     </div>
   </div>
   <div class="py-4">
@@ -309,8 +361,8 @@ export default {
       let posit = JSON.parse(window.localStorage.getItem("ID"));
       http.get(`posit/${posit}`).then((response) => {
         console.log(response.data);
-        localStorage.setItem('posit', JSON.stringify(response.data))
-      })
+        localStorage.setItem("posit", JSON.stringify(response.data));
+      });
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
@@ -337,38 +389,38 @@ export default {
           if (result.isConfirmed) {
             let positionid = JSON.parse(window.localStorage.getItem("posit"));
             http.get(`posit/carid/${positionid.posit_id}`).then((response) => {
-              let responsePosition = response.data
-              let responseStatus = response.data
-              this.posit = responsePosition
-              this.car_status = responseStatus
-              console.log(positionid.car_status)
+              let responsePosition = response.data;
+              let responseStatus = response.data;
+              this.posit = responsePosition;
+              this.car_status = responseStatus;
+              console.log(positionid.car_status);
               //console.log(responseUser)
               if (positionid.car_status === 0) {
                 let data = new FormData();
                 data.append("car_status", "2");
                 data.append("car_id", "1");
                 data.append("_method", "PUT");
-                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
-                  console.log(response.data);
-                  window.location.reload();
-                })
-
-
+                http
+                  .post(`posit/${positionid.posit_id}`, data)
+                  .then((response) => {
+                    console.log(response.data);
+                    window.location.reload();
+                  });
               } else {
-
                 let data = new FormData();
                 data.append("car_status", "0");
                 data.append("car_id", "1");
                 data.append("_method", "PUT");
-                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
-                  console.log(response.data);
-                  window.location.reload();
-                })
+                http
+                  .post(`posit/${positionid.posit_id}`, data)
+                  .then((response) => {
+                    console.log(response.data);
+                    window.location.reload();
+                  });
               }
-            })
-
+            });
           } else {
-            console.log('no sccess')
+            console.log("no sccess");
           }
         });
     },
@@ -415,21 +467,14 @@ export default {
       let responseClose = response.data;
       this.close = responseClose;
     });
-
   },
-
 };
 </script>
-
-
-
-
 
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
 input:checked+label {
   background-color: rgb(47, 255, 186);
-
 }
 
 .ABCDE {
@@ -454,7 +499,8 @@ input:checked+label {
 
 .position .tooltiptext {
   visibility: hidden;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+  0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 200px;
   background-color: white;
   color: rgb(255, 255, 255);
@@ -488,6 +534,3 @@ input:checked+label {
   color: #fff;
 }
 </style>
-
-
-

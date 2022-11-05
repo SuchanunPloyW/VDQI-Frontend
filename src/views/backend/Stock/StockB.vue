@@ -89,140 +89,273 @@
         Stock B (160) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
       </p>
       <!-- Card Lotus's -->
-      <div class="py-4">
-        <a
-          class="bg-gray-200 flex p-4 max- w-screen ">
-          <h1 >Lotus's</h1>
-        </a>
+      <div
+        class="h-14 overflow-x-auto items-center p-4 bg-gray-200 rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-0 mb-8 md:grid-cols-2 xl:grid-cols-1">
+        <div class="text-center">
+          <h1 class="font-bold">Lotus's</h1>
+        </div>
       </div>
-
-      <!-- position A -->
-      <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
-         <div class="ABCDE">A</div>
+     
+        <ul>
+          
+        </ul>
+        <!-- A -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">A</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionA in positionA.data" :key="positionA.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionA.car_status === 0 ,
-            'position-1': positionA.car_status === 1,
-            'position-2': positionA.car_status === 2,
-          }">
-          <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionA.car_id.car_chassis }}
-            </span>
+          <input type="radio" :id="positionA.posit_id" name="position-radio" :value="positionA.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionA.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionA.line }}{{
+                      positionA.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionA.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-            <input class="hidden w-1" type="radio" :id="positionA.posit_id" name="position-radio"
-              :value="positionA.posit_id" v-model="posit_id" />
-            <label :for="positionA.posit_id" class="">
-              <span>{{ positionA.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionA.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionA.car_status === 2,
+                  'bg-red-in': positionA.car_status === 1,
+                  'bg-green-in': positionA.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionA.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
+      </ul>
       <br>
-      <!-- position A -->
-      <!-- position B -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
-        <div class="ABCDE">B</div>
+       <!-- B -->
+       <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">B</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionB in positionB.data" :key="positionB.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionB.car_status === '0',
-            'position-1': positionB.car_status === '1',
-            'position-2': positionB.car_status === '2',
-          }">
-          <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionB.car_id.car_chassis }}
-            </span>
-            <input class="hidden w-1" type="radio" :id="positionB.posit_id" name="position-radio"
-              :value="positionB.posit_id" v-model="posit_id" />
+          <input type="radio" :id="positionB.posit_id" name="position-radio" :value="positionB.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionB.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionB.line }}{{
+                      positionB.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionB.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-            <label :for="positionB.posit_id" class="">
-              <span>{{ positionB.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionB.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionB.car_status === 2,
+                  'bg-red-in': positionB.car_status === 1,
+                  'bg-green-in': positionB.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionB.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-       <br>
-      <!-- position B -->
-      <!-- position C -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
-         <div class="ABCDE">C</div>
+      </ul>
+      <br>
+      <!-- C -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">C</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionC in positionC.data" :key="positionC.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionC.car_status === '0',
-            'position-1': positionC.car_status === '1',
-            'position-2': positionC.car_status === '2',
-          }">
-           <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionC.car_id.car_chassis }}
-            </span>
-            <input class="hidden w-1" type="radio" :id="positionC.posit_id" name="position-radio"
-              :value="positionC.posit_id" v-model="posit_id" />
+          <input type="radio" :id="positionC.posit_id" name="position-radio" :value="positionC.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionC.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionC.line }}{{
+                      positionC.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionC.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-            <label :for="positionC.posit_id" class="">
-              <span>{{ positionC.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionC.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionC.car_status === 2,
+                  'bg-red-in': positionC.car_status === 1,
+                  'bg-green-in': positionC.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionC.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-       <br>
-      <!-- position C -->
-       <!-- position D -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
-         <div class="ABCDE">D</div>
+      </ul>
+      <br>
+      <!-- D -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">D</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionD in positionD.data" :key="positionD.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionD.car_status === '0',
-            'position-1': positionD.car_status === '1',
-            'position-2': positionD.car_status === '2',
-          }">
-          <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionD.car_id.car_chassis }}
-            </span>
-            <input class="hidden w-1" type="radio" :id="positionD.posit_id" name="position-radio"
-              :value="positionD.posit_id" v-model="posit_id" />
+          <input type="radio" :id="positionD.posit_id" name="position-radio" :value="positionD.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionD.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionD.line }}{{
+                      positionD.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionD.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-            <label :for="positionD.posit_id" class="">
-              <span>{{ positionD.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionD.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionD.car_status === 2,
+                  'bg-red-in': positionD.car_status === 1,
+                  'bg-green-in': positionD.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionD.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
-      </div>
-       <br>
-      <!-- position D -->
-      <!-- position E -->
-      <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
-         <div class="ABCDE">E</div>
+      </ul>
+      <br>
+      <!-- E -->
+      <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
+        <li>
+          <label class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-500">
+            <div class="text-center">
+              <h1 class="text-xs font-semibold">E</h1>
+            </div>
+          </label>
+        </li>
         <div v-for="positionE in positionE.data" :key="positionE.posit_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionE.car_status === '0',
-            'position-1': positionE.car_status === '1',
-            'position-2': positionE.car_status === '2',
-          }">
-          <span class="tooltiptext">
-              <h1 class="font-bold">ข้อมูลรถ</h1>
-              <span class="font-bold"> เลขตัวถัง :</span>
-              {{ positionE.car_id.car_chassis }}
-            </span>
+          <input type="radio" :id="positionE.posit_id" name="position-radio" :value="positionE.posit_id"
+            v-model="posit_id" class="hidden peer" required />
+          <div class="group">
+            <div class="relative">
+              <div
+                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                  <span class="">
+                  <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
+                      positionE.car_where.car_where
+                  }}</span> </h1>
+                  
+                  <h1 class="text-left font-bold text-sm		  ">&nbsp;ช่องจอด <span class="font-thin text-sm	">{{ positionE.line }}{{
+                      positionE.posit
+                  }}</span></h1>
+                  <h1 class="text-left font-bold text-sm		 ">&nbsp;เลขตัวถัง <span class="font-thin text-sm	">{{
+                      positionE.car_id.car_chassis
+                  }}</span></h1>
+                </span>
+                  <div class="items-center text-center">
+                    <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
+                  </div>
+              </div>
 
-            <input class="hidden w-1" type="radio" :id="positionE.posit_id" name="position-radio"
-              :value="positionE.posit_id" v-model="posit_id" />
-
-            <label :for="positionE.posit_id" class="">
-              <span>{{ positionE.posit }} </span>
-            </label>
+              <label @click="Select" :for="positionE.posit_id"
+                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                :class="{
+                  'bg-gray-in': positionE.car_status === 2,
+                  'bg-red-in': positionE.car_status === 1,
+                  'bg-green-in': positionE.car_status === 0,
+                }">
+                <div class="text-center">
+                  <h1 class="text-xs font-semibold">{{ positionE.posit }}</h1>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
+      </ul>
+      
+
       </div>
-       <br>
-      <!-- position E -->
-    </div>
+
+
+
+
+
+
+       
+
+      
+
   </div>
 
   <div class="py-4">
