@@ -4,6 +4,7 @@ export default {
   data() {
     return {
       noavailable: [],
+      progress: [],
       req: [],
       reqfinish: [],
       currentPage: 0,
@@ -109,7 +110,7 @@ export default {
     /* line chart 1 */
 
     http
-      .get(`position/status/1/1?page=${this.currentPage}`)
+      .get(`posit/status/1?page=${this.currentPage}`)
       .then((response) => {
         let responseNoAvailable = response.data;
         this.noavailable = responseNoAvailable;
@@ -123,6 +124,14 @@ export default {
       let responseReqFinish = response.data;
       this.reqfinish = responseReqFinish;
     });
+
+    http
+    .get(`cardb/status/2?page=${this.currentPage}`)
+    .then((response) => {
+      let responseProgress = response.data;
+      this.progress = responseProgress;
+    });
+
   },
   
 

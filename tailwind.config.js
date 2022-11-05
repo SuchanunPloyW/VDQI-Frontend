@@ -3,6 +3,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      colors: {
+        'ploy': '#991521',
+      },
       fontFamily:{
         sans: ['Inter','IBM Plex Sans Thai', 'sans-serif']
         

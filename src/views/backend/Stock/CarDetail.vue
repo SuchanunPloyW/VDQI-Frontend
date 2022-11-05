@@ -3,8 +3,8 @@
     Stock Management
   </h2>
   <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
-    <div class=" gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2">
-      <!-- //gap-6 mb-8 md:grid-cols-2 xl:grid-cols-2 -->
+    
+     
       <form enctype="multipart/form-data">
         <h4 class="font-semibold">Car Information</h4>
         <div class="flex flex-wrap mb-4">
@@ -79,7 +79,7 @@
         </div>
 
       </form>
-
+      
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <h4 class="font-semibold">Car History</h4>
         <div class="w-full overflow-auto">
@@ -88,33 +88,26 @@
               <tr
                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th class="px-4 py-3">WHERE</th>
-                <th class="px-4 py-3">POSITION</th>
+                <!-- <th class="px-4 py-3">POSITION</th> -->
                 <th class="px-4 py-3">ACTION</th>
                 <th class="px-4 py-3">PERSON</th>
                 <th class="px-4 py-3">DATE</th>
-                <th class="px-4 py-3">TIME</th>
-                <th class="px-4 py-3">STATION</th>
+                <th class="px-4 py-3">Time</th>
+             
+               
               </tr>
             </thead>
             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
               <tr v-for="req in req.data" :key="req.req_id"
                 class="text-gray-700 dark:text-gray-400 hover:bg-blue-100 border-b">
-                <td class="px-4 py-3 text-sm">{{ req.car_where }}</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.car_position }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
+                <td class="px-4 py-3 text-sm">{{ req.car_where.car_where}}</td>
+                
 
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.req_status }}
+                        {{ req.car_status.car_status }}
                       </p>
                     </div>
                   </div>
@@ -123,7 +116,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.fullname }}
+                        {{req.person.fullname  }}
                       </p>
                     </div>
                   </div>
@@ -132,7 +125,7 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.req_date }}
+                        {{ req.date }}
                       </p>
                     </div>
                   </div>
@@ -141,25 +134,19 @@
                   <div class="flex items-center text-sm">
                     <div>
                       <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.req_time }}
+                        {{ req.time }}
                       </p>
                     </div>
                   </div>
                 </td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center text-sm">
-                    <div>
-                      <p class="text-sm text-gray-600 dark:text-gray-400">
-                        {{ req.car_station }}
-                      </p>
-                    </div>
-                  </div>
-                </td>
+
+                
+                
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-span-2">
+       <!--  <div class="col-span-2">
           <button @click="openModal"
             class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
             เบิกรถยนต์
@@ -170,10 +157,10 @@
             class="w-full px-4 py-2 mt-4 font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-lg text-md active:bg-purple-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple">
             ย้อนกลับ
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
-  </div>
+
 
   <!-- Popup สำหรับเบิกรถยนต์ -->
   <div v-if="showModal" id="addProductModal"
@@ -273,12 +260,15 @@ export default {
     };
   },
   methods: {
+
     ShowCar() {
       this.car_id = this.$store.state.carShow;
-      http.get(`car/${this.car_id}`).then((response) => {
+      this.car_chassis = this.$store.state.carShow;
+
+      http.get(`cardb/${this.car_id}`).then((response) => {
         this.car_chassis = response.data.car_chassis;
-        this.car_where = response.data.car_where;
-        this.car_position = response.data.car_position;
+        this.car_where = response.data.car_where.car_where;
+        this.car_position = response.data.posit_id.posit;
         this.date = response.data.date;
         this.time = response.data.time;
         this.fullname = response.data.fullname
@@ -375,7 +365,7 @@ export default {
       data.append('car_where', this.car_where)
       data.append('car_position', this.car_position)
       data.append("_method", "PUT");
-      http.post(`car/${this.car_id}`, data).then(response => {
+      http.post(`cardb/${this.car_id}`, data).then(response => {
         console.log(response.data)
       })
 
@@ -404,26 +394,18 @@ export default {
   mounted() {
     this.currentPage = 1;
     this.ShowCar();
-    http.get(`station?page=${this.currentPage}`).then(response => {
-      let responseStation = response.data
-      this.station = responseStation
-    }),
-
-      http.get(`where?page=${this.currentPage}`).then(response => {
-        let responseWhere = response.data
-        this.where = responseWhere
-      })
+   
     /*   http.get(`position/search/0/?page=${this.currentPage}`).then(response => {
         let responsePosition = response.data
         this.position = responsePosition
       }), */
 
-     /*  http.get(`req/id/${this.car_id}?page=${this.currentPage}`).then(response => {
+      http.get(`history/search/${this.car_id}/?page=${this.currentPage}`).then(response => {
         let responsereq = response.data
         this.req = responsereq
         this.req.data.reverse();
 
-      }) */
+      })
 
   }
 };

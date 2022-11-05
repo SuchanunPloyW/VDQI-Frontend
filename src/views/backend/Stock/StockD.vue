@@ -26,15 +26,15 @@
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
               <option value="d"> Stock D (270) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-               <option  value="b" > Stock B (60) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-             <option value="a" > Stock A (160) : ลานจอดรถ VDQi ลานดิน</option>
-             <option  value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option value="b"> Stock B (60) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option value="a"> Stock A (160) : ลานจอดรถ VDQi ลานดิน</option>
+              <option value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
           </label>
         </div>
       </div>
     </div>
-    
+
     <!-- Card -->
     <div class="flex items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800">
       <div class="p-3 mr-4 text-green-500 bg-green-400 rounded-full dark:text-green-100 dark:bg-green-500">
@@ -45,7 +45,7 @@
           ปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ close.total }} 
+          {{ close.total }}
         </p>
       </div>
     </div>
@@ -60,7 +60,7 @@
           อยู่ในช่องจอด
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-         {{ noavailable.total }}
+          {{ noavailable.total }}
         </p>
       </div>
     </div>
@@ -75,7 +75,7 @@
           ว่าง
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-         {{ available.total }}
+          {{ available.total }}
         </p>
       </div>
     </div>
@@ -90,9 +90,8 @@
       </p>
       <!-- Card Lotus's -->
       <div class="py-4">
-        <a
-          class="bg-gray-200 flex p-4 max- w-full ">
-          <h1 >Lotus's</h1>
+        <a class="bg-gray-200 flex p-4 max- w-full ">
+          <h1>Lotus's</h1>
         </a>
       </div>
 
@@ -100,16 +99,31 @@
       <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
         <div class="ABCDE">A</div>
 
-        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+        <div v-for="positionA in positionA.data" :key="positionA.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionA.position_status === '0',
-            'position-1': positionA.position_status === '1',
-            'position-2': positionA.position_status === '2',
+            'position-0': positionA.car_status === 0,
+            'position-1': positionA.car_status === 1,
+            'position-2': positionA.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
-              :value="positionA.position_id" v-model="position_id" />
-            <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_position }} </span>
+            <span class="tooltiptext">
+              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span>{{ positionA.car_id.car_chassis }}</span> </h1>
+              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span>{{ positionA.car_id.car_chassis }}</span></h1>
+              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span>{{ positionA.car_id.car_chassis }}</span></h1>
+              <button
+                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center">
+
+                <span>เพิ่มเติม</span>
+              </button>
+
+
+
+              <!--  <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionA.car_id.car_chassis }} -->
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionA.posit_id" name="position-radio"
+              :value="positionA.posit_id" v-model="posit_id" />
+            <label :for="positionA.posit_id" class="">
+              <span>{{ positionA.posit }} </span>
             </label>
           </div>
         </div>
@@ -118,88 +132,109 @@
       <!-- position A -->
       <!-- position B -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
-         <div class="ABCDE">B</div>
-        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+        <div class="ABCDE">B</div>
+        <div v-for="positionB in positionB.data" :key="positionB.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionB.position_status === '0',
-            'position-1': positionB.position_status === '1',
-            'position-2': positionB.position_status === '2',
+            'position-0': positionB.car_status === '0',
+            'position-1': positionB.car_status === '1',
+            'position-2': positionB.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
-              :value="positionB.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionB.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionB.posit_id" name="position-radio"
+              :value="positionB.posit_id" v-model="posit_id" />
 
-            <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_position }} </span>
+            <label :for="positionB.posit_id" class="">
+              <span>{{ positionB.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position B -->
       <!-- position C -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
         <div class="ABCDE">C</div>
-        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+        <div v-for="positionC in positionC.data" :key="positionC.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionC.position_status === '0',
-            'position-1': positionC.position_status === '1',
-            'position-2': positionC.position_status === '2',
+            'position-0': positionC.car_status === '0',
+            'position-1': positionC.car_status === '1',
+            'position-2': positionC.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
-              :value="positionC.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionC.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionC.posit_id" name="position-radio"
+              :value="positionC.posit_id" v-model="posit_id" />
 
-            <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_position }} </span>
+            <label :for="positionC.posit_id" class="">
+              <span>{{ positionC.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position C -->
-       <!-- position D -->
+      <!-- position D -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
         <div class="ABCDE">D</div>
-        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+        <div v-for="positionD in positionD.data" :key="positionD.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionD.position_status === '0',
-            'position-1': positionD.position_status === '1',
-            'position-2': positionD.position_status === '2',
+            'position-0': positionD.car_status === '0',
+            'position-1': positionD.car_status === '1',
+            'position-2': positionD.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
-              :value="positionD.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionD.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionD.posit_id" name="position-radio"
+              :value="positionD.posit_id" v-model="posit_id" />
 
-            <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_position }} </span>
+            <label :for="positionD.posit_id" class="">
+              <span>{{ positionD.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position D -->
       <!-- position E -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-57 md:gap-12 ">
         <div class="ABCDE">E</div>
-        
-        <div v-for="positionE in positionE.data" :key="positionE.position_id">
-          <div @click="Select" class="position" :class="{
-            'position-0': positionE.position_status === '0',
-            'position-1': positionE.position_status === '1',
-            'position-2': positionE.position_status === '2',
-          }">
-            <input class="hidden w-1" type="radio" :id="positionE.position_id" name="position-radio"
-              :value="positionE.position_id" v-model="position_id" />
 
-            <label :for="positionE.position_id" class="">
-              <span>{{ positionE.car_position }} </span>
+        <div v-for="positionE in positionE.data" :key="positionE.posit_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionE.car_status === '0',
+            'position-1': positionE.car_status === '1',
+            'position-2': positionE.car_status === '2',
+          }">
+            <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionE.car_id.car_chassis }}
+            </span>
+
+            <input class="hidden w-1" type="radio" :id="positionE.posit_id" name="position-radio"
+              :value="positionE.posit_id" v-model="posit_id" />
+
+            <label :for="positionE.posit_id" class="">
+              <span>{{ positionE.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position E -->
-       
-  
-      
+
+
+
     </div>
   </div>
 
@@ -218,7 +253,7 @@
       <span>View &RightArrow;</span>
     </button>
   </div>
-  
+
 </template>
 
 <script>
@@ -246,10 +281,10 @@ export default {
   methods: {
     changeRoute(e) {
       this.$router.push("/backend/stock/" + e.target.value);
-     // this.$router.push({ name: 'StockList' })
+      // this.$router.push({ name: 'StockList' })
       // this.$router.push("/b" + e.target.value); not working....
     },
-    
+
     ViewPicture() {
       this.$swal.fire({
         imageUrl:
@@ -259,12 +294,12 @@ export default {
       });
     },
     Select() {
-      localStorage.setItem("id1", this.position_id);
-            let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
-            http.get(`position/${positionid1}`).then((response) => {
-              console.log(response.data);
-              localStorage.setItem('position', JSON.stringify(response.data))
-            })
+      localStorage.setItem("ID", this.posit_id);
+      let posit = JSON.parse(window.localStorage.getItem("ID"));
+      http.get(`posit/${posit}`).then((response) => {
+        console.log(response.data);
+        localStorage.setItem('posit', JSON.stringify(response.data))
+      })
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
@@ -279,7 +314,7 @@ export default {
       swalWithBootstrapButtons
         .fire({
           title: "โปรดยืนยันการทำรายการ",
-          text: "ปิดการใช้งานช่องจอดรถยนต์",
+          text: "เปิด / ปิด การใช้งานช่องจอดรถยนต์",
           icon: "warning",
 
           showCancelButton: true,
@@ -289,90 +324,92 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            let positionid = JSON.parse(window.localStorage.getItem("position"));
-            http.get(`position/id/${positionid.position_id}`).then((response) => {
-                let responsePosition = response.data
-                let responseStatus= response.data
-                this.position = responsePosition
-                this.position_status = responseStatus
-                console.log(positionid.position_status)
-                //console.log(responseUser)
-                if(positionid.position_status === '0'){
-                  let data = new FormData();
-                  data.append("position_status", "2");
-                  data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
-                    console.log(response.data);
-                    window.location.reload();
+            let positionid = JSON.parse(window.localStorage.getItem("posit"));
+            http.get(`posit/carid/${positionid.posit_id}`).then((response) => {
+              let responsePosition = response.data
+              let responseStatus = response.data
+              this.posit = responsePosition
+              this.car_status = responseStatus
+              console.log(positionid.car_status)
+              //console.log(responseUser)
+              if (positionid.car_status === 0) {
+                let data = new FormData();
+                data.append("car_status", "2");
+                data.append("car_id", "1");
+                data.append("_method", "PUT");
+                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
+                  console.log(response.data);
+                  window.location.reload();
+                })
 
-                  })
-                  
 
-                }else{
-                  let data = new FormData();
-                  data.append("position_status", "0");
-                  data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
-                    console.log(response.data);
-                    window.location.reload();
-                  })
-                }
-              })
+              } else {
+
+                let data = new FormData();
+                data.append("car_status", "0");
+                data.append("car_id", "1");
+                data.append("_method", "PUT");
+                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
+                  console.log(response.data);
+                  window.location.reload();
+                })
+              }
+            })
 
           } else {
-           /*  window.location.reload(); */
+            console.log('no sccess')
           }
         });
     },
-    
+
   },
   mounted() {
     this.currentPage = 1;
     // get stock B  / ตำแหน่ง A
-    http.get(`position/search/4/a?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/4/a?page=${this.currentPage}`).then((response) => {
       let responsePositionA = response.data;
       this.positionA = responsePositionA;
     });
-     // get stock B  / ตำแหน่ง B
-    http.get(`position/search/4/b?page=${this.currentPage}`).then((response) => {
+    // get stock B  / ตำแหน่ง B
+    http.get(`posit/where/4/b?page=${this.currentPage}`).then((response) => {
       let responsePositionB = response.data;
       this.positionB = responsePositionB;
     });
     // get stock A  / ตำแหน่ง C
-    http.get(`position/search/4/c?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/4/c?page=${this.currentPage}`).then((response) => {
       let responsePositionC = response.data;
       this.positionC = responsePositionC;
     });
     // get stock A  / ตำแหน่ง D
-    http.get(`position/search/4/d?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/4/d?page=${this.currentPage}`).then((response) => {
       let responsePositionD = response.data;
       this.positionD = responsePositionD;
     });
-     // get stock A  / ตำแหน่ง E
-    http.get(`position/search/4/e?page=${this.currentPage}`).then((response) => {
+    // get stock A  / ตำแหน่ง E
+    http.get(`posit/where/4/e?page=${this.currentPage}`).then((response) => {
       let responsePositionE = response.data;
       this.positionE = responsePositionE;
     });
 
     /* เช็คตำแหน่งที่จอดว่าง */
-    http.get(`position/status/4/0?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/0?page=${this.currentPage}`).then((response) => {
       let responseAvailable = response.data;
       this.available = responseAvailable;
     });
 
     // เช็คตำแหน่งรถที่จอดอยู่
-    http.get(`position/status/4/1?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/1?page=${this.currentPage}`).then((response) => {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
 
     // เช็คตำแหน่งปิดช่องจอด
-    http.get(`position/status/4/2?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/2?page=${this.currentPage}`).then((response) => {
       let responseClose = response.data;
       this.close = responseClose;
     });
 
-    
+
   },
 };
 </script>
@@ -394,6 +431,7 @@ input:checked+label {
 
   position: relative;
 }
+
 .ABCDE {
   width: 30px;
   background-color: rgb(255, 255, 255);
@@ -407,8 +445,8 @@ input:checked+label {
 .position .tooltiptext {
   visibility: hidden;
   width: 200px;
-  background-color: rgb(197, 135, 248);
-  color: rgb(255, 255, 255);
+  background-color: white;
+  color: black;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;

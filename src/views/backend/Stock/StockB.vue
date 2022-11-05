@@ -25,8 +25,8 @@
 
             <select v-on:change="changeRoute($event)"
               class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-               <option  value="b" > Stock B (60) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-             <option value="a" > Stock A (160) : ลานจอดรถ VDQi ลานดิน</option>
+               <option  value="b" > Stock B (160) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+             <option value="a" > Stock A (60) : ลานจอดรถ VDQi ลานดิน</option>
               <option  value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
               <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
@@ -99,16 +99,22 @@
       <!-- position A -->
       <div class="grid grid-cols-8 gap-8 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">A</div>
-        <div v-for="positionA in positionA.data" :key="positionA.position_id">
+        <div v-for="positionA in positionA.data" :key="positionA.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionA.position_status === '0',
-            'position-1': positionA.position_status === '1',
-            'position-2': positionA.position_status === '2',
+            'position-0': positionA.car_status === 0 ,
+            'position-1': positionA.car_status === 1,
+            'position-2': positionA.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
-              :value="positionA.position_id" v-model="position_id" />
-            <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_position }} </span>
+          <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionA.car_id.car_chassis }}
+            </span>
+
+            <input class="hidden w-1" type="radio" :id="positionA.posit_id" name="position-radio"
+              :value="positionA.posit_id" v-model="posit_id" />
+            <label :for="positionA.posit_id" class="">
+              <span>{{ positionA.posit }} </span>
             </label>
           </div>
         </div>
@@ -118,17 +124,22 @@
       <!-- position B -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
         <div class="ABCDE">B</div>
-        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+        <div v-for="positionB in positionB.data" :key="positionB.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionB.position_status === '0',
-            'position-1': positionB.position_status === '1',
-            'position-2': positionB.position_status === '2',
+            'position-0': positionB.car_status === '0',
+            'position-1': positionB.car_status === '1',
+            'position-2': positionB.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
-              :value="positionB.position_id" v-model="position_id" />
+          <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionB.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionB.posit_id" name="position-radio"
+              :value="positionB.posit_id" v-model="posit_id" />
 
-            <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_position }} </span>
+            <label :for="positionB.posit_id" class="">
+              <span>{{ positionB.posit }} </span>
             </label>
           </div>
         </div>
@@ -138,17 +149,22 @@
       <!-- position C -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">C</div>
-        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+        <div v-for="positionC in positionC.data" :key="positionC.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionC.position_status === '0',
-            'position-1': positionC.position_status === '1',
-            'position-2': positionC.position_status === '2',
+            'position-0': positionC.car_status === '0',
+            'position-1': positionC.car_status === '1',
+            'position-2': positionC.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
-              :value="positionC.position_id" v-model="position_id" />
+           <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionC.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionC.posit_id" name="position-radio"
+              :value="positionC.posit_id" v-model="posit_id" />
 
-            <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_position }} </span>
+            <label :for="positionC.posit_id" class="">
+              <span>{{ positionC.posit }} </span>
             </label>
           </div>
         </div>
@@ -158,17 +174,22 @@
        <!-- position D -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">D</div>
-        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+        <div v-for="positionD in positionD.data" :key="positionD.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionD.position_status === '0',
-            'position-1': positionD.position_status === '1',
-            'position-2': positionD.position_status === '2',
+            'position-0': positionD.car_status === '0',
+            'position-1': positionD.car_status === '1',
+            'position-2': positionD.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
-              :value="positionD.position_id" v-model="position_id" />
+          <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionD.car_id.car_chassis }}
+            </span>
+            <input class="hidden w-1" type="radio" :id="positionD.posit_id" name="position-radio"
+              :value="positionD.posit_id" v-model="posit_id" />
 
-            <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_position }} </span>
+            <label :for="positionD.posit_id" class="">
+              <span>{{ positionD.posit }} </span>
             </label>
           </div>
         </div>
@@ -178,17 +199,23 @@
       <!-- position E -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12 ">
          <div class="ABCDE">E</div>
-        <div v-for="positionE in positionE.data" :key="positionE.position_id">
+        <div v-for="positionE in positionE.data" :key="positionE.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionE.position_status === '0',
-            'position-1': positionE.position_status === '1',
-            'position-2': positionE.position_status === '2',
+            'position-0': positionE.car_status === '0',
+            'position-1': positionE.car_status === '1',
+            'position-2': positionE.car_status === '2',
           }">
-            <input class="hidden w-1" type="radio" :id="positionE.position_id" name="position-radio"
-              :value="positionE.position_id" v-model="position_id" />
+          <span class="tooltiptext">
+              <h1 class="font-bold">ข้อมูลรถ</h1>
+              <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionE.car_id.car_chassis }}
+            </span>
 
-            <label :for="positionE.position_id" class="">
-              <span>{{ positionE.car_position }} </span>
+            <input class="hidden w-1" type="radio" :id="positionE.posit_id" name="position-radio"
+              :value="positionE.posit_id" v-model="posit_id" />
+
+            <label :for="positionE.posit_id" class="">
+              <span>{{ positionE.posit }} </span>
             </label>
           </div>
         </div>
@@ -253,13 +280,13 @@ export default {
     },
 
     Select() {
-      localStorage.setItem("id1", this.position_id);
-            let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
-            http.get(`position/${positionid1}`).then((response) => {
-              console.log(response.data);
-              localStorage.setItem('position', JSON.stringify(response.data))
-            })
-      
+      localStorage.setItem("ID", this.posit_id);
+      let posit = JSON.parse(window.localStorage.getItem("ID"));
+      http.get(`posit/${posit}`).then((response) => {
+        console.log(response.data);
+        localStorage.setItem('posit', JSON.stringify(response.data))
+        })
+
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
           title: "font-weight-bold",
@@ -273,7 +300,7 @@ export default {
       swalWithBootstrapButtons
         .fire({
           title: "โปรดยืนยันการทำรายการ",
-          text: "ปิดการใช้งานช่องจอดรถยนต์",
+          text: "เปิด / ปิด การใช้งานช่องจอดรถยนต์",
           icon: "warning",
 
           showCancelButton: true,
@@ -283,37 +310,40 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            let positionid = JSON.parse(window.localStorage.getItem("position"));
-            http.get(`position/id/${positionid.position_id}`).then((response) => {
+            let positionid = JSON.parse(window.localStorage.getItem("posit"));
+            http.get(`posit/carid/${positionid.posit_id}`).then((response) => {
                 let responsePosition = response.data
                 let responseStatus= response.data
-                this.position = responsePosition
-                this.position_status = responseStatus
-                console.log(positionid.position_status)
+                this.posit = responsePosition
+                this.car_status = responseStatus
+                console.log(positionid.car_status)
                 //console.log(responseUser)
-                if(positionid.position_status === '0'){
+                if(positionid.car_status === 0){
                   let data = new FormData();
-                  data.append("position_status", "2");
+                  data.append("car_status", "2");
+                  data.append("car_id", "1");
                   data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
+                  http.post(`posit/${positionid.posit_id}`, data).then((response) => {
                     console.log(response.data);
                     window.location.reload();
-                    
                   })
-
+                  
+                  
                 }else{
+                  
                   let data = new FormData();
-                  data.append("position_status", "0");
+                  data.append("car_status", "0");
+                  data.append("car_id", "1");
                   data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
+                  http.post(`posit/${positionid.posit_id}`, data).then((response) => {
                     console.log(response.data);
                     window.location.reload();
                   })
                 }
               })
-              
+
           } else {
-            /* window.location.reload(); */
+            console.log('no sccess')
           }
         });
     },
@@ -322,45 +352,45 @@ export default {
   mounted() {
     this.currentPage = 1;
     // get stock B  / ตำแหน่ง A
-    http.get(`position/search/2/a?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/2/A?page=${this.currentPage}`).then((response) => {
       let responsePositionA = response.data;
       this.positionA = responsePositionA;
     });
      // get stock B  / ตำแหน่ง B
-    http.get(`position/search/2/b?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/2/B?page=${this.currentPage}`).then((response) => {
       let responsePositionB = response.data;
       this.positionB = responsePositionB;
     });
     // get stock A  / ตำแหน่ง C
-    http.get(`position/search/2/c?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/2/C?page=${this.currentPage}`).then((response) => {
       let responsePositionC = response.data;
       this.positionC = responsePositionC;
     });
     // get stock A  / ตำแหน่ง D
-    http.get(`position/search/2/d?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/2/D?page=${this.currentPage}`).then((response) => {
       let responsePositionD = response.data;
       this.positionD = responsePositionD;
     });
      // get stock A  / ตำแหน่ง E
-    http.get(`position/search/2/e?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/2/E?page=${this.currentPage}`).then((response) => {
       let responsePositionE = response.data;
       this.positionE = responsePositionE;
     });
 
     /* เช็คตำแหน่งที่จอดว่าง */
-    http.get(`position/status/2/0?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/0?page=${this.currentPage}`).then((response) => {
       let responseAvailable = response.data;
       this.available = responseAvailable;
     });
 
     // เช็คตำแหน่งรถที่จอดอยู่
-    http.get(`position/status/2/1?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/1?page=${this.currentPage}`).then((response) => {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
 
     // เช็คตำแหน่งปิดช่องจอด
-    http.get(`position/status/2/2?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/2?page=${this.currentPage}`).then((response) => {
       let responseClose = response.data;
       this.close = responseClose;
     });

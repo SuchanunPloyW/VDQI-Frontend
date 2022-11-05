@@ -53,6 +53,21 @@
       <div></div>
       <ul class="pt-3 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700"></ul>
 
+      <ul>
+        <li class="relative px-6 py-3">
+          <router-link to="/backend/station"
+            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+            href="forms.html">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M5 19a2 2 0 01-2-2V7a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1M5 19h14a2 2 0 002-2v-5a2 2 0 00-2-2H9a2 2 0 00-2 2v5a2 2 0 01-2 2z" />
+            </svg>
+            <span class="ml-4">จัดการสถานี</span>
+          </router-link>
+        </li>
+      </ul>
+
     <!--   <h6 class="ml-6 text-sm text-gray">การจัดการระบบ</h6> -->
 
       <!-- <ul>
@@ -135,6 +150,21 @@
               </path>
             </svg>
             <span class="ml-4">Report Generator</span>
+          </router-link>
+        </li>
+      </ul>
+
+      <ul>
+        <li class="relative px-6 py-3">
+          <router-link to="/backend/station"
+            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+             <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
+              stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+              </path>
+            </svg>
+            <span class="ml-4">จัดการสถานี</span>
           </router-link>
         </li>
       </ul>

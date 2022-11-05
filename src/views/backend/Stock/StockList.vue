@@ -35,7 +35,7 @@
           อยู่ระหว่างดำเนินงาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          300
+          {{  progress.total }}
         </p>
       </div>
     </div>
@@ -114,7 +114,7 @@
       </button>
     </div>
 
-    <div>
+    <!-- <div>
       <button
         @click="openModalAddCar"
         class="flex items-center justify-between px-4 py-1.5 mx-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-500 border border-transparent rounded-lg active:bg-purple-600 hover:bg-yellow-700 focus:outline-none focus:shadow-outline-purple"
@@ -153,7 +153,7 @@
         </svg>
         <span>เพิ่ม</span>
       </button>
-    </div>
+    </div> -->
   </div>
   <!-- ตารางสแดง Stock รถในลานจอด -->
   <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -165,6 +165,7 @@
           >
             <th class="px-4 py-3">CHASSIS</th>
             <th class="px-4 py-3">WHERE</th>
+            <th class="px-4 py-3">LINE</th>
             <th class="px-4 py-3">POSITION</th>
             <th class="px-4 py-3">DATE</th>
             <th class="px-4 py-3">TIME</th>
@@ -188,7 +189,26 @@
               </div>
             </td>
 
-            <td class="px-4 py-3 text-sm">{{ car.car_position }}</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center text-sm">
+                <div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{   car.posit_id.line }}     
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-4 py-3">
+              <div class="flex items-center text-sm">
+                <div>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {{   car.posit_id.posit }}     
+                  </p>
+                </div>
+              </div>
+            </td>
+
+          
             <td class="px-4 py-3 text-sm">
               <div class="flex items-center text-sm">
                 <div>
@@ -346,6 +366,7 @@ export default {
       position: [],
       status: [],
       noavailable: [],
+      progress: [],
       currentPage: 0,
       perPage: 0,
       total: 0,
@@ -378,13 +399,14 @@ export default {
       });
     },
 
-    show(car_id) {
+    show(car_id ) {
       this.$router.push({ name: "CarDetail" });
       this.$store.state.carShow = car_id;
+    
     },
     //function get car api
     async getCar(pagenumber) {
-      let response = await http.get(`car?page=${pagenumber}`);
+      let response = await http.get(`cardb/sort/1?page=${pagenumber}`);
       let responseCar = response.data;
       this.car = responseCar;
       this.currentPage = responseCar.currentPage;
@@ -394,7 +416,7 @@ export default {
 
     async getCarSearch(pagenumber) {
       let response = await http.get(
-        `car/search/${this.keyword}?page=${pagenumber}`
+        `cardb/search/${this.keyword}?page=${pagenumber}`
       );
       let responseCar = response.data;
       this.car = responseCar;
@@ -415,7 +437,7 @@ export default {
       }
     },
     onSelectClick() {
-      http.get(`car/${this.car_id}`).then((response) => {
+      http.get(`cardb/${this.car_id}`).then((response) => {
         this.car_chassis = response.data.car_chassis;
       });
     },
@@ -424,7 +446,7 @@ export default {
     submitSearchForm() {
       if (this.keyword != "") {
         //เรียก api search
-        http.get(`car/search/${this.keyword}`).then((response) => {
+        http.get(`cardb/search/${this.keyword}`).then((response) => {
           let responseCar = response.data;
           this.car = responseCar;
           this.currentPage = responseCar.currentPage;
@@ -568,22 +590,33 @@ export default {
 
     this.getCar(this.currentPage);
 
-    http.get(`car?page=${this.currentPage}`).then((response) => {
+    http.get(`cardb/sort/1?page=${this.currentPage}`).then((response) => {
       let responseCar = response.data;
       this.car = responseCar;
     }),
+    
       http.get(`where?page=${this.currentPage}`).then((response) => {
         let responseWhere = response.data;
         this.where = responseWhere;
       }),
       http
-        .get(`position/status/1/1?page=${this.currentPage}`)
+        .get(`posit/status/1?page=${this.currentPage}`)
         .then((response) => {
           let responseNoAvailable = response.data;
           this.noavailable = responseNoAvailable;
         });
 
-    http.get(`car?page=${this.currentPage}`).then((response) => {
+        http
+        .get(`cardb/status/2?page=${this.currentPage}`)
+        .then((response) => {
+          let responseProgress = response.data;
+          this.progress = responseProgress;
+        });
+
+
+
+
+    http.get(`cardb?page=${this.currentPage}`).then((response) => {
       let responseCar = response.data;
       this.car = responseCar;
       // console.log(responseCar)

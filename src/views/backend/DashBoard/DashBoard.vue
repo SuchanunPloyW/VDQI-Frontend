@@ -44,7 +44,7 @@
           อยู่ระหว่างดำเนินการ
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-          {{ req.total }}
+          {{ progress.total }}
         </p>
       </div>
     </div>

@@ -52,7 +52,7 @@
           ปิดใช้งาน
         </p>
         <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-         {{ close.total }} 
+          {{ close.total }}
         </p>
       </div>
     </div>
@@ -97,24 +97,42 @@
       </p>
       <!-- Card Lotus's -->
       <div class="py-4">
-        <a
-          class="bg-gray-200 flex  p-4 ">Lotus's
+        <a class="bg-gray-200 flex  p-4 ">Lotus's
         </a>
       </div>
       <!-- position A -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
-         <div class="ABCDE">A</div>
-        <div v-for="positionA in positionA.data" :key="positionA.position_id">
-          <div  @click="Select" class="position" :class="{
-            'position-0': positionA.position_status === '0' ,
-            'position-1': positionA.position_status === '1',
-            'position-2': positionA.position_status === '2',
+        <div class="ABCDE">A</div>
+        <div v-for="positionA in positionA.data" :key="positionA.posit_id">
+          <div @click="Select" class="position" :class="{
+            'position-0': positionA.car_status === 0,
+            'position-1': positionA.car_status === 1,
+            'position-2': positionA.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionA.position_id" name="position-radio"
-              :value="positionA.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1></h1>
+              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionA.car_where.car_where }}</span> </h1>
+              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionA.line }}{{ positionA.posit }}</span></h1>
+              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionA.car_id.car_chassis }}</span></h1>
+              
+              <button
+                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
 
-            <label :for="positionA.position_id" class="">
-              <span>{{ positionA.car_position }} </span>
+                <span>เพิ่มเติม</span>
+              </button>
+
+
+
+              <!--  <span class="font-bold"> เลขตัวถัง :</span>
+              {{ positionA.car_id.car_chassis }} -->
+            </span>
+
+
+            <input class="hidden w-1" type="radio" :id="positionA.posit_id" name="position-radio"
+              :value="positionA.posit_id" v-model="posit_id" />
+
+            <label :for="positionA.posit_id" class="">
+              <span>{{ positionA.posit }} </span>
             </label>
           </div>
         </div>
@@ -124,67 +142,110 @@
 
       <!-- position B -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0">
-         <div class="ABCDE">B</div>
-        <div v-for="positionB in positionB.data" :key="positionB.position_id">
+        <div class="ABCDE">B</div>
+        <div v-for="positionB in positionB.data" :key="positionB.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionB.position_status === '0',
-            'position-1': positionB.position_status === '1',
-            'position-2': positionB.position_status === '2',
+            'position-0': positionB.car_status === 0,
+            'position-1': positionB.car_status === 1,
+            'position-2': positionB.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionB.position_id" name="position-radio"
-              :value="positionB.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1></h1>
+              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionB.car_where.car_where }}</span> </h1>
+              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionB.line }}{{ positionB.posit }}</span></h1>
+              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionB.car_id.car_chassis }}</span></h1>
+              
+              <button
+                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
 
-            <label :for="positionB.position_id" class="">
-              <span>{{ positionB.car_position }} </span>
+                <span>เพิ่มเติม</span>
+              </button>
+
+            </span>
+
+            <input class="hidden w-1" type="radio" :id="positionB.posit_id" name="position-radio"
+              :value="positionB.posit_id" v-model="posit_id" />
+
+            <label :for="positionB.posit_id" class="">
+              <span>{{ positionB.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position B -->
 
-     <!-- position C -->
+      <!-- position C -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
-         <div class="ABCDE">C</div>
-        <div v-for="positionC in positionC.data" :key="positionC.position_id">
+        <div class="ABCDE">C</div>
+        <div v-for="positionC in positionC.data" :key="positionC.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionC.position_status === '0',
-            'position-1': positionC.position_status === '1',
-            'position-2': positionC.position_status === '2',
+            'position-0': positionC.car_status === 0,
+            'position-1': positionC.car_status === 1,
+            'position-2': positionC.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionC.position_id" name="position-radio"
-              :value="positionC.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1></h1>
+              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionC.car_where.car_where }}</span> </h1>
+              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionC.line }}{{ positionC.posit }}</span></h1>
+              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionC.car_id.car_chassis }}</span></h1>
+              
+              <button
+                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
 
-            <label :for="positionC.position_id" class="">
-              <span>{{ positionC.car_position }} </span>
+                <span>เพิ่มเติม</span>
+              </button>
+
+            </span>
+
+            <input class="hidden w-1" type="radio" :id="positionC.posit_id" name="position-radio"
+              :value="positionC.posit_id" v-model="posit_id" />
+
+            <label :for="positionC.posit_id" class="">
+              <span>{{ positionC.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position C -->
 
-    <!-- position D -->
+      <!-- position D -->
       <div class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-16 md:gap-0 ">
-         <div class="ABCDE">D</div>
-        <div v-for="positionD in positionD.data" :key="positionD.position_id">
+        <div class="ABCDE">D</div>
+        <div v-for="positionD in positionD.data" :key="positionD.posit_id">
           <div @click="Select" class="position" :class="{
-            'position-0': positionD.position_status === '0',
-            'position-1': positionD.position_status === '1',
-            'position-2': positionD.position_status === '2',
+            'position-0': positionD.car_status === 0,
+            'position-1': positionD.car_status === 1,
+            'position-2': positionD.car_status === 2,
           }">
-            <input class="hidden w-1" type="radio" :id="positionD.position_id" name="position-radio"
-              :value="positionD.position_id" v-model="position_id" />
+            <span class="tooltiptext">
+              <h1></h1>
+              <h1 class="text-left font-bold	 	">&nbsp;ลานจอด <span class="font-thin">{{ positionD.car_where.car_where }}</span> </h1>
+              <h1 class="text-left font-bold	  ">&nbsp;ช่องจอด <span class="font-thin">{{ positionD.line }}{{ positionD.posit }}</span></h1>
+              <h1 class="text-left font-bold	 ">&nbsp;เลขตัวถัง <span class="font-thin">{{ positionD.car_id.car_chassis }}</span></h1>
+              
+              <button
+                class="bg-purple-600 hover:bg-purple-500 text-gray-100 font-bold py-2 px-4 rounded inline-flex items-center ">
 
-            <label :for="positionD.position_id" class="">
-              <span>{{ positionD.car_position }} </span>
+                <span>เพิ่มเติม</span>
+              </button>
+
+            </span>
+
+            <input class="hidden w-1" type="radio" :id="positionD.posit_id" name="position-radio"
+              :value="positionD.posit_id" v-model="posit_id" />
+
+            <label :for="positionD.posit_id" class="">
+              <span class="">{{ positionD.posit }} </span>
             </label>
           </div>
         </div>
       </div>
-       <br>
+      <br>
       <!-- position D -->
       
+
     </div>
   </div>
   <div class="py-4">
@@ -209,7 +270,7 @@ import http from "@/services/BackendServices";
 export default {
   data() {
     return {
-      position:[],
+      position: [],
       positionA: [],
       positionB: [],
       positionC: [],
@@ -222,8 +283,9 @@ export default {
       total: 0,
       car_position: "",
       positionModel: "",
-      position_id: "",
+      posit_id: "",
       position_status: "",
+      sort: "",
     };
   },
   methods: {
@@ -237,18 +299,18 @@ export default {
       this.$swal.fire({
         imageUrl:
           "https://trello.com/1/cards/62846a8ad8fd477751f8fd0f/attachments/62f71d2bcb4c9600e49d56e5/previews/62f71d2ccb4c9600e49d5a8d/download/image.png",
-       
-        imageWidth: 1200,     
+
+        imageWidth: 1200,
         imageAlt: "A tall image",
       });
     },
     Select() {
-      localStorage.setItem("id1", this.position_id);
-      let positionid1 = JSON.parse(window.localStorage.getItem("id1"));
-      http.get(`position/${positionid1}`).then((response) => {
+      localStorage.setItem("ID", this.posit_id);
+      let posit = JSON.parse(window.localStorage.getItem("ID"));
+      http.get(`posit/${posit}`).then((response) => {
         console.log(response.data);
-        localStorage.setItem('position', JSON.stringify(response.data))
-        })
+        localStorage.setItem('posit', JSON.stringify(response.data))
+      })
 
       const swalWithBootstrapButtons = this.$swal.mixin({
         customClass: {
@@ -273,37 +335,40 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            let positionid = JSON.parse(window.localStorage.getItem("position"));
-            http.get(`position/id/${positionid.position_id}`).then((response) => {
-                let responsePosition = response.data
-                let responseStatus= response.data
-                this.position = responsePosition
-                this.position_status = responseStatus
-                console.log(positionid.position_status)
-                //console.log(responseUser)
-                if(positionid.position_status === '0'){
-                  let data = new FormData();
-                  data.append("position_status", "2");
-                  data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
-                    console.log(response.data);
-                  })
-                  
-                  
-                }else{
-                  
-                  let data = new FormData();
-                  data.append("position_status", "0");
-                  data.append("_method", "PUT");
-                  http.post(`position/${positionid.position_id}`, data).then((response) => {
-                    console.log(response.data);
-                    window.location.reload();
-                  })
-                }
-              })
+            let positionid = JSON.parse(window.localStorage.getItem("posit"));
+            http.get(`posit/carid/${positionid.posit_id}`).then((response) => {
+              let responsePosition = response.data
+              let responseStatus = response.data
+              this.posit = responsePosition
+              this.car_status = responseStatus
+              console.log(positionid.car_status)
+              //console.log(responseUser)
+              if (positionid.car_status === 0) {
+                let data = new FormData();
+                data.append("car_status", "2");
+                data.append("car_id", "1");
+                data.append("_method", "PUT");
+                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
+                  console.log(response.data);
+                  window.location.reload();
+                })
+
+
+              } else {
+
+                let data = new FormData();
+                data.append("car_status", "0");
+                data.append("car_id", "1");
+                data.append("_method", "PUT");
+                http.post(`posit/${positionid.posit_id}`, data).then((response) => {
+                  console.log(response.data);
+                  window.location.reload();
+                })
+              }
+            })
 
           } else {
-            console.log('')
+            console.log('no sccess')
           }
         });
     },
@@ -311,42 +376,42 @@ export default {
   mounted() {
     this.currentPage = 1;
     // get stock A  / ตำแหน่ง A
-    http.get(`position/search/1/a?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/1/A?page=${this.currentPage}`).then((response) => {
       let responsePositionA = response.data;
       this.positionA = responsePositionA;
     });
     // get stock A  / ตำแหน่ง B
-    http.get(`position/search/1/b?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/1/B?page=${this.currentPage}`).then((response) => {
       let responsePositionB = response.data;
       this.positionB = responsePositionB;
     });
 
     // get stock A  / ตำแหน่ง C
-    http.get(`position/search/1/c?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/where/1/C?page=${this.currentPage}`).then((response) => {
       let responsePositionC = response.data;
       this.positionC = responsePositionC;
     });
-  
-   // get stock A  / ตำแหน่ง D
-    http.get(`position/search/1/d?page=${this.currentPage}`).then((response) => {
+
+    // get stock A  / ตำแหน่ง D
+    http.get(`posit/where/1/D?page=${this.currentPage}`).then((response) => {
       let responsePositionD = response.data;
       this.positionD = responsePositionD;
     });
 
     /* เช็คตำแหน่งที่จอดว่าง */
-    http.get(`position/status/1/0?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/0?page=${this.currentPage}`).then((response) => {
       let responseAvailable = response.data;
       this.available = responseAvailable;
     });
 
     // เช็คตำแหน่งรถที่จอดอยู่
-    http.get(`position/status/1/1?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/1?page=${this.currentPage}`).then((response) => {
       let responseNoAvailable = response.data;
       this.noavailable = responseNoAvailable;
     });
 
     // เช็คตำแหน่งปิดช่องจอด
-    http.get(`position/status/1/2?page=${this.currentPage}`).then((response) => {
+    http.get(`posit/status/2?page=${this.currentPage}`).then((response) => {
       let responseClose = response.data;
       this.close = responseClose;
     });
@@ -363,9 +428,10 @@ export default {
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
 <style>
 input:checked+label {
- background-color: rgb(47, 255, 186);
-  
+  background-color: rgb(47, 255, 186);
+
 }
+
 .ABCDE {
   width: 30px;
   background-color: rgb(255, 255, 255);
@@ -388,8 +454,9 @@ input:checked+label {
 
 .position .tooltiptext {
   visibility: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   width: 200px;
-  background-color: rgb(197, 135, 248);
+  background-color: white;
   color: rgb(255, 255, 255);
   text-align: center;
   border-radius: 6px;
