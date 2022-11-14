@@ -1,6 +1,7 @@
 <template>
+     
      <h2 class="my-6 text-2xl font-semibold text-black dark:text-gray-200">
-          Station
+          จัดการสถานีจอดรถยนต์
      </h2>
 
      <!-- Card -->

@@ -28,7 +28,7 @@
                <option  value="b" > Stock B (160) : ลานลานจอดรถ VDQi หลังกำแพง</option>
              <option value="a" > Stock A (60) : ลานจอดรถ VDQi ลานดิน</option>
               <option  value="c"> Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง</option>
-              <option value="d"> Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง</option>
+              <option value="d"> Stock D (270) : ลานลานจอดรถ VDQi หลังกำแพง</option>
             </select>
           </label>
         </div>
@@ -86,19 +86,19 @@
     class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
-        Stock B (160) : ลานจอดรถ VDQi หลังกำแพง ( custom text description )
+        Stock B (160) : ลานจอดรถ VDQi หลังกำแพง 
       </p>
       <!-- Card Lotus's -->
       <div
         class="h-14 overflow-x-auto items-center p-4 bg-gray-200 rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-0 mb-8 md:grid-cols-2 xl:grid-cols-1">
         <div class="text-center">
-          <h1 class="font-bold">Lotus's</h1>
+          <h1 class="font-bold">Lotus's </h1>
         </div>
       </div>
-     
-        <ul>
-          
-        </ul>
+
+      <div
+        class=" overflow-x-auto  rounded-lg dark:bg-gray-800 space-x-3 grid gap-0 mb-8 md:grid-cols-2 xl:grid-cols-1">
+        <ul></ul>
         <!-- A -->
       <ul class="grid grid-cols-8 gap-4 sm:grid-cols-2 md:grid-cols-33 md:gap-12">
         <li>
@@ -108,13 +108,15 @@
             </div>
           </label>
         </li>
+        
         <div v-for="positionA in positionA.data" :key="positionA.posit_id">
           <input type="radio" :id="positionA.posit_id" name="position-radio" :value="positionA.posit_id"
             v-model="posit_id" class="hidden peer" required />
           <div class="group">
             <div class="relative">
               <div
-                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                class="hidden group-hover:block absolute top-10 left-40 w-72 z-10  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                
                   <span class="">
                   <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
                       positionA.car_where.car_where
@@ -131,7 +133,7 @@
                     <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
                   </div>
               </div>
-
+  
               <label @click="Select" :for="positionA.posit_id"
                 class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 :class="{
@@ -163,7 +165,7 @@
           <div class="group">
             <div class="relative">
               <div
-                class="hidden group-hover:block absolute bottom-1 left-9 w-72  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
+                class="hidden group-hover:block absolute top-10 left-40 w-72 z-10  px-4 py-3 mb-10 -ml-32 text-black bg-white shadow-fix rounded-lg ">
                   <span class="">
                   <h1 class="  text-left font-bold text-sm	 	">&nbsp;ลานจอด <span class="font-thin text-sm	">{{
                       positionB.car_where.car_where
@@ -180,9 +182,9 @@
                     <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
                   </div>
               </div>
-
+  
               <label @click="Select" :for="positionB.posit_id"
-                class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="inline-flex justify-center items-center p-5 w-2 h-2  text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 :class="{
                   'bg-gray-in': positionB.car_status === 2,
                   'bg-red-in': positionB.car_status === 1,
@@ -229,7 +231,7 @@
                     <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
                   </div>
               </div>
-
+  
               <label @click="Select" :for="positionC.posit_id"
                 class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 :class="{
@@ -278,7 +280,7 @@
                     <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
                   </div>
               </div>
-
+  
               <label @click="Select" :for="positionD.posit_id"
                 class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 :class="{
@@ -327,7 +329,7 @@
                     <button class="bg-purple-600 text-white hover:bg-purple-500 font-bold py-2 px-4 mt-3 rounded items-center text-sm">   เพิ่มเติม   </button>
                   </div>
               </div>
-
+  
               <label @click="Select" :for="positionE.posit_id"
                 class="inline-flex justify-center items-center p-5 w-2 h-2 text-gray-700 rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                 :class="{
@@ -343,6 +345,11 @@
           </div>
         </div>
       </ul>
+      </div>
+     
+
+
+
       
 
       </div>
@@ -533,65 +540,3 @@ export default {
 };
 </script>
 
-<style>
-input:checked+label {
-  background-color: RED;
-  border: red;
-}
-
-.position {
-  width: 30px;
-  background-color: rgb(47, 255, 186);
-  padding-top: 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  text-align: center;
-
-
-  position: relative;
-}
-.ABCDE {
-  width: 30px;
-  background-color: rgb(255, 255, 255);
-  padding-top: 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  text-align: center;
-  position: relative;
-}
-
-.position .tooltiptext {
-  visibility: hidden;
-  width: 200px;
-  background-color: rgb(197, 135, 248);
-  color: rgb(255, 255, 255);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.position:hover .tooltiptext {
-  visibility: visible;
-}
-
-.position:hover {
-  background-color: rgb(255, 0, 0);
-}
-
-.position-1 {
-  background-color: red;
-  color: #fff;
-}
-
-.position-2 {
-  background-color: rgb(190, 190, 190);
-  color: #fff;
-}
-</style>

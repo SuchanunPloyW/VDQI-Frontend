@@ -17,29 +17,25 @@ const backendService = axios.create({
   withCredentials: true,
   headers: {
     "Content-type": "multipart/form-data",
-    "Accept": "application/json",
-   // "Authorization": `Bearer ${token}`
+    Accept: "application/json",
+    // "Authorization": `Bearer ${token}`
   },
 });
 
-
 // การใช้ interceptors เพื่อแทรก token --> header
-backendService.interceptors.request.use(config =>{
-  let token =''
-  try{
-    let userStorage = localStorage.getItem('user')
-    let userStorageJSON = JSON.parse(userStorage)
-    token = userStorageJSON['token']
-
-  }catch(error){
+backendService.interceptors.request.use((config) => {
+  let token = "";
+  try {
+    let userStorage = localStorage.getItem("user");
+    let userStorageJSON = JSON.parse(userStorage);
+    token = userStorageJSON["token"];
+  } catch (error) {
     console.log(error);
   }
   //เช็คส่า token ว่าไม่ null
-  if(token){
-    config.headers.Authorization = "Bearer "+token
-
+  if (token) {
+    config.headers.Authorization = "Bearer " + token;
   }
-  return config
-
-})
+  return config;
+});
 export default backendService;

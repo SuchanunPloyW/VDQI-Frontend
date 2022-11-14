@@ -33,7 +33,7 @@
                 Stock C (280) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
               <option value="d">
-                Stock D (500) : ลานลานจอดรถ VDQi หลังกำแพง
+                Stock D (270) : ลานลานจอดรถ VDQi หลังกำแพง
               </option>
             </select>
           </label>
@@ -91,7 +91,7 @@
     class="overflow-x-auto items-center p-4 bg-white rounded-lg shadow-lg dark:bg-gray-800 space-x-3 grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-1">
     <div>
       <p class="mb-2 text-sm font-semibold text-black dark:text-gray-400">
-        Stock A (15) : ลานจอดรถ VDQi ลานดิน
+        Stock A (60) : ลานจอดรถ VDQi ลานดิน
       </p>
       <!-- Card Lotus's -->
       <div
@@ -472,65 +472,4 @@ export default {
 </script>
 
 <!-- ย้ายไปไฟล์ ใหม่ด้วยนะ  -->
-<style>
-input:checked+label {
-  background-color: rgb(47, 255, 186);
-}
 
-.ABCDE {
-  width: 30px;
-  background-color: rgb(255, 255, 255);
-  padding-top: 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  text-align: center;
-  position: relative;
-}
-
-.position {
-  width: 50px;
-  background-color: rgb(47, 255, 186);
-  padding-top: 10px;
-  border-radius: 5px;
-  font-size: 12px;
-  text-align: center;
-  position: relative;
-}
-
-.position .tooltiptext {
-  visibility: hidden;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
-  0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  width: 200px;
-  background-color: white;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  position: absolute;
-
-  bottom: 100%;
-  left: 50%;
-  margin-left: -60px;
-}
-
-.position:hover .tooltiptext {
-  visibility: visible;
-}
-
-.position:hover {
-  background-color: rgb(255, 0, 0);
-}
-
-.position-1 {
-  background-color: red;
-  color: #fff;
-}
-
-.position-2 {
-  background-color: rgb(190, 190, 190);
-  color: #fff;
-}
-</style>

@@ -19,11 +19,12 @@ module.exports = {
         33: "repeat(33, minmax(0, 1fr))",
         56: "repeat(56, minmax(0, 1fr))",
         57: "repeat(57, minmax(0, 1fr))",
+        55: "repeat(55, minmax(0, 1fr))",
         /*    'footer': '200px minmax(900px, 1fr) 100px', */
       },
       boxShadow: {
-        'fix': '0 4px 8px 0 rgba(0, 0, 0, 0.2) ',
-      }
+        fix: "0 4px 8px 0 rgba(0, 0, 0, 0.2) ",
+      },
     },
   },
   variants: {

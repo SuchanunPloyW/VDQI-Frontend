@@ -21,6 +21,7 @@ import StockD from "@/views/backend/Stock/StockD.vue";
 import AddStock from "@/views/backend/Stock/AddStock/AddStock.vue"
 import TestCode from "@/views/backend/Test/TestCode.vue";
 import StationManage from "@/views/backend/Station/StationManage.vue";
+import ExportCar from "@/views/frontend/Form/ExportCar.vue";
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
 function authGuard(to, from, next) {
@@ -251,6 +252,17 @@ const routes = [
   meta: {
     title: "StationManage",
     description: "StationManage",
+  },
+},
+
+
+/*  Error 404 */
+{
+  path: "/form/ex/car",
+  component: ExportCar,
+  meta: {
+    title: "แบบประเมิน",
+    description: "แบบประเมิน",
   },
 },
 
