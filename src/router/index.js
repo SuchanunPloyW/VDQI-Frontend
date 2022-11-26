@@ -18,10 +18,14 @@ import PositionManage from "@/views/backend/Manage/Zone/ZoneManage.vue";
 import StockB from "@/views/backend/Stock/StockB.vue";
 import StockC from "@/views/backend/Stock/StockC.vue";
 import StockD from "@/views/backend/Stock/StockD.vue";
-import AddStock from "@/views/backend/Stock/AddStock/AddStock.vue"
+import AddStock from "@/views/backend/Stock/AddStock/AddStock.vue";
 import TestCode from "@/views/backend/Test/TestCode.vue";
 import StationManage from "@/views/backend/Station/StationManage.vue";
-import ExportCar from "@/views/frontend/Form/ExportCar.vue";
+import ExportCar from "@/views/frontend/Form/EvaluationCar.vue";
+import EvaData from "@/views/frontend/Form/EvaluationData.vue";
+import EvaDetail from "@/views/frontend/Form/EvaluationDetail.vue";
+import EvaResualt from "@/views/frontend/Form/EvaluationResult.vue";
+
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
 function authGuard(to, from, next) {
@@ -148,8 +152,6 @@ const routes = [
       description: "Stock",
     },
   },
-  
-  
 
   /* route StockManagement / list */
   {
@@ -204,95 +206,95 @@ const routes = [
       description: "ReportGen",
     },
   },
-/* route system */
-{
-  path: "/backend/position",
-  component: BackendLayout,
-  children: [
-    {
-      path: "",
-      name: "PositionManage",
-      component: PositionManage,
-      beforeEnter: authGuard,
+  /* route system */
+  {
+    path: "/backend/position",
+    component: BackendLayout,
+    children: [
+      {
+        path: "",
+        name: "PositionManage",
+        component: PositionManage,
+        beforeEnter: authGuard,
+      },
+    ],
+    meta: {
+      title: "PositionManage",
+      description: "PositionManage",
     },
-  ],
-  meta: {
-    title: "PositionManage",
-    description: "PositionManage",
   },
-},
-{
-  path: "/backend/stock/add",
-  component: BackendLayout,
-  children: [
-    {
-      path: "",
-      name: "AddStock",
-      component: AddStock,
-      beforeEnter: authGuard,
+  {
+    path: "/backend/stock/add",
+    component: BackendLayout,
+    children: [
+      {
+        path: "",
+        name: "AddStock",
+        component: AddStock,
+        beforeEnter: authGuard,
+      },
+    ],
+    meta: {
+      title: "AddStock",
+      description: "AddStock",
     },
-  ],
-  meta: {
-    title: "AddStock",
-    description: "AddStock",
   },
-},
 
-{
-  path: "/backend/station",
-  component: BackendLayout,
-  children: [
-    {
-      path: "",
-      name: "StationManage",
-      component: StationManage,
-      beforeEnter: authGuard,
+  {
+    path: "/backend/station",
+    component: BackendLayout,
+    children: [
+      {
+        path: "",
+        name: "StationManage",
+        component: StationManage,
+        beforeEnter: authGuard,
+      },
+    ],
+    meta: {
+      title: "StationManage",
+      description: "StationManage",
     },
-  ],
-  meta: {
-    title: "StationManage",
-    description: "StationManage",
   },
-},
 
-
-/*  Error 404 */
-{
-  path: "/form/ex/car",
-  component: ExportCar,
-  meta: {
-    title: "แบบประเมิน",
-    description: "แบบประเมิน",
+  // แบบการตรวจประเมิน
+  {
+    path: "/form/evaluation",
+    component: ExportCar,
+    name: "Evaluation",
+    meta: {
+      title: "แบบการตรวจประเมิน",
+      description: "แบบการตรวจประเมิน",
+    },
   },
-},
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  {
+    path: "/form/evaluation/data",
+    component: EvaData,
+    name: "EvaluationData",
+    meta: {
+      title: "แบบการตรวจประเมิน | ข้อมูลรถ",
+      description: "แบบการตรวจประเมิน | ข้อมูลรถ",
+    },
+  },
+  {
+    path: "/form/evaluation/detail",
+    component: EvaDetail,
+    name: "EvaluationDetail",
+    meta: {
+      title: "แบบการตรวจประเมิน | ข้อมูลรถ",
+      description: "แบบการตรวจประเมิน | ข้อมูลรถ",
+    },
+  },
+  {
+    path: "/form/evaluation/result",
+    component: EvaResualt,
+    name: "EvaluationResult",
+    meta: {
+      title: "แบบการตรวจประเมิน | นำรถออก",
+      description: "แบบการตรวจประเมิน | นำรถออก",
+    },
+  },
+ 
 
 
   /* router test */

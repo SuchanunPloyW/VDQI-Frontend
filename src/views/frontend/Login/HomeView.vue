@@ -33,7 +33,6 @@
                 {{ v$.password.$errors[0].$message }}
               </div>
 
-            
               <p class="my-4"></p>
               <button @click="submitForm"
                 class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg cursor-pointer active:bg-purple-600 hover:bg-purple-700">LOGIN</button>
@@ -49,8 +48,6 @@
 import useValidate from "@vuelidate/core";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
 import http from "@/services/AuthService";
-
-
 
 export default {
   data() {
@@ -74,7 +71,7 @@ export default {
           }
 
         ).then(response => {
-        //  console.log(response.data)
+          //  console.log(response.data)
           //เก็บข้อมูลลง localStorahe
           localStorage.setItem('user', JSON.stringify(response.data))
 

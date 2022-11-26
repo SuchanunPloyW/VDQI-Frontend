@@ -5,7 +5,11 @@ export default createStore({
   // State คือพื้นที่สำหรับตัวแปร object หรือค่าต่าง ๆ จองแอพเราไว้
   state: {
     showSideMenu: false,
-    carShow: 0
+    carShow: 0,
+    evaShow: 0,
+    evaForm: 'ไม่พบข้อมูล',
+
+
     
   },
   getters: {
