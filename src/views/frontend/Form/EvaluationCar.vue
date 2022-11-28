@@ -75,7 +75,7 @@
                                 <input type="text" v-model="car_chassis" maxlength="17"
                                     class="w-full px-3 py-2 leading-tight text-gray-700 shadow appearance-none border uppercase"
                                     placeholder="chassis no." />
-                                <button @click="submitSearchForm" type="button"
+                                <button @click="Check_chassis" type="button"
                                     class="absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-r-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                     ตรวจสอบ
                                 </button>
@@ -522,7 +522,6 @@
                         <textarea cols="30 " rows="5" placeholder="Other" v-model="detail"
                             class="shadow appearance-none border relative w-full px-3 py-1 text-base bg-white text-gray-700 focus:outline-none focus:shadow-outline"></textarea>
 
-                        <!-- <label class="block text-gray-700 text-base mt-3 mb-2 font-semibold">รูปภาพเพิ่มเติม</label> -->
                         <div class="mt-4">
                             <img v-if="imgUrl" :src="imgUrl" class="w-96 h-96" />
                         </div>
@@ -530,53 +529,53 @@
                         <label class=" font-semibold block my-3 text-gray-700 text-md"
                             for="image">รูปภาพเพิ่มเติม</label>
 
-
-                        <!-- input -->
-                        <!--  <input ref="fileupload" @change="onFileChange"
-                            class="w-full px-3 py-2 leading-tight text-gray-700 border rounded shadow" type="file"> -->
-                        <!-- input -->
-
-
                         <input class="w-full px-3 py-2 leading-tight text-gray-700 shadow appearance-none border"
                             id="upload-file" type="file" multiple @change="uploadImage" name="PictureCar[]">
 
-
-                        <!-- <div v-for="(image, key) in PictureCar" :key="key">
-                            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <div class="container px-4 mx-auto  ">
+                            <br>
+                            <div class="max-w-sm rounded overflow-hidden shadow-lg " v-for="(image, key) in PictureCar"
+                                :key="key">
                                 <img class="w-full" v-bind:ref="'image'" alt="" src="">
-                                <div class="px-6 py-4">
-                                    <div class="font-bold text-xl mb-2">The Coldest Sunset</div>
-                                    <p class="text-gray-700 text-base">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia,
-                                        nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
-                                    </p>
-                                </div>
-                                <div class="px-6 pt-4 pb-2">
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                                    <span
-                                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                                <div class="px-6 py-4 text-center ">
+                                    <button type="button" @click="removeImage(image, key)">
+                                        <svg class="w-6 h-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+                                            className="w-6 h-6">
+                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>
+
+                                        <!-- <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm1 3a1 1 0 00-1 1v7a1 1 0 001 1h12a1 1 0 001-1v-7a1 1 0 00-1-1H4zm3 2a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1z"
+                                                clip-rule="evenodd"></path>
+                                        </svg> -->
+
+                                    </button>
                                 </div>
                             </div>
 
-                        </div> -->
+                            <!--  <div v-for="(image, key) in PictureCar" :key="key">
+                                <img v-bind:ref="'image'" alt="" src="" class="" />
+                            </div> -->
+                        </div>
 
-                        <div v-for="(image, key) in PictureCar" :key="key">
+
+
+
+
+
+                        <!--  <div v-for="(image, key) in PictureCar" :key="key">
                             <div class="flex flex-row items-center gap-2 bg-gray-50">
                                 <div class="">
                                     <img class="w-1/2 h-1/2" v-bind:ref="'image'" alt="" src="" />
                                 </div>
-                                <!-- <button type="button" @click="removeImage(image, key)">ลบรูปภาพ</button> -->
-
-
+                                <button type="button" @click="removeImage(image, key)">ลบรูปภาพ</button>
                             </div>
-                            <!-- <div class="bg-gray-200 w-32 h-32">
-                                <img v-bind:ref="'image'" alt="" src="" />
-                            </div>
-                            <button type="button" @click="removeImage(image, key)">ลบรูปภาพ</button> -->
-                        </div>
+                            
+                        </div> -->
 
                         <button type="button" @click="submit_evaluation(car_chassis)"
                             class="bg-blue-600 hover:bg-blue-400 focus:ring-4 focus:outline-none  font-medium rounded-lg text-base text-white px-1 py-1 w-full mt-4">
@@ -897,7 +896,7 @@ export default {
                 reader.readAsDataURL(this.PictureCar[i]);
             }
         },
-        submitSearchForm() {
+        Check_chassis() {
             http.post('chassis',
                 {
                     "car_chassis": this.car_chassis,
@@ -919,23 +918,7 @@ export default {
                 });
 
 
-            /* this.isHiddenE =  !this.isHidden; */
-            /*   this.isHiddenS =  false; */
-
-            /*  http.get(`cardb`).then((response) => {
-                 let responseWhere = response.data;
-                 this.where = responseWhere;
-                 this.currentPage = responseWhere.currentPage;
-                 this.perPage = responseWhere.per_page;
-                 this.total = responseWhere.total;
-             }); */
-
-
-            /*   if(this.car_chassis != ""){
-                  http.get(`cardb/${this.car_chassis}`)
-  
-              } */
-            /* this.$swal.fire("เลขตัวถังไม่ถูกต้อง"); */
+            
         },
 
     },
@@ -951,15 +934,7 @@ export default {
                 )
 
             },
-            /*  car_chassis: {
-                 required: helpers.withMessage('Please insert Password. ', required),
-                 minLength: helpers.withMessage(
-                     ({
-                         $params
-                     }) => `Password must be at least  ${$params.min} characters`,
-                     minLength(1)
-                 )
-             }, */
+            
         };
     },
 

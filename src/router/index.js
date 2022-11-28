@@ -25,6 +25,7 @@ import ExportCar from "@/views/frontend/Form/EvaluationCar.vue";
 import EvaData from "@/views/frontend/Form/EvaluationData.vue";
 import EvaDetail from "@/views/frontend/Form/EvaluationDetail.vue";
 import EvaResualt from "@/views/frontend/Form/EvaluationResult.vue";
+import TestTest from "@/views/frontend/Form/TestTest.vue";
 
 
 //สร้างฟังก์ชันสำหรับเช็ค route ก่อนเรียกใช้งาน (Route Auth Guard)
@@ -289,6 +290,16 @@ const routes = [
     path: "/form/evaluation/result",
     component: EvaResualt,
     name: "EvaluationResult",
+    meta: {
+      title: "แบบการตรวจประเมิน | นำรถออก",
+      description: "แบบการตรวจประเมิน | นำรถออก",
+    },
+  },
+ 
+  {
+    path: "/form/evaluation/TestTest",
+    component: TestTest,
+    name: "TestTest",
     meta: {
       title: "แบบการตรวจประเมิน | นำรถออก",
       description: "แบบการตรวจประเมิน | นำรถออก",
