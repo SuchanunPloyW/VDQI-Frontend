@@ -2,6 +2,6 @@ const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
-    public: "octopus-app-lrdas.ondigitalocean.app",
+    public: "octopus-app-lrdas.ondigitalocean.app:8080",
   },
 });
