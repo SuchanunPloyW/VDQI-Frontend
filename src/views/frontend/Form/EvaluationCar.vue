@@ -522,9 +522,9 @@
                         <textarea cols="30 " rows="5" placeholder="Other" v-model="detail"
                             class="shadow appearance-none border relative w-full px-3 py-1 text-base bg-white text-gray-700 focus:outline-none focus:shadow-outline"></textarea>
 
-                        <div class="mt-4">
+                       <!--  <div class="mt-4">
                             <img v-if="imgUrl" :src="imgUrl" class="w-96 h-96" />
-                        </div>
+                        </div> -->
 
                         <label class=" font-semibold block my-3 text-gray-700 text-md"
                             for="image">รูปภาพเพิ่มเติม</label>
@@ -643,15 +643,7 @@ export default {
         };
     },
     methods: {
-        /* Test() {
-            this.v$.$validate();
-            if (!this.v$.$error) {
-                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-            } else {
-                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-            } // check app input
-        }, */
-
+        
         //ฟังก์ชั่น
         submit_evaluation(car_chassis) {
             this.v$.$validate();
@@ -759,143 +751,37 @@ export default {
             }
 
         },
-
-        submit_evaluation1() {
-
-            const swalWithBootstrapButtons = this.$swal.mixin({
-                customClass: {
-                    title: "font-weight-bold",
-                    confirmButton:
-                        " bg-green-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	",
-                    cancelButton:
-                        "bg-red-600 px-6 py-3 mx-4 mb-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-emerald-500 active:bg-emerald-600 hover:shadow-lg focus:outline-none	",
-                },
-                buttonsStyling: false,
-            });
-            swalWithBootstrapButtons
-                .fire({
-                    title: "คุณต้องการบันทึกข้อมูลใช่หรือไม่?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "ใช่, บันทึกข้อมูล!",
-                    cancelButtonText: "ไม่, ยกเลิก!",
-                    reverseButtons: true,
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        swalWithBootstrapButtons.fire({
-                            title: 'โปรดอย่าปิดหน้านี้ !',
-                            html: 'ระบบกำลังดำเนินการส่งข้อมูล',// add html attribute if you want or remove
-                            allowOutsideClick: false,
-                            showConfirmButton: false,
-                            willOpen: () => {
-                                this.$swal.showLoading()
-                                const data = new FormData();
-                                data.append('person', this.person);
-                                data.append('team', this.team);
-                                data.append('branch', this.branch);
-                                data.append('car_chassis', this.car_chassis);
-                                data.append('topic_1', this.topic_1);
-                                data.append('topic_2', this.topic_2);
-                                data.append('topic_3', this.topic_3);
-                                data.append('topic_4', this.topic_4);
-                                data.append('topic_5', this.topic_5);
-                                data.append('topic_6', this.topic_6);
-                                data.append('topic_7', this.topic_7);
-                                data.append('topic_8', this.topic_8);
-                                data.append('topic_9', this.topic_9);
-                                data.append('detail', this.detail);
-                                for (let i = 0; i < this.PictureCar.length; i++) {
-                                    data.append("image_path[]", this.PictureCar[i]);
-                                    console.log(this.PictureCar[i]);
-                                }
-                                document.getElementById('upload-file').value = [];
-                                http.post("evaluation", data).then((res) => {
-                                    console.log(res);
-                                    /* 
-                                    console.log(res.status); */
-                                    swalWithBootstrapButtons.fire(
-                                        'บันทึกข้อมูลสำเร็จ!',
-                                        'ข้อมูลของคุณถูกบันทึกเรียบร้อยแล้ว',
-                                        'success'
-                                    )
-                                    this.showAddModal = true;
-                                    /* let id = res */
-                                    /*  this.$store.state.evaRs = res;
-                                     this.$router.push({ name: "EvaluationResult" }); */
-
-
-                                }).catch((err) => {
-                                    console.log(err);
-                                    swalWithBootstrapButtons.fire(
-                                        'บันทึกข้อมูลไม่สำเร็จ!',
-                                        'กรุณาตรวจสอบข้อมูลอีกครั้ง',
-                                        'error'
-                                    )
-                                });
-                            },
-                        });
-
-
-
-
-                        /* this.$router.push("/evaluation"); */
-                    } else if (
-                        /* Read more about handling dismissals below */
-                        result.dismiss === this.$swal.DismissReason.cancel
-                    ) {
-
-                        swalWithBootstrapButtons.fire(
-                            "ยกเลิก",
-                            "ข้อมูลของคุณยังไม่ถูกบันทึก",
-                            "error"
-                        );
-                    }
-                });
-
-        },
+ 
 
         uploadImage(e) {
             const selectedFiles = e.target.files;
-            if (!selectedFiles.length) {
-                return false;
-            }
             for (let i = 0; i < selectedFiles.length; i++) {
                 this.PictureCar.push(selectedFiles[i]);
             }
             console.log(this.PictureCar);
             this.applyImage();
-            /*  for (let i = 0; i < selectedFiles.length; i++) {
-                 this.PictureCar.push(selectedFiles[i]);
- 
-             }
-             this.applyImage(); */
-        },
-
-        onFileChange(e) {
-            const file = e.target.files[0]
-            this.file = e.target.files[0]
-            this.imgUrl = URL.createObjectURL(file)
 
         },
 
-        removeImage(image, index) {
-            console.log(this.PictureCar);
-            this.PictureCar.splice(index, 1);
-            this.applyImage();
-            //this.$refs.image[index].src = "" // You are hidding the 3rd one that is now in index 1.
-        },
+
         applyImage() {
             for (let i = 0; i < this.PictureCar.length; i++) {
                 let reader = new FileReader();
-                /* tslint:disable:no-unused-variable */
-                // eslint-disable-next-line no-unused-vars
                 reader.onload = (e) => {
-                    this.$refs.image[i].src = reader.result;
+                    this.$refs.image[i].src = e.target.result;
                 };
+
                 reader.readAsDataURL(this.PictureCar[i]);
             }
         },
+        removeImage(i) {
+            this.PictureCar.splice(i, 1);
+            this.applyImage();
+            console.log(this.PictureCar);
+        },
+
+
+
         Check_chassis() {
             http.post('chassis',
                 {
@@ -918,7 +804,7 @@ export default {
                 });
 
 
-            
+
         },
 
     },
@@ -934,7 +820,7 @@ export default {
                 )
 
             },
-            
+
         };
     },
 

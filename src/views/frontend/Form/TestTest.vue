@@ -1,64 +1,33 @@
-<!-- <template>
-    <div id="app">
-        <input id="file-upload" type="file" multiple @change="uploadImage" />
-        <div v-for="(image, key) in productImages" :key="key">
-            <div class="image-holder">
-                <img v-bind:ref="'image'" alt="" src="" />
-                <button type="button" @click="removeImage(image, key)">x</button>
-            </div>
-        </div>
+<template>
+    <div class="file-upload-section">
+      <label id="preview" for="file-upload">
+          <img :key="url" v-if="url" :src="url" />
+      </label>
+      <div class="file-upload">
+        <label class="file-upload-button" for="file-upload">Upload Image</label>
+        <input multiple type="file" id="file-upload" @change="onFileChange"/>
+      </div>
+      <div v-if="url">
+        <button @click="removeImage()">Remove image</button>
+      </div>
     </div>
-</template>
-<script>
-export default {
-    name: "App",
-    components: {},
-    data() {
-        return {
-            productImages: [],
-        };
-    },
-    methods: {
-        uploadImage(e) {
-            let selectedFiles = e.target.files;
-            for (let i = 0; i < selectedFiles.length; i++) {
-                this.productImages.push(selectedFiles[i]);
-            }
-            this.applyImage();
-        },
-
-        removeImage(image, index) {
-            console.log(this.productImages);
-            this.productImages.splice(index, 1);
-            this.applyImage();
-            //this.$refs.image[index].src = "" // You are hidding the 3rd one that is now in index 1.
-        },
-        applyImage() {
-            for (let i = 0; i < this.productImages.length; i++) {
-                let reader = new FileReader();
-
-                reader.onload = (e) => {
-                    this.$refs.image[i].src = e.reader.result;
-                };
-                reader.readAsDataURL(this.productImages[i]);
-            }
-        },
-    },
-};
-</script>
+  </template>
   
-<style>
-#app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-}
-
-.image-holder {
-    float: left;
-}
-</style>
-   -->
+  <script>
+    export default {
+      data: function () {
+        return {
+          url: null
+        }
+      },
+      methods: {
+        onFileChange (e) {
+          let file = e.target.files[0]
+          this.url = URL.createObjectURL(file)
+        },
+        removeImage: function () {
+          this.url = null
+        }
+      }
+    }
+  </script>
