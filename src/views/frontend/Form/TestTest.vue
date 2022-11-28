@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div id="app">
         <input id="file-upload" type="file" multiple @change="uploadImage" />
         <div v-for="(image, key) in productImages" :key="key">
@@ -61,4 +61,4 @@ export default {
     float: left;
 }
 </style>
-  
+   -->
