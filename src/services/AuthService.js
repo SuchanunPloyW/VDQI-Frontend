@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const authService = axios.create({
-  baseURL: "http://206.189.92.79/api/",
+  baseURL: "https://vdqi-db.toyotaparagon.com/api/",
   withCredentials: true,
   headers: {
     "Content-type": "application/json",

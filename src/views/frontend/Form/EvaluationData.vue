@@ -10,7 +10,6 @@
                             </h1>
                         </div>
                     </div>
-
                     <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <table border="0" cellspacing="5" cellpadding="5">
                             <tbody>
@@ -27,9 +26,9 @@
                         <table id="EVA" class="display">
                             <thead>
                                 <tr>
-                                    <th>ลำดับ</th>
                                     <th>เลขตัวถัง</th>
                                     <th>พนักงานขาย</th>
+                                    <th>สาขา</th>
                                     <th>วันที่</th>
                                     <th>เวลา</th>
                                     <th></th>
@@ -37,9 +36,9 @@
                             </thead>
                             <tbody>
                                 <tr v-for="eva in eva.data" :key="eva.evaluation_id">
-                                    <td>{{ eva.evaluation_id }}</td>
                                     <td>{{ eva.car_chassis }}</td>
                                     <td>{{ eva.person }}</td>
+                                    <td>{{ eva.branch }}</td>
                                     <td>{{ format_date(eva.created_at) }}</td>
                                     <td>{{ format_time(eva.created_at) }}</td>
                                     <td>
@@ -50,38 +49,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
-                        <!-- 
-
-                        <table id="Data" class="display">
-                            <thead>
-                                <tr>
-                                    <th>ลำดับ</th>
-                                    <th>เลขตัวถัง</th>
-                                    <th>พนักงานขาย</th>
-                                    <th>วันที่</th>
-                                    <th>เวลา</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                <tr v-for="eva in eva.data" :key="eva.evaluation_id">
-                                    <td>{{ eva.evaluation_id }}</td>
-                                    <td>{{ eva.car_chassis }}</td>
-                                    <td>{{ eva.person }}</td>
-                                    <td>{{ format_date(eva.created_at) }}</td>
-                                    <td>{{ format_time(eva.created_at) }}</td>
-                                    <td>
-                                        <button
-                                            class="px-3 py-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-gray-500 border border-transparent rounded-md active:bg-gray-600 hover:bg-gray-700 focus:outline-none focus:shadow-outline-purple"
-                                            @click="showEvadetail(eva.evaluation_id)">เพิ่มเติม</button>
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-                        </table> -->
                     </div>
                 </div>
             </div>
@@ -101,8 +68,6 @@ import http from "@/services/BackendServices";
 import moment from 'moment';
 import { loadScript } from "vue-plugin-load-script";
 import DateTime from 'datatables.net-datetime';
-/* import axios from 'axios';
- */
 
 
 

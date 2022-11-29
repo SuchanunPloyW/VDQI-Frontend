@@ -21,8 +21,9 @@
                             placeholder="Team" />
 
                         <label class="block text-gray-700 text-base mt-3 mb-2 font-semibold">สาขา</label>
-                        <ul
-                            class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                        <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                            :class="{ 'border-red-500': v$.branch.$error }">
+
                             <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
                                 <div class="flex items-center pl-3">
                                     <input id="horizontal-list-radio-license" type="radio" value="คลอง 7"
@@ -70,17 +71,20 @@
                                 </div>
                             </li>
                         </ul>
+                        <div v-if="v$.branch.$error" class="mt-2 text-sm text-red-500">
+                            {{ v$.branch.$errors[0].$message }}
+                        </div>
+
                         <label class="block text-gray-700 text-base mt-3 mb-2 font-semibold">เลขตัวถัง
-                            <div class="relative text-gray-500 focus-within:text-purple-600">
+                            <div class="relative text-gray-500 focus-within:text-purple-600 ">
                                 <input type="text" v-model="car_chassis" maxlength="17"
                                     class="w-full px-3 py-2 leading-tight text-gray-700 shadow appearance-none border uppercase"
-                                    placeholder="chassis no." />
+                                    :class="{ 'border-red-500': v$.car_chassis.$error }" placeholder="chassis no." />
                                 <button @click="Check_chassis" type="button"
                                     class="absolute inset-y-0 right-0 px-4 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-r-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                     ตรวจสอบ
                                 </button>
                             </div>
-
                         </label>
                         <div v-if="v$.car_chassis.$error" class="mt-2 text-sm text-red-500">
                             {{ v$.car_chassis.$errors[0].$message }}
@@ -89,9 +93,7 @@
                             กรุณาตรวจสอบเลขตัวถังให้ถูกต้อง **</p>
                         <p v-if="!isHiddenS" class="text-green-500 text-sm italic text-end"> ** เลขตัวถังถูกต้อง **</p>
 
-
                         <!-- table การบริการของพนักงานติดตั้ง -->
-
                         <div class="pt-4 container  mx-auto">
                             <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
                                 การบริการของพนักงานติดตั้ง
@@ -118,16 +120,18 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_1.$error }">
+
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_1.$error }">
+
                                                             <div class="flex items-center pl-3">
                                                                 <input id="1.1" type="radio" value="1" name="Topic1"
                                                                     v-model="topic_1"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300 ">
                                                                     ดีมาก
 
                                                                 </div>
@@ -140,15 +144,18 @@
                                                                     v-model="topic_1"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ควรปรับปรุง
 
                                                                 </div>
                                                             </div>
                                                         </li>
-
                                                     </ul>
+                                                    <div v-if="v$.topic_1.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_1.$errors[0].$message }}
+                                                    </div>
                                                 </td>
+
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
                                                 <td class="px-4 py-3">
@@ -159,16 +166,16 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_2.$error }">
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_2.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="2.1" type="radio" value="1" name="Topic2"
                                                                     v-model="topic_2"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ดีมาก
 
                                                                 </div>
@@ -181,7 +188,7 @@
                                                                     v-model="topic_2"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ควรปรับปรุง
 
                                                                 </div>
@@ -189,6 +196,9 @@
                                                         </li>
 
                                                     </ul>
+                                                    <div v-if="v$.topic_2.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_2.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -200,16 +210,16 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_3.$error }">
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_3.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="3.1" type="radio" value="1" name="Topic3"
                                                                     v-model="topic_3"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ดีมาก
 
                                                                 </div>
@@ -222,14 +232,16 @@
                                                                     v-model="topic_3"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ควรปรับปรุง
 
                                                                 </div>
                                                             </div>
                                                         </li>
-
                                                     </ul>
+                                                    <div v-if="v$.topic_3.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_3.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
 
@@ -255,7 +267,6 @@
                                                 class="text-sm font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                                 <th class="px-4 py-3 ">รายการประเมิน</th>
                                                 <th class="px-4 py-3">ความพึงพอใจ</th>
-
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -265,20 +276,20 @@
                                                     </div>
                                                     <div>
                                                         <p class="font-semibold">4. อุปกรณ์ตกแต่งมีความครบถ้วน</p>
-
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_4.$error }">
+
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r"
+                                                            :class="{ 'border-red-500': v$.topic_4.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="4.1" type="radio" value="1" name="Topic4"
                                                                     v-model="topic_4"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
 
                                                                 </div>
@@ -291,7 +302,7 @@
                                                                     v-model="topic_4"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
@@ -299,6 +310,9 @@
                                                         </li>
 
                                                     </ul>
+                                                    <div v-if="v$.topic_4.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_4.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -311,18 +325,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_5.$error }">
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_5.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="5.1" type="radio" value="1" name="Topic5"
                                                                     v-model="topic_5"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
-
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -333,7 +346,7 @@
                                                                     v-model="topic_5"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
@@ -341,6 +354,9 @@
                                                         </li>
 
                                                     </ul>
+                                                    <div v-if="v$.topic_5.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_5.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -353,16 +369,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_6.$error }">
+
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_6.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="6.1" type="radio" value="1" name="Topic6"
                                                                     v-model="topic_6"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
 
                                                                 </div>
@@ -375,13 +392,16 @@
                                                                     v-model="topic_6"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                    <div v-if="v$.topic_6.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_6.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -394,16 +414,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_7.$error }">
+
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_7.$error }">
                                                             <div class="flex items-center pl-3">
                                                                 <input id="7.1" type="radio" value="1" name="Topic7"
                                                                     v-model="topic_7"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
 
                                                                 </div>
@@ -416,13 +437,16 @@
                                                                     v-model="topic_7"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                    <div v-if="v$.topic_7.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_7.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -436,16 +460,17 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_8.$error }">
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_8.$error }">
+
                                                             <div class="flex items-center pl-3">
                                                                 <input id="8.1" type="radio" value="1" name="Topic8"
                                                                     v-model="topic_8"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
 
                                                                 </div>
@@ -458,13 +483,16 @@
                                                                     v-model="topic_8"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                    <div v-if="v$.topic_8.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_8.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -478,18 +506,18 @@
                                                     </div>
                                                 </td>
                                                 <td class="px-4 py-3 text-sm">
-                                                    <ul
-                                                        class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                                        <li
-                                                            class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r ">
+                                                    <ul class="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                                                        :class="{ 'border-red-500': v$.topic_9.$error }">
+                                                        <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r "
+                                                            :class="{ 'border-red-500': v$.topic_9.$error }">
+
                                                             <div class="flex items-center pl-3">
                                                                 <input id="9.1" type="radio" value="1" name="Topic9"
                                                                     v-model="topic_9"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ใช่
-
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -500,13 +528,16 @@
                                                                     v-model="topic_9"
                                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                                 <div
-                                                                    class="py-3 ml-2 w-full text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                                    class="py-3 ml-2 w-full text-sm font-semibold text-gray-900 dark:text-gray-300">
                                                                     ไม่ใช่
 
                                                                 </div>
                                                             </div>
                                                         </li>
                                                     </ul>
+                                                    <div v-if="v$.topic_9.$error" class="mt-2 text-sm text-red-500">
+                                                        {{ v$.topic_9.$errors[0].$message }}
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -514,7 +545,6 @@
                                     </table>
                                 </div>
                             </div>
-
                         </div>
 
                         <label class="block text-gray-700 text-base mt-3 mb-2 font-semibold">รายละเอียดเพิ่มเติม</label>
@@ -545,9 +575,6 @@
                                             <path strokeLinecap="round" strokeLinejoin="round"
                                                 d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                         </svg>
-
-                            
-
                                     </button>
                                 </div>
                             </div>
@@ -556,10 +583,6 @@
                                 <img v-bind:ref="'image'" alt="" src="" class="" />
                             </div> -->
                         </div>
-
-
-
-
 
 
                         <!--  <div v-for="(image, key) in PictureCar" :key="key">
@@ -815,6 +838,37 @@ export default {
                 )
 
             },
+            branch: {
+                required: helpers.withMessage('กรุณาเลือกสาขา', required),
+            },
+            topic_1: {
+                required: helpers.withMessage('กรุณาประเมินการบริการของพนักงานติดตั้ง', required),
+            },
+            topic_2: {
+                required: helpers.withMessage('กรุณาประเมินการบริการของพนักงานติดตั้ง', required),
+            },
+            topic_3: {
+                required: helpers.withMessage('กรุณาประเมินการบริการของพนักงานติดตั้ง', required),
+            },
+            topic_4: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+            topic_5: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+            topic_6: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+            topic_7: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+            topic_8: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+            topic_9: {
+                required: helpers.withMessage('กรุณาประเมินคุณภาพงาน', required),
+            },
+
 
         };
     },

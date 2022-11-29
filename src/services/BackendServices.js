@@ -13,7 +13,7 @@ if(localStorage.getItem('user')){
  */
 
 const backendService = axios.create({
-  baseURL: "http://206.189.92.79/api/",
+  baseURL: "https://vdqi-db.toyotaparagon.com/api/",
   withCredentials: true,
   headers: {
     "Content-type": "multipart/form-data",
