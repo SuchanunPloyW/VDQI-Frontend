@@ -39,10 +39,14 @@
             </form>
 
           </div>
+
+
         </div>
+        <img src="https://i.pinimg.com/236x/51/a0/c0/51a0c08b3b830f53be088b7ea593513c.jpg" alt="">
       </div>
     </div>
   </div>
+
 </template>
 <script>
 import useValidate from "@vuelidate/core";
